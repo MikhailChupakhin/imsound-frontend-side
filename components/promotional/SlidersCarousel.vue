@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\Carousel.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\SlidersCarousel.vue -->
 
 <template>
     <div class="carousel-container relative">

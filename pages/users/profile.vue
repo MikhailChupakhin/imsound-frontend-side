@@ -2,7 +2,7 @@
 
 <template>
     <div class="main_container">
-    <Header />
+    <MainHeader />
         <div>
           <h1>Профиль пользователя</h1>
           <div v-if="isLoading">Загрузка...</div>
@@ -16,7 +16,7 @@
   </template>
   
   <script>
-  import Header from '~/components/header/Header.vue'
+  import MainHeader from '~/components/header/MainHeader.vue'
   import authRequestHandler from '@/utils/authRequestHandler';
 
 

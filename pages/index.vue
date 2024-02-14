@@ -2,8 +2,8 @@
 
 <template>
   <div class="main_container">
-    <Header />
-    <PromotionalCarousel />
+    <MainHeader />
+    <PromotionalSlidersCarousel />
     <PromotionalBannersTop />
     <PromotionalFeaturedProducts/>
   </div>
@@ -11,7 +11,7 @@
 
 <script setup>
 import { provide } from 'vue';
-import Header from '~/components/header/Header.vue'
+import MainHeader from '~/components/header/MainHeader.vue'
 
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;

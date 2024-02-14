@@ -2,7 +2,7 @@
 
 <template>
   <div class="main_container">
-    <Header />
+    <MainHeader />
     <h1>Данные из API:</h1>
     <pre>{{ data }}</pre>
   </div>
@@ -10,7 +10,7 @@
 
 <script setup>
 import { provide } from 'vue';
-import Header from '~/components/header/Header.vue'
+import MainHeader from '~/components/header/MainHeader.vue'
 
 const route = useRoute();
 const config = useRuntimeConfig()

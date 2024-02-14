@@ -2,15 +2,15 @@
 
 <template>
   <div>
-    <Header />
-    <h1>Product Details Бля</h1>
+    <MainHeader />
+    <h1>Product Details</h1>
     <!-- Здесь можете добавить код для загрузки информации о товаре по его slug и id -->
   </div>
 </template>
   
 <script setup>
 import { provide } from 'vue';
-import Header from '~/components/header/Header.vue'
+import MainHeader from '~/components/header/MainHeader.vue'
 
 const route = useRoute();
 const config = useRuntimeConfig()

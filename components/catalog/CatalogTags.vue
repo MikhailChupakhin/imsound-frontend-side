@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\Tags.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogTags.vue -->
 
 <template>
     <div class="tags_container mt-5">

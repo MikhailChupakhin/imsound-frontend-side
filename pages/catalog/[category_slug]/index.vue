@@ -2,8 +2,8 @@
 
 <template>
   <div class="main_container">
-    <Header />
-    <Breadcrumbs />
+    <MainHeader />
+    <BreadcrumbsNav />
     <h1>Данные из API:</h1>
     <pre>{{ data }}</pre>
   </div>
@@ -11,8 +11,8 @@
 
 <script setup>
 import { provide } from 'vue';
-import Header from '~/components/header/Header.vue'
-import Breadcrumbs from '~/components/common/Breadcrumbs.vue';
+import MainHeader from '~/components/header/MainHeader.vue'
+import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 
 const route = useRoute();
 const config = useRuntimeConfig()

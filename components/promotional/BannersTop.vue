@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\Banners_top.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\BannersTop.vue -->
 
 <template>
   <div class="banners-container mt-5">

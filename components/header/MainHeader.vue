@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\Header.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\MainHeader.vue -->
 
 <template>
   <header class="header">

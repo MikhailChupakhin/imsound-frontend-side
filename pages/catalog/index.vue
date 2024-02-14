@@ -2,14 +2,14 @@
 
 <template>
   <div class="main_container">
-    <Header />
-    <Breadcrumbs />
+    <MainHeader />
+    <BreadcrumbsNav />
     <div class="sidebar_container">
       <SidebarNav />
       <div class="content_container">
-        <Tags />
-        <Sorting />
-        <ProductsBlock />
+        <CatalogTags />
+        <CatalogSorting @update:viewMode="updateViewMode" />
+        <ProductsBlock :viewMode="viewMode" />
       </div>
     </div>
   </div>
@@ -18,11 +18,11 @@
 <script setup>
 import { provide } from 'vue';
 
-import Header from '~/components/header/Header.vue'
-import Breadcrumbs from '~/components/common/Breadcrumbs.vue';
+import MainHeader from '~/components/header/MainHeader.vue'
+import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import SidebarNav from '~/components/catalog/SidebarNav.vue';
-import Tags from '~/components/catalog/Tags.vue';
-import Sorting from '~/components/catalog/Sorting.vue';
+import CatalogTags from '~/components/catalog/CatalogTags.vue';
+import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 
 const config = useRuntimeConfig()
@@ -31,13 +31,18 @@ const endpoint = 'catalog/';
 
 const queryParams = useRoute().query
 console.log('Query параметры:', queryParams);
-
 const queryString = new URLSearchParams(queryParams).toString();
 
 const { data } = await useAsyncData(
   'data',
   () => $fetch(`${BASE_API_URL}${endpoint}?${queryString}`)
 );
+
+
+const viewMode = ref('grid');
+const updateViewMode = (mode) => {
+  viewMode.value = mode;
+};
 
 // console.log(data.value.results.categories)
 // console.log(data.value.results.subcategories)

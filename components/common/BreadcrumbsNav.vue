@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\Breadcrumbs.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\BreadcrumbsNav.vue -->
 
 <template>
     <div class="home">

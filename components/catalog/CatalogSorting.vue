@@ -1,8 +1,8 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogSorting.vue -->
 
 <template>
-    <div class="sorting-container mt-5">
-        <div class="sorting-wrapper">
+    <div class="border mt-5">
+        <div class="sorting-wrapper border">
             <div class="view-mode-buttons">
                 <a @click="setGridViewMode">
                     <i class="fa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -21,14 +21,14 @@
                 Всего товаров: {{ products_quantity }}
             </div>
             <div class="sorting">
-                <select class="sorting-options mr-5" v-model="sortingOption">
+                <select class="border mr-5" v-model="sortingOption">
                     <option value="">По умолчанию</option>
                     <option value="name_asc">По названию (А-Я)</option>
                     <option value="name_desc">По названию (Я-А)</option>
                     <option value="price_asc">По цене (возрастание)</option>
                     <option value="price_desc">По цене (убывание)</option>
                 </select>
-                <button class="sorting-button" @click="sortProducts">Сортировать</button>
+                <button class="border" @click="sortProducts">Сортировать</button>
             </div>
         </div>
     </div>
@@ -95,10 +95,6 @@ export default {
 </script>
   
 <style scoped>
-.sorting-container {
-    border: 1px solid black;
-}
-
 .sorting-wrapper {
     padding: 5px;
     display: flex;
@@ -119,10 +115,4 @@ export default {
     height: 1em;
 }
 
-.sorting-button {
-    border: 1px solid black;
-}
-
-.sorting-options {
-    border: 1px solid black;
-}</style>
+</style>

@@ -2,7 +2,7 @@
 
 <template>
     <div class="carousel-container relative">
-      <div class="carousel">
+      <div class="carousel flex">
         <div v-for="(slide, index) in sliders" :key="slide.id" :class="getSlideClasses(index)">
           <img :src="'https://imsound.ru' + slide.image" :alt="slide.alt_text" class="w-full" />
           <div class="carousel-caption absolute bottom-0 left-0 w-full p-4">
@@ -46,7 +46,6 @@
 }
 
 .carousel {
-  display: flex;
   scroll-snap-type: x mandatory;
   overflow-x: auto;
   width: 100%;

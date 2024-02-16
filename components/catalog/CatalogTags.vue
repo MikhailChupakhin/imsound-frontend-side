@@ -1,7 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogTags.vue -->
 
 <template>
-    <div class="tags_container mt-5">
+    <div class="p-10 border mt-5">
       <p>Тэги</p>
       <div class="tags">
         <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="`/catalog/tags/${tag.slug}`" class="tag_link">{{ tag.name }}</NuxtLink>
@@ -16,10 +16,6 @@ export default {
 </script>
   
 <style scoped>
-.tags_container {
-  border: 1px solid black;
-  padding: 10px;
-}
 
 .tags {
   display: flex;

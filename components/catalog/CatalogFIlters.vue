@@ -1,7 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogFIlters.vue -->
 
 <template>
-    <div class="filters-container m-5">
+    <div class="filters-container border m-5">
         <div class="text-center mb-4">
             <p class="text-lg font-semibold">Фильтры</p>
         </div>
@@ -90,9 +90,6 @@ export default {
 </script>
 
 <style scoped>
-.filters-container {
-    border: 1px solid black;
-}
 </style>
 
 

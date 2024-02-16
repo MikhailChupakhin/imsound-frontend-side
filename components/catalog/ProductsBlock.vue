@@ -2,7 +2,7 @@
 
 <template>
     <p v-bind:viewMode="viewMode">Режим отображения: {{ viewMode }}</p>
-    <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products_block_container mt-5">
+    <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products_block_container border mt-5">
         <ProductCard v-for="(product, index) in products_list" :key="index" :productInfo="product" />
     </div>
 </template>
@@ -22,7 +22,6 @@ console.log('products_list')
   
 <style scoped>
 .products_block_container {
-    border: 1px solid black;
     display: flex;
     flex-wrap: wrap;
 }

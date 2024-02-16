@@ -41,6 +41,17 @@ provide('featured_products', data.value.featured_products);
 
 <style scoped>
 .main_container {
-  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar_container {
+  display: flex;
+  flex: 1;
+}
+
+.content_container {
+  width: 100%;
+  margin-left: 20px;
 }
 </style>

@@ -47,12 +47,9 @@ const updateViewMode = (mode) => {
 
 provide('categories', data.value.results.categories);
 provide('subcategories', data.value.results.subcategories);
-
 provide('breadcrumbs', data.value.results.breadcrumbs);
-
 provide('tags_data', data.value.results.tags_data);
 provide('products_quantity', data.value.count);
-
 provide('products_list', data.value.results.product_list);
 
 </script>

@@ -4,7 +4,7 @@
     <div class="tags_container mt-5">
       <p>Тэги</p>
       <div class="tags">
-        <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="`catalog/tags/${tag.slug}`" class="tag_link">{{ tag.name }}</NuxtLink>
+        <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="`/catalog/tags/${tag.slug}`" class="tag_link">{{ tag.name }}</NuxtLink>
       </div>
     </div>
   </template>
@@ -13,7 +13,6 @@
 export default {
     inject: ['tags_data'],
 };
-console.log('tags_data')
 </script>
   
 <style scoped>

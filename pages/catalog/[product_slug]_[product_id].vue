@@ -4,7 +4,6 @@
   <div>
     <MainHeader />
     <h1>Product Details</h1>
-    <!-- Здесь можете добавить код для загрузки информации о товаре по его slug и id -->
   </div>
 </template>
   

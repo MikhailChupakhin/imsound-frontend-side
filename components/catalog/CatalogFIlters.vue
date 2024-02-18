@@ -10,16 +10,16 @@
                 <div class="w-full md:w-1/2 px-2">
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
-                        <input type="number" v-model="minPrice"  @input="updateSliderFromMin" class="form-control custom-input">
+                        <input type="number" v-model.number="minPrice"  @input="updateSliderFromMin" class="form-control custom-input" inputmode="numeric">
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 px-2">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
-                        <input type="number" v-model="maxPrice" @input="updateSliderFromMax" class="form-control custom-input">
+                        <input type="number" v-model.number="maxPrice" @input="updateSliderFromMax" class="form-control custom-input" inputmode="numeric">
                     </div>
                 </div>
-                <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval" @sliderValuesChanged="handleSliderValuesChanged" ref="slider"/>
+                <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval" @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef"/>
             </div>
 
             <div class="flex">
@@ -33,7 +33,7 @@
 
             <div class="flex">
                 <div class="w-full px-2">
-                    <p>Производители</p>
+                    <p class="text-center font-semibold">Производители</p>
                     <ul class="list-group list-group-flush manufacturer-list">
                         <li v-for="(manufacturer, index) in manufacturers" :key="index" class="list-group-item">
                             <input type="checkbox" v-model="selectedManufacturers" :value="manufacturer"
@@ -46,12 +46,13 @@
         </div>
 
         <div class="filter-btn text-center">
-            <button @click="applyFilters" class="btn btn-primary">Применить фильтр</button>
+            <button @click="applyFilters" class="border m-5 p-2">Применить фильтр</button>
         </div>
     </div>
 </template>
   
 <script>
+import { ref } from 'vue';
 import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
 
 export default {
@@ -59,33 +60,66 @@ export default {
         CatalogPriceSlider
     },
     inject: ['manufacturers', 'price_interval'],
-    data() {
-        return {
-            minPrice: '',
-            maxPrice: '',
-            inStock: false,
-            selectedManufacturers: [],
+    setup() {
+        const minPrice = inject('minPrice');
+        const maxPrice = inject('maxPrice');
+        const inStock = inject('inStock');
+        const selectedManufacturers = inject('selectedManufacturers');
+        const sliderRef = ref(null);
+        const productsList = inject('products_list');
+        const productsQuantity = inject('products_quantity');
+        
+        const applyFilters = async() => {
+            // Нужно вынести в отдельную функцию
+            let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
+            if (selectedManufacturers.value.length > 0) {
+                const manufacturerNames = selectedManufacturers.value.map(manufacturer => manufacturer.name);
+                queryString += `&manufacturer[]=${manufacturerNames.join('&manufacturer[]=')}`;
+            }
+            if (inStock.value) {
+                queryString += '&in_stock=true';
+            }
+            //
+            const BASE_API_URL = useRuntimeConfig().public.apiBase;
+            const apiUrl = BASE_API_URL + 'catalog/' + queryString;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                productsList.value = data.results.product_list;
+                productsQuantity.value = data.count;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         };
-    },
-    methods: {
-        applyFilters() {
-            console.log('Applying filters...');
-            console.log('Min Price:', this.minPrice);
-            console.log('Max Price:', this.maxPrice);
-            console.log('In Stock:', this.inStock);
-            console.log('Selected Manufacturers:', this.selectedManufacturers);
-        },
-        handleSliderValuesChanged(values) {
-            this.minPrice = values[0];
-            this.maxPrice = values[1];
-        },
-        updateSliderFromMin() {
-            this.$refs.slider.slider.set([this.minPrice, null]);
-        },
-        updateSliderFromMax() {
-            this.$refs.slider.slider.set([null, this.maxPrice]);
-        }
+
+        const handleSliderValuesChanged = (values) => {
+            minPrice.value = parseInt(values[0]);
+            maxPrice.value = parseInt(values[1]);
+        };
+
+        const updateSliderFromMin = () => {
+            sliderRef.value.slider.set([minPrice.value, null]);
+        };
+
+        const updateSliderFromMax = () => {
+            sliderRef.value.slider.set([null, maxPrice.value]);
+        };
+
+        
+        return {
+            minPrice,
+            maxPrice,
+            inStock,
+            selectedManufacturers,
+            applyFilters,
+            handleSliderValuesChanged,
+            updateSliderFromMin,
+            updateSliderFromMax,
+            sliderRef
+        };
     }
+
 };
 </script>
 

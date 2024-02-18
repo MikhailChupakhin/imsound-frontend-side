@@ -1,23 +1,29 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductsBlock.vue -->
 
 <template>
-    <p v-bind:viewMode="viewMode">Режим отображения: {{ viewMode }}</p>
     <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products_block_container border mt-5">
-        <ProductCard v-for="(product, index) in products_list" :key="index" :productInfo="product" />
+        <ProductCard v-for="(product, index) in productsList" :key="index" :productInfo="product" />
     </div>
 </template>
   
 <script>
+import { inject, ref, watch } from 'vue';
 import ProductCard from './ProductCard.vue';
 
 export default {
-    components: {
+  components: {
     ProductCard,
   },
   props: ['viewMode'],
-  inject: ['products_list'],
+  
+  setup() {
+    const productsList = inject('products_list');
+
+    return {
+      productsList
+    };
+  }
 };
-console.log('products_list')
 </script>
   
 <style scoped>

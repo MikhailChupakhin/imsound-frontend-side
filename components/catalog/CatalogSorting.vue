@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="products_quantity">
-                Всего товаров: {{ products_quantity }}
+                Всего товаров: {{ productsQuantity }}
             </div>
             <div class="sorting">
                 <select class="border mr-5" v-model="sortingOption">
@@ -35,61 +35,85 @@
 </template>
   
 <script>
-export default {
-    inject: ['products_quantity'],
-    computed: {
-        sortingOption() {
-            const query = this.$route.query;
-            if (query.sort) {
-                switch (query.sort) {
-                    case 'name':
-                        return 'name_asc';
-                    case '-name':
-                        return 'name_desc';
-                    case 'price':
-                        return 'price_asc';
-                    case '-price':
-                        return 'price_desc';
-                    default:
-                        return '';
-                }
-            } else {
-                return '';
-            }
-        }
-    },
-    methods: {
-        setGridViewMode() {
-            console.log('grid clicked')
-            this.$emit('update:viewMode', 'grid');
-        },
-        setListViewMode() {
-            console.log('list clicked')
-            this.$emit('update:viewMode', 'list');
-        },
-        sortProducts() {
-            let sortParam = '';
-            switch (this.sortingOption) {
-                case 'name_asc':
-                    sortParam = '?sort=name';
-                    break;
-                case 'name_desc':
-                    sortParam = '?sort=-name';
-                    break;
-                case 'price_asc':
-                    sortParam = '?sort=price';
-                    break;
-                case 'price_desc':
-                    sortParam = '?sort=-price';
-                    break;
-                default:
-                    sortParam = '';
-                    break;
-            }
+import { computed, inject } from 'vue';
 
-            const newUrl = window.location.pathname + sortParam;
-            window.location.href = newUrl;
-        }
+export default {
+    setup() {
+        const { emit } = getCurrentInstance();
+        const minPrice = inject('minPrice');
+        const maxPrice = inject('maxPrice');
+        const inStock = inject('inStock');
+        const selectedManufacturers = inject('selectedManufacturers');
+        const productsList = inject('products_list');
+        const productsQuantity = inject('products_quantity');
+        const sortingOption = ref('');
+
+        const sortingOptionValue = computed(() => {
+            switch (sortingOption.value) {
+                case 'name_asc':
+                    return 'name';
+                case 'name_desc':
+                    return '-name';
+                case 'price_asc':
+                    return 'price';
+                case 'price_desc':
+                    return '-price';
+                default:
+                    return '';
+            }
+        });
+
+        const setGridViewMode = () => {
+            console.log('grid clicked');
+            emit('update:viewMode', 'grid');
+        };
+
+        const setListViewMode = () => {
+            console.log('list clicked');
+            emit('update:viewMode', 'list');
+        };
+
+        const sortProducts = async() => {
+            const sortParam = sortingOptionValue.value ? `&sort=${sortingOptionValue.value}` : '';
+
+
+            // Нужно вынести в отдельную функцию
+            let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
+            if (selectedManufacturers.value.length > 0) {
+                const manufacturerNames = selectedManufacturers.value.map(manufacturer => manufacturer.name);
+                queryString += `&manufacturer[]=${manufacturerNames.join('&manufacturer[]=')}`;
+            }
+            if (inStock.value) {
+                queryString += '&in_stock=true';
+            }
+            //
+
+            const BASE_API_URL = useRuntimeConfig().public.apiBase;            
+            const apiUrl = BASE_API_URL + 'catalog/' + queryString + sortParam;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                console.log(data.results.product_list)
+                productsList.value = data.results.product_list;
+                productsQuantity.value = data.count;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        return {
+            minPrice,
+            maxPrice,
+            inStock,
+            selectedManufacturers,
+            productsQuantity,
+            sortingOption,
+            productsList,
+            setGridViewMode,
+            setListViewMode,
+            sortProducts
+        };
     }
 };
 </script>

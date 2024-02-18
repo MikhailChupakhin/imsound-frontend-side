@@ -34,7 +34,6 @@ const BASE_API_URL = config.public.apiBase;
 const endpoint = 'catalog/';
 
 const queryParams = useRoute().query
-console.log('Query параметры:', queryParams);
 const queryString = new URLSearchParams(queryParams).toString();
 
 const { data } = await useAsyncData(
@@ -42,11 +41,26 @@ const { data } = await useAsyncData(
   () => $fetch(`${BASE_API_URL}${endpoint}?${queryString}`)
 );
 
-
 const viewMode = ref('grid');
 const updateViewMode = (mode) => {
   viewMode.value = mode;
 };
+
+const productsList = ref(data.value.results.product_list);
+provide('products_list', productsList);
+
+const productsQuantity = ref(data.value.count);
+provide('products_quantity', productsQuantity);
+
+const minPrice = ref('');
+const maxPrice = ref('');
+const inStock = ref(false);
+const selectedManufacturers = ref([]);
+
+provide('minPrice', minPrice);
+provide('maxPrice', maxPrice);
+provide('inStock', inStock);
+provide('selectedManufacturers', selectedManufacturers);
 
 provide('categories', data.value.results.categories);
 provide('subcategories', data.value.results.subcategories);
@@ -54,8 +68,8 @@ provide('manufacturers', data.value.results.manufacturers);
 provide('price_interval', data.value.results.price_interval);
 provide('breadcrumbs', data.value.results.breadcrumbs);
 provide('tags_data', data.value.results.tags_data);
-provide('products_quantity', data.value.count);
-provide('products_list', data.value.results.product_list);
+
+
 
 </script>
 

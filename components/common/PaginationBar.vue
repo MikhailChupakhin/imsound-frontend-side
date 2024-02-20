@@ -23,6 +23,7 @@ export default {
     setup() {
         const productsQuantity = inject('products_quantity');
         const productsList = inject('products_list');
+        const selectedRowsPerPage = inject('selectedRowsPerPage');
 
         // NOTE: При текущей реализации API бэкенда, которое отдает URL страниц пагинации(previous и next) не используются.
         // Если оставим +- так как сделал - заменю их в API просто на номер текущей страницы.
@@ -31,12 +32,16 @@ export default {
         const APIqueryString = inject('APIqueryString');
         const currentPage = inject('currentPage');
         const totalRecords = ref(productsQuantity.value);
-        const selectedRowsPerPage = ref();
+        const TESTselectedRowsPerPage = ref(selectedRowsPerPage.value);
         const previousRowsPerPage = ref();
         
         watch(productsQuantity, (newValue) => {
             // console.log('TOTAL RECORDS', totalRecords)
             totalRecords.value = newValue;
+        });
+
+        watch(selectedRowsPerPage, (newValue) => {
+            TESTselectedRowsPerPage.value = newValue;
         });
         
         onMounted(() => {

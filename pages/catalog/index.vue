@@ -63,6 +63,9 @@ provide('products_list', productsList);
 const productsQuantity = ref(data.value.count);
 provide('products_quantity', productsQuantity);
 
+const selectedRowsPerPage = ref(12);
+provide('selectedRowsPerPage', selectedRowsPerPage);
+
 const APIpath = ref('catalog/');
 provide('APIpath', APIpath);
 const APIqueryString = ref('');

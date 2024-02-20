@@ -76,6 +76,7 @@ export default {
         const productsQuantity = inject('products_quantity');
         const APIpath = inject('APIpath');
         const APIqueryString = inject('APIqueryString');
+        const selectedRowsPerPage = inject('selectedRowsPerPage');
 
         const applyFilters = async () => {
             // Лучше вынести в отдельную функцию
@@ -99,6 +100,7 @@ export default {
                 productsList.value = data.results.product_list;
                 productsQuantity.value = data.count;
                 currentPage.value = 1;
+                selectedRowsPerPage.value = 12;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

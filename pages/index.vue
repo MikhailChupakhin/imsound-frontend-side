@@ -5,7 +5,7 @@
     <MainHeader />
     <PromotionalSlidersCarousel />
     <PromotionalBannersTop />
-    <PromotionalFeaturedProducts/>
+    <PromotionalFeaturedProductsGrid />
   </div>
 </template>
 
@@ -43,6 +43,7 @@ provide('featured_products', data.value.featured_products);
 .main_container {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .sidebar_container {

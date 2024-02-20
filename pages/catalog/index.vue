@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-import 'primevue/resources/themes/saga-blue/theme.css';
-import 'primevue/resources/primevue.min.css';
-
 import { provide } from 'vue';
 
 import MainHeader from '~/components/header/MainHeader.vue'
@@ -101,6 +98,7 @@ provide('page_previous', data.value.previous);
 
 <style scoped>
 .main_container {
+  overflow-x: hidden;
   width: 100%;
   display: flex;
   flex-direction: column;

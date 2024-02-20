@@ -2,17 +2,16 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: true,
+  
   pages: true,
-  alias: {
-    // assets: "/<rootDir>/assets",
-  },
   modules: [
-    '@nuxtjs/tailwindcss',
     'nuxt-primevue',
   ],
-  primevue: {
-    unstyled: false,
-  },
+  primevue: true,
+  css: [
+    '~/assets/global.css'
+  ],
   runtimeConfig: {
     public: {
       apiBase: '',

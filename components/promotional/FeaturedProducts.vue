@@ -1,9 +1,9 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\FeaturedProducts.vue -->
 
 <template>
-    <div class="products">
-      <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+  <div class="products">
+    <div class="p-container">
+      <div class="p-grid p-gap-4">
           <div v-for="product in featuredProducts" :key="product.id" class="product">
             <div class="product_image">
               <img :src="'https://imsound.ru' + product.image" :alt="product.name">
@@ -43,4 +43,9 @@ function getProductDetailURL(slug, id) {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.product-image img {
+  max-width: 100%;
+  height: auto;
+}
+</style>

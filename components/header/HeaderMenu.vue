@@ -43,6 +43,7 @@ export default {
     color: white;
     padding: 10px 24px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 

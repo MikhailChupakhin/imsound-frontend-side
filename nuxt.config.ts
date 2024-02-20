@@ -8,7 +8,11 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/tailwindcss',
+    'nuxt-primevue',
   ],
+  primevue: {
+    unstyled: false,
+  },
   runtimeConfig: {
     public: {
       apiBase: '',

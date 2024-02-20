@@ -10,16 +10,19 @@
                 <div class="w-full md:w-1/2 px-2">
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
-                        <input type="number" v-model.number="minPrice"  @input="updateSliderFromMin" class="form-control custom-input" inputmode="numeric">
+                        <input type="number" v-model.number="minPrice" @input="updateSliderFromMin"
+                            class="form-control custom-input" inputmode="numeric">
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 px-2">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
-                        <input type="number" v-model.number="maxPrice" @input="updateSliderFromMax" class="form-control custom-input" inputmode="numeric">
+                        <input type="number" v-model.number="maxPrice" @input="updateSliderFromMax"
+                            class="form-control custom-input" inputmode="numeric">
                     </div>
                 </div>
-                <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval" @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef"/>
+                <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval"
+                    @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
             </div>
 
             <div class="flex">
@@ -57,20 +60,25 @@ import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
 
 export default {
     components: {
-        CatalogPriceSlider
+        CatalogPriceSlider,
     },
     inject: ['manufacturers', 'price_interval'],
     setup() {
+
+
         const minPrice = inject('minPrice');
         const maxPrice = inject('maxPrice');
         const inStock = inject('inStock');
         const selectedManufacturers = inject('selectedManufacturers');
         const sliderRef = ref(null);
         const productsList = inject('products_list');
+        const currentPage = inject('currentPage');
         const productsQuantity = inject('products_quantity');
-        
-        const applyFilters = async() => {
-            // Нужно вынести в отдельную функцию
+        const APIpath = inject('APIpath');
+        const APIqueryString = inject('APIqueryString');
+
+        const applyFilters = async () => {
+            // Лучше вынести в отдельную функцию
             let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
             if (selectedManufacturers.value.length > 0) {
                 const manufacturerNames = selectedManufacturers.value.map(manufacturer => manufacturer.name);
@@ -81,13 +89,16 @@ export default {
             }
             //
             const BASE_API_URL = useRuntimeConfig().public.apiBase;
-            const apiUrl = BASE_API_URL + 'catalog/' + queryString;
+            APIpath.value = window.location.pathname.slice(1);
+            APIqueryString.value = queryString;
+            const apiUrl = BASE_API_URL + APIpath.value + '/' + queryString;
 
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
                 productsList.value = data.results.product_list;
                 productsQuantity.value = data.count;
+                currentPage.value = 1;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -106,7 +117,6 @@ export default {
             sliderRef.value.slider.set([null, maxPrice.value]);
         };
 
-        
         return {
             minPrice,
             maxPrice,
@@ -116,14 +126,14 @@ export default {
             handleSliderValuesChanged,
             updateSliderFromMin,
             updateSliderFromMax,
-            sliderRef
+            currentPage,
+            sliderRef,
+            APIpath,
+            APIqueryString,
         };
     }
 
 };
 </script>
 
-<style scoped>
-</style>
-
-
+<style scoped></style>

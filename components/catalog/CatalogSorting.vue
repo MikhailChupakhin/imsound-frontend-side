@@ -46,7 +46,9 @@ export default {
         const selectedManufacturers = inject('selectedManufacturers');
         const productsList = inject('products_list');
         const productsQuantity = inject('products_quantity');
-        const sortingOption = ref('');
+        const APIpath = inject('APIpath');
+        const APIqueryString = inject('APIqueryString');
+        const sortingOption = inject('sortingOption');
 
         const sortingOptionValue = computed(() => {
             switch (sortingOption.value) {
@@ -75,9 +77,9 @@ export default {
 
         const sortProducts = async() => {
             const sortParam = sortingOptionValue.value ? `&sort=${sortingOptionValue.value}` : '';
+             
 
-
-            // Нужно вынести в отдельную функцию
+            // Техдолг, вынести в отдельную функцию
             let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
             if (selectedManufacturers.value.length > 0) {
                 const manufacturerNames = selectedManufacturers.value.map(manufacturer => manufacturer.name);
@@ -88,15 +90,17 @@ export default {
             }
             //
 
-            const BASE_API_URL = useRuntimeConfig().public.apiBase;            
-            const apiUrl = BASE_API_URL + 'catalog/' + queryString + sortParam;
+            const BASE_API_URL = useRuntimeConfig().public.apiBase;
+            APIpath.value = window.location.pathname.slice(1);
+            APIqueryString.value = queryString;
+            const apiUrl = BASE_API_URL + APIpath.value + '/' + queryString + sortParam;
 
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
-                console.log(data.results.product_list)
                 productsList.value = data.results.product_list;
                 productsQuantity.value = data.count;
+                APIqueryString.value = queryString + sortParam;
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -112,7 +116,9 @@ export default {
             productsList,
             setGridViewMode,
             setListViewMode,
-            sortProducts
+            sortProducts,
+            APIpath,
+            APIqueryString
         };
     }
 };

@@ -1,3 +1,5 @@
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\SiteLogo.vue -->
+
 <template>
   <div class="container">
     <NuxtLink :to="`/`" class="logo">IMSOUND</NuxtLink>
@@ -15,5 +17,11 @@ export default {
     font-weight: 700;
     color: #1b1b1b;
     text-decoration: none;
+}
+
+@media screen and (max-width: 540px) {
+    .logo {
+        font-size: 20px;
+    }
 }
 </style>

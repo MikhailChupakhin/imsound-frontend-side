@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-content-between row-gap-3">
+  <div class="flex flex-row justify-content-between row-gap-3 mr-5">
     <div class="header-contact">
         <p>
           <a href="tel:+71234567890">

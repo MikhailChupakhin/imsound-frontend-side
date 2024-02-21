@@ -1,6 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\HeaderMenu.vue -->
 
 <template>
+  <div class="unvisible-sm">
   <NuxtLink :to="`/`" class="menu-button mr-5">Главная</NuxtLink>
   <div class="menu">
     <NuxtLink :to="`/catalog`" class="menu-button mr-5">Каталог</NuxtLink>
@@ -18,6 +19,7 @@
     </div>
   </div>
   <NuxtLink :to="`/blog`" class="menu-button">Блог</NuxtLink>
+  </div>
 </template>
 
 <script>
@@ -89,6 +91,8 @@ export default {
     left: 100%;
     top: 0;
     z-index: 1;
+    list-style: none;
+    padding: 0;
 }
 
 .category:hover .subcategories {

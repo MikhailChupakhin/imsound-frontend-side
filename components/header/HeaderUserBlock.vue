@@ -4,7 +4,7 @@
   <div class="container flex py-2">
     <button class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 flex items-center">
       <img src="/static/svg/cart-trolley.svg" class="svg-icon-l mr-2" alt="Корзина">
-      <span class="mt-1">Корзина</span>
+      <span class="cart-text mt-1">Корзина</span>
     </button>
     <div class="flex items-center menu-container">
       <button v-if="isAuthenticated" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2"
@@ -21,7 +21,7 @@
 
       <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
         <div class="text-center mb-5">
-          <HeaderLogo />
+          <CommonSiteLogo/>
           <div class="text-900 text-3xl font-medium mb-3">Добро пожаловать!</div>
           <span class="text-600 font-medium line-height-3">Еще нет аккаунта?</span>
           <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Зарегистрируйтесь!</a>
@@ -54,7 +54,6 @@
 
 
 <script>
-import HeaderLogo from './HeaderLogo.vue';
 export default {
   data() {
     return {
@@ -241,5 +240,10 @@ button[type="submit"] {
   border: none;
   border-radius: 7px;
   cursor: pointer;
+}
+@media screen and (max-width: 450px) {
+    .cart-text {
+        display: none;
+    }
 }
 </style>

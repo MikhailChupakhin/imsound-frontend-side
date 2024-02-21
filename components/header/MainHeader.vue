@@ -4,8 +4,9 @@
   <header class="header">
     <div class="header_container">
       <HeaderTopRow />
-      <div class="header_components">
-        <HeaderLogo />
+      <div class="header_components mr-5">
+        <SiteLogo />
+        <HeaderHamburgerMenu />
         <HeaderMenu />
         <HeaderSearchPanel />
         <HeaderUserBlock />
@@ -16,19 +17,21 @@
   
 <script>
 import HeaderTopRow from './HeaderTopRow.vue';
-import HeaderLogo from './HeaderLogo.vue';
+import SiteLogo from '../common/SiteLogo.vue';
 import HeaderMenu from './HeaderMenu.vue';
 import HeaderSearchPanel from './HeaderSearchPanel.vue';
 import HeaderUserBlock from './HeaderUserBlock.vue';
-  
+import HeaderHamburgerMenu from './HeaderHamburgerMenu.vue';
+
 export default {
   components: {
     HeaderTopRow,
-    HeaderLogo,
+    SiteLogo,
     HeaderMenu,
     HeaderSearchPanel,
-    HeaderUserBlock
-  }
+    HeaderUserBlock,
+    HeaderHamburgerMenu
+  },
 }
 
 </script>
@@ -39,6 +42,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
 }
 
 .header_components {
@@ -46,5 +53,10 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .header_container {
+    position: fixed;
+  }
 }
 </style>

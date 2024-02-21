@@ -40,8 +40,8 @@ export default {
 .search_icon {
 	margin-right: 10px;
 	fill: #333;
-	width: 40px;
-	height: 40px
+	width: 30px;
+	height: 30px
 }
 
 .search_icon svg {

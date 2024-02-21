@@ -1,17 +1,20 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\index.vue -->
 
 <template>
+  <MainHeader />
   <div class="main_container">
-    <MainHeader />
     <PromotionalSlidersCarousel />
     <PromotionalBannersTop />
     <PromotionalFeaturedProductsGrid />
+    <IndexSubscriptionEmail />
   </div>
+  <MainFooter />
 </template>
 
 <script setup>
 import { provide } from 'vue';
 import MainHeader from '~/components/header/MainHeader.vue'
+import MainFooter from '~/components/footer/MainFooter.vue';
 
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
@@ -22,20 +25,17 @@ const { data } = await useAsyncData(
   () => $fetch(`${BASE_API_URL}${endpoint}`)
 );
 
-// console.log(data.value.categories)
-// console.log(data.value.subcategories)
 
 provide('categories', data.value.categories);
 provide('subcategories', data.value.subcategories);
 
-// console.log(data.value.sliders_and_banners.sliders)
+
 provide('sliders', data.value.sliders_and_banners.sliders);
-
-// console.log(data.value.sliders_and_banners.banners)
 provide('banners_top', data.value.sliders_and_banners.banners);
-
-// console.log(data.value.featured_products)
 provide('featured_products', data.value.featured_products);
+
+provide('company_info', data.value.company_info);
+provide('clients_info', data.value.clients_info);
 
 </script>
 
@@ -44,6 +44,8 @@ provide('featured_products', data.value.featured_products);
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .sidebar_container {

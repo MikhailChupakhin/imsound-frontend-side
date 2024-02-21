@@ -2,14 +2,16 @@
 
 <template>
   <header class="header">
-    <div class="header_container">
-      <HeaderTopRow />
-      <div class="header_components mr-5">
-        <SiteLogo />
-        <HeaderHamburgerMenu />
-        <HeaderMenu />
-        <HeaderSearchPanel />
-        <HeaderUserBlock />
+    <div class="wrapper">
+      <div class="header_container">
+        <HeaderTopRow />
+        <div class="header_components">
+          <SiteLogo />
+          <HeaderHamburgerMenu />
+          <HeaderMenu />
+          <HeaderSearchPanel />
+          <HeaderUserBlock />
+        </div>
       </div>
     </div>
   </header>
@@ -37,6 +39,14 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  width: 100%;
+  background-color: #fff;
+}
+.wrapper {
+  margin-left: 15px;
+  margin-right: 15px;
+}
 .header_container {
   display: flex;
   flex-direction: column;
@@ -44,7 +54,7 @@ export default {
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   top: 0;
   width: 100%;
-  background-color: #fff;
+  
   z-index: 1000;
 }
 
@@ -54,9 +64,11 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 @media screen and (max-width: 767px) {
-  .header_container {
+  .header {
     position: fixed;
+    z-index: 1000;
   }
 }
 </style>

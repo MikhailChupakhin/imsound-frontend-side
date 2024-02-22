@@ -1,43 +1,53 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogFIlters.vue -->
 
 <template>
-    <div class="filters-container border m-5">
-        <div class="text-center mb-4">
+    <div class="filters-container">
+        <div class="text-center">
             <p class="text-lg font-semibold">Фильтры</p>
         </div>
         <div>
-            <div class="flex flex-wrap">
-                <div class="w-full md:w-1/2 px-2">
+            <div class="grid">
+                <div class="col-5">
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
-                        <input type="number" v-model.number="minPrice" @input="updateSliderFromMin"
-                            class="form-control custom-input" inputmode="numeric">
+                        <input type="text" v-model.number="formattedMinPrice" @input="updateSliderFromMin($event)"
+                            class="form-control custom-input" inputmode="numeric" style="width: 100%;">
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 px-2">
+                <div class="col-2">
+                    <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+                        <div class="mt-4">-</div>
+                    </div>
+                </div>
+                <div class="col-5">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
-                        <input type="number" v-model.number="maxPrice" @input="updateSliderFromMax"
-                            class="form-control custom-input" inputmode="numeric">
+                        <input type="text" v-model.number="formattedMaxPrice" @input="updateSliderFromMax($event)"
+                            class="form-control custom-input" inputmode="numeric" style="width: 100%;">
                     </div>
                 </div>
-                <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval"
-                    @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
             </div>
-
-            <div class="flex">
-                <div class="w-full px-2">
-                    <div class="form-group form-check availability">
+            <div class="grid">
+                <div class="col-12">
+                    <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval"
+                        @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
+                </div>
+            </div>
+            <div class="grid">
+                <div class="col-9">
+                    <label class="form-check-label">Только в наличии</label>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
                         <input type="checkbox" v-model="inStock" class="form-check-input">
-                        <label class="form-check-label">Только в наличии</label>
                     </div>
                 </div>
             </div>
 
-            <div class="flex">
-                <div class="w-full px-2">
+            <div class="grid">
+                <div class="col-12">
                     <p class="text-center font-semibold">Производители</p>
-                    <ul class="list-group list-group-flush manufacturer-list">
+                    <ul class="manufacturers-list">
                         <li v-for="(manufacturer, index) in manufacturers" :key="index" class="list-group-item">
                             <input type="checkbox" v-model="selectedManufacturers" :value="manufacturer"
                                 class="form-check-input">
@@ -48,8 +58,8 @@
             </div>
         </div>
 
-        <div class="filter-btn text-center">
-            <button @click="applyFilters" class="border m-5 p-2">Применить фильтр</button>
+        <div class="text-center">
+            <button @click="applyFilters" class="interface-btn-1">Применить</button>
         </div>
     </div>
 </template>
@@ -57,6 +67,7 @@
 <script>
 import { ref } from 'vue';
 import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
+import { formatPrice } from '~/utils/priceFormatter.js';
 
 export default {
     components: {
@@ -64,8 +75,6 @@ export default {
     },
     inject: ['manufacturers', 'price_interval'],
     setup() {
-
-
         const minPrice = inject('minPrice');
         const maxPrice = inject('maxPrice');
         const inStock = inject('inStock');
@@ -111,13 +120,27 @@ export default {
             maxPrice.value = parseInt(values[1]);
         };
 
-        const updateSliderFromMin = () => {
+        const updateSliderFromMin = (event) => {
+            const input = event.target.value;
+            const filteredValue = input.replace(/\D/g, '');
+            minPrice.value = parseInt(filteredValue);
             sliderRef.value.slider.set([minPrice.value, null]);
         };
 
         const updateSliderFromMax = () => {
+            const input = event.target.value;
+            const filteredValue = input.replace(/\D/g, '');
+            maxPrice.value = parseInt(filteredValue);
             sliderRef.value.slider.set([null, maxPrice.value]);
         };
+
+        const formattedMinPrice = computed(() => {
+            return formatPrice(minPrice.value);
+        });
+
+        const formattedMaxPrice = computed(() => {
+            return formatPrice(maxPrice.value);
+        });
 
         return {
             minPrice,
@@ -132,10 +155,70 @@ export default {
             sliderRef,
             APIpath,
             APIqueryString,
+            formattedMinPrice,
+            formattedMaxPrice,
         };
-    }
+    },
+
 
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.form-group input[type="text"] {
+    text-align: center;
+    color: #8B0000;
+}
+
+.form-group input[type="number"] {
+    text-align: center;
+    color: #8B0000;
+}
+</style>
+
+<style>
+.p-inputnumber,
+.p-inputtext {
+    width: 70px !important;
+}
+ul.manufacturers-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+.interface-btn-1 {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: rgba(73, 192, 232, 0.84);
+    color: #000000; 
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.interface-btn-1:hover {
+
+    background-color: rgb(58, 77, 146);
+}
+</style>

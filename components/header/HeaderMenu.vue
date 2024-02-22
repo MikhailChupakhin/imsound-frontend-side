@@ -41,12 +41,15 @@ export default {
 }
 
 .menu-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 750;
+    color: rgb(118, 118, 118);
+    padding: 10px 10px;
+    text-decoration: none;
+}
+.menu-button:hover {
+  text-shadow: 0 0 1px #8B0000, 0 0 1px #8B0000;
+  color: #8B0000;
 }
 
 .menu:hover .dropdown-menu {

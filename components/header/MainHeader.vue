@@ -42,16 +42,18 @@ export default {
 .header {
   width: 100%;
   background-color: #fff;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+
 }
 .wrapper {
   margin-left: 15px;
   margin-right: 15px;
 }
+  
 .header_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   top: 0;
   width: 100%;
   

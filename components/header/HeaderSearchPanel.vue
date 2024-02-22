@@ -54,6 +54,6 @@ export default {
 }
 
 .search_icon:hover svg {
-	fill: #e95a5a
+	fill: #8B0000;
 }
 </style>

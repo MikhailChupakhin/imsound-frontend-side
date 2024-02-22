@@ -4,12 +4,12 @@
   <div class="main_container">
     <MainHeader />
     <BreadcrumbsNav />
-    <div class="content_area">
-      <div class="sidebar_container">
-        <SidebarNav />
-        <CatalogFIlters />
+    <div class="content_area grid">
+      <div class="col-2">
+          <SidebarNav />
+          <CatalogFIlters />
       </div>
-      <div class="content_container">
+      <div class="col-10">
         <CatalogTags />
         <CatalogSorting @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
@@ -105,8 +105,8 @@ provide('page_previous', data.value.previous);
 }
 
 .content_area {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .sidebar_container {

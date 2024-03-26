@@ -24,7 +24,7 @@
           <CommonSiteLogo/>
           <div class="text-900 text-3xl font-medium mb-3">Добро пожаловать!</div>
           <span class="text-600 font-medium line-height-3">Еще нет аккаунта?</span>
-          <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Зарегистрируйтесь!</a>
+          <NuxtLink to="/users/registration" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Зарегистрируйтесь!</NuxtLink>
         </div>
 
         <div>

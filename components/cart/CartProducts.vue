@@ -34,7 +34,7 @@
         <Column field="delete" header="Удалить">
 
           <template #body="slotProps">
-            <span :key="slotProps.data.product.id" @click="deleteItem(slotProps.data)" class="delete-button"><svg class="mt-1 delete_icon" width="20"
+            <span :key="slotProps.data.product.id" @click="deleteItem(slotProps.data, isAuthenticated)" class="delete-button"><svg class="mt-1 delete_icon" width="20"
                 height="20" id="Layer_1" style="enable-background:new 0 0 128 128;" version="1.1" viewBox="0 0 128 128"
                 xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <circle class="st0" cx="64" cy="64" r="64" />
@@ -72,15 +72,14 @@ const props = defineProps({
   onDeleteItem: {
     type: Function,
     required: true
+  },
+  isAuthenticated: {
+    type: Boolean,
   }
 });
 
-// const cartItems = ref(props.cartItems)
-
 const computedCartItems = computed(() => {
   return props.cartItems.map(item => {
-    console.log('item.quantity', item.quantity)
-    console.log('item.product.total_price', item.product.total_price)
     const summ = item.quantity * item.product.total_price;
     return reactive({
       ...item,
@@ -95,9 +94,12 @@ const updateSumm = (item, responseData) => {
 };
 
 const updateItem = (item, data) => {
+  console.log('updateItem emmited')
   const itemToUpdate = computedCartItems.value.find(cartItem => cartItem.product.id === data.productId);
   if (itemToUpdate) {
     itemToUpdate.quantity = data.quantity;
+    CartStore.commit('updateCartItem', { productInfo: itemToUpdate.product, quantity: itemToUpdate.quantity });
+  } else {
     console.error(`Product not found in cartItems.`);
   }
 };
@@ -120,24 +122,41 @@ const cartItemsTotalPrice = computed(() => {
   return totalPrice;
 });
 
-const deleteItem = (item) => {
+const deleteItem = (item, isAuthenticated) => {
   const config = useRuntimeConfig();
   const BASE_API_URL = config.public.apiBase;
-  const endpoint = 'users/cart/remove/';
-  if (process.client) {
-    (async () => {
-      const body = JSON.stringify({ 'product_id': item.product.id });
-      const headers = {
-        'Content-Type': 'application/json'
-      };
-      const apiResponse = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
-      const responseData = await apiResponse.json();
-      if (responseData.success === true) {
-        const delQuantity = item.quantity;
-        props.onDeleteItem(item);
-        CartStore.commit('removeCartItem', item.product.id);
-      }
-    })();
+  if (isAuthenticated) {
+    const endpoint = 'users/cart/remove/';
+    if (process.client) {
+      (async () => {
+        const body = JSON.stringify({ 'product_id': item.product.id });
+        const headers = {
+          'Content-Type': 'application/json'
+        };
+        const apiResponse = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+        const responseData = await apiResponse.json();
+        if (responseData.success === true) {
+          props.onDeleteItem(item);
+          CartStore.commit('removeCartItem', item.product.id);
+        }
+      })();
+    }
+  } else {
+    const endpoint = 'users/cart-guest/remove/';
+    if (process.client) {
+      (async () => {
+        const body = JSON.stringify({ 'product_id': item.product.id });
+        const headers = {
+          'Content-Type': 'application/json'
+        };
+        const apiResponse = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+        const responseData = await apiResponse.json();
+        if (responseData.success === true) {
+          props.onDeleteItem(item);
+          CartStore.commit('removeCartItem', item.product.id);
+        }
+      })();
+    }
   }
 };
 

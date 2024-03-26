@@ -9,17 +9,16 @@
   
 <script setup>
 import { ref, inject } from 'vue';
-import { useAuthStore } from '~/store/useAuthStore';
-const authData = useAuthStore();
-const isAuthenticated = ref(authData.isAuthenticated);
-
 
 import ProductCard from './ProductCard.vue';
 import QuickviewModal from '~/components/productcard/QuickviewModal.vue';
 
+import { useAuthStore } from '~/store/useAuthStore';
+const authData = useAuthStore();
+const isAuthenticated = ref(authData.isAuthenticated);
+
 const productsList = inject('products_list');
 const { viewMode } = defineProps({ viewMode: String });
-
 
 const showQuickviewModal = ref(false);
 const quickviewProduct = ref(null);

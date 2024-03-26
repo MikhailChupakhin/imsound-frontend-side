@@ -27,10 +27,13 @@ import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import { useBaseStore } from '~/store/baseData';
 
+import { useAuthStore } from '~/store/useAuthStore';
+const authData = useAuthStore();
+const isAuthenticated = ref(authData.isAuthenticated);
+
 const route = useRoute();
 const config = useRuntimeConfig();
 const BASE_API_URL = config.public.apiBase;
-const endpoint = 'orders/checkout/auth/';
 
 const router = useRouter();
 const response = ref(null);
@@ -40,13 +43,21 @@ const baseStore = useBaseStore();
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
-provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзина пользователя"], ["/users/checkout-auth/", "Оформление заказа"]]);
+provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзина пользователя"], ["/users/checkout/", "Оформление заказа"]]);
 
 if (process.client) {
   (async () => {
-    const urlWithQuery = `${endpoint}?deliveryMethod=${deliveryMethod}`;
-    const apiResponse = await authRequestHandler(BASE_API_URL, urlWithQuery, 'GET');
-    response.value = await apiResponse.json();
+    if (isAuthenticated.value) {
+      const endpoint = 'orders/checkout/auth/';
+      const urlWithQuery = `${endpoint}?deliveryMethod=${deliveryMethod}`;
+      const apiResponse = await authRequestHandler(BASE_API_URL, urlWithQuery, 'GET');
+      response.value = await apiResponse.json();
+    } else {
+      const endpoint = 'orders/checkout/guest/';
+      const urlWithQuery = `${endpoint}?deliveryMethod=${deliveryMethod}`;
+      const apiResponse = await guestRequestHandler(BASE_API_URL, urlWithQuery, 'GET');
+      response.value = await apiResponse.json();
+    } 
   })();
 }
 
@@ -100,14 +111,20 @@ const handleCheckout = async (selectedPaymentMethod) => {
   });
 
   try {
-    const response = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
-
-    if (response.ok) {
-      console.log('Запрос выполнен успешно');
-      CartStore.commit('resetCart');
-      router.push({ path: '/users/order-success' });
+    if (isAuthenticated.value) {
+      const endpoint = 'orders/checkout/auth/';
+      const response = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+      if (response.statusText === 'Created') {
+        CartStore.commit('resetCart');
+        router.push({ path: '/users/order-success' });
+      }
     } else {
-      console.error('Ошибка выполнения запроса:', response.statusText);
+      const endpoint = 'orders/checkout/guest/';
+      const response = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+      if (response.statusText === 'Created') {
+        CartStore.commit('resetCart');
+        router.push({ path: '/users/order-success' });
+      }
     }
   } catch (error) {
     console.error('Произошла ошибка при выполнении запроса:', error);

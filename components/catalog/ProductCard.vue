@@ -3,7 +3,6 @@
 <template>
   <div class="product-card text-center" @mouseenter="showCartButton" @mouseleave="hideCartButton">
     <div class="card-border">
-      <div>аутентификация - {{ isAuthenticated }} </div>
       <!-- <Skeleton v-if="ImgIsLoading" class="skeleton"></Skeleton> -->
       <img class="product-img" :src="productInfo.image" alt="{{ productInfo.name }} Image" @load="imageLoaded" loading="lazy">
       <h2><a>{{ productInfo.name }}</a></h2>
@@ -93,7 +92,6 @@ export default {
       const headerRect = document.querySelector('header').getBoundingClientRect();
       const xB = buttonRect.left + window.scrollX - headerRect.left;
       const yB = buttonRect.top - headerRect.top;
-      console.log('this.isAuthenticated', this.isAuthenticated)
 
       if (this.isAuthenticated) {
         this.addToCartAUTH(productInfo, this.selectedQuantity, xA, yA, xB, yB);

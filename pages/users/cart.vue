@@ -6,10 +6,10 @@
   <div class="main_container" v-show="!isCartEmpty">
     <div>
       <template v-if="!cartItems.length">
-        <CartProducts :cartItems="CartItemsStored" :onDeleteItem="deleteItem" />
+        <CartProducts :cartItems="CartItemsStored" :onDeleteItem="deleteItem" :is-authenticated="isAuthenticated" />
       </template>
       <template v-else>
-        <CartProducts :cartItems="cartItems" :onDeleteItem="deleteItem" />
+        <CartProducts :cartItems="cartItems" :onDeleteItem="deleteItem" :is-authenticated="isAuthenticated" />
       </template>
     </div>
     <div class="flex justify-content-center flex-wrap">
@@ -46,8 +46,11 @@ import CartOutput from '~/components/cart/CartOutput.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 
 import { useBaseStore } from '~/store/baseData';
-import { useAuthStore } from '~/store/useAuthStore';
 import CartStore from '~/store/cart';
+
+import { useAuthStore } from '~/store/useAuthStore';
+const authData = useAuthStore();
+const isAuthenticated = ref(authData.isAuthenticated);
 
 const baseStore = useBaseStore();
 const baseData = baseStore.baseResponse;

@@ -39,3 +39,7 @@ h1 {
     overflow-y: auto;
   }
 }
+
+* {
+  user-select: none;
+}

@@ -4,13 +4,14 @@
 <template>
   <MainHeader />
   <BreadcrumbsNav />
+  <!-- <pre>{{ response }}</pre> -->
   <div class="main_container" v-show="!isCartEmpty">
     <div>
       <template v-if="!cartItems.length">
-        <CartProducts :cartItems="CartItemsStored" :onDeleteItem="deleteItem" />
+        <CartProducts :cartItems="CartItemsStored" :onDeleteItem="deleteItem" :is-authenticated="isAuthenticated" />
       </template>
       <template v-else>
-        <CartProducts :cartItems="cartItems" :onDeleteItem="deleteItem" />
+        <CartProducts :cartItems="cartItems" :onDeleteItem="deleteItem" :is-authenticated="isAuthenticated" />
       </template>
     </div>
     <div class="flex justify-content-center flex-wrap">
@@ -46,8 +47,11 @@ import CartOutput from '~/components/cart/CartOutput.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 
 import { useBaseStore } from '~/store/baseData';
-import { useAuthStore } from '~/store/useAuthStore';
 import CartStore from '~/store/cart';
+
+import { useAuthStore } from '~/store/useAuthStore';
+const authData = useAuthStore();
+const isAuthenticated = ref(authData.isAuthenticated);
 
 const baseStore = useBaseStore();
 const baseData = baseStore.baseResponse;
@@ -85,17 +89,17 @@ const config = useRuntimeConfig();
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'users/cart-guest/';
 
-// if (process.client) {
-//   (async () => {
-//     const apiResponse = await authRequestHandler(BASE_API_URL, endpoint, 'GET');
-//     response.value = await apiResponse.json();
-//     cartItems.value = response.value.cart_items;
-//     if (cartItems.value.length === 0) {
-//       isCartEmpty.value = true;
-//     }
-//     deliveryMethods.value = response.value.delivery_methods;
-//   })();
-// }
+if (process.client) {
+  (async () => {
+    const apiResponse = await guestRequestHandler(BASE_API_URL, endpoint, 'GET');
+    response.value = await apiResponse.json();
+    cartItems.value = response.value.cart_items;
+    if (cartItems.value.length === 0) {
+      isCartEmpty.value = true;
+    }
+    deliveryMethods.value = response.value.delivery_methods;
+  })();
+}
 
 console.log('cartItems', cartItems)
 

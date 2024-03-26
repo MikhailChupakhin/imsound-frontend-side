@@ -61,7 +61,7 @@ const handleCheckout = () => {
     showDeliveryMethodNotSelectedMessage.value = true;
   } else {
     router.push({ 
-      path: '/users/checkout-auth',
+      path: '/users/checkout/',
       query: { deliveryMethod: computedDeliveryMethod.value.id },
       replace: true 
     });

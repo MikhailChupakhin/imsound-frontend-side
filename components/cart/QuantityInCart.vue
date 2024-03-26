@@ -49,27 +49,15 @@ export default {
                     handleResponseData(responseData);
                 })();
             } else {
-                console.log('user is guest');
-                const endpoint = 'users/cart_guest/update/';
+                const endpoint = 'users/cart-guest/update/';
                 const body = JSON.stringify({'product_id': props.productId, 'operation_type': operation});
-                // Доделать при возвращении к гостевой логике
-                guestToken =  '123'
                 const headers = {
                     'Content-Type': 'application/json',
-                    'guest-token': guestToken,
                 };
-                try {
-                    const response = await fetch(BASE_API_URL + endpoint, {
-                        method: 'POST',
-                        headers: headers,
-                        body: body
-                    });
-                    const responseData = await response.json();
-                    console.log(responseData);
-                    handleResponseData(responseData);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
+                const apiResponse = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+                const responseData = await apiResponse.json();
+                console.log(responseData);
+                handleResponseData(responseData);
             }
         };
 
@@ -132,10 +120,8 @@ export default {
                 console.log('excess: set maximal value');
                 quantity.value = responseData.upd_qty;
                 emit('quantity-change', { productId: props.productId, quantity: quantity.value });
-
             }
         };
-
 
         return {
             quantity,

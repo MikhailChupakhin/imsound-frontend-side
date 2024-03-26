@@ -4,32 +4,36 @@
   <div class="main_container">
     <MainHeader />
     <BreadcrumbsNav />
-    <div class="content_area grid">
-      <div class="col-2">
-          <SidebarNav />
-          <CatalogFIlters />
-      </div>
-      <div class="col-10">
+    <div class="content-wrapper grid">
+      <SidebarBuiltin />
+      <SidebarAside />
+      <div class="content-area col-10">
         <CatalogTags />
         <CatalogSorting @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
         <PaginationBar />
       </div>
     </div>
+    <FooterBottom />
   </div>
 </template>
 
 <script setup>
 import { provide } from 'vue';
+import { useBaseStore } from '~/store/baseData';
 
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
-import SidebarNav from '~/components/catalog/SidebarNav.vue';
-import CatalogFIlters from '~/components/catalog/CatalogFIlters.vue';
 import CatalogTags from '~/components/catalog/CatalogTags.vue';
 import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';
+import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
+import SidebarAside from '~/components/catalog/SidebarAside.vue';
+import FooterBottom from '~/components/footer/FooterBottom.vue';
+
+
+const baseStore = useBaseStore();
 
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
@@ -84,8 +88,10 @@ provide('sortingOption', sortingOption);
 const currentPage = ref('1');
 provide('currentPage', currentPage);
 
-provide('categories', data.value.results.categories);
-provide('subcategories', data.value.results.subcategories);
+const baseData = baseStore.baseResponse;
+provide('categories', baseData.categories);
+provide('subcategories', baseData.subcategories);
+
 provide('manufacturers', data.value.results.manufacturers);
 provide('price_interval', data.value.results.price_interval);
 provide('breadcrumbs', data.value.results.breadcrumbs);
@@ -93,6 +99,9 @@ provide('tags_data', data.value.results.tags_data);
 
 provide('page_next', data.value.next);
 provide('page_previous', data.value.previous);
+
+provide('company_info', data.value.company_info);
+provide('clients_info', data.value.clients_info);
 
 </script>
 
@@ -104,19 +113,14 @@ provide('page_previous', data.value.previous);
   flex-direction: column;
 }
 
-.content_area {
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
 }
-
-.sidebar_container {
-  width: 240px;
-  display: flex;
-  flex-direction: column;
+.content-area {
   flex: 1;
-}
-
-.content_container {
-  margin-left: 20px;
 }
 </style>

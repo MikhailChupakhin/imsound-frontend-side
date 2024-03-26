@@ -22,7 +22,21 @@
 </template>
 
 <script>
+import { useAuthStore} from '~/store/useAuthStore';
+import {restoreAuthStateFromCookie} from '~/utils/restore/restoreAuthState';
+
 export default {
+  setup() {
+    const authStore = useAuthStore();
+
+    onMounted(() => {
+      if (!authStore.isAuthenticatedCheckInit) {
+        restoreAuthStateFromCookie(authStore);
+        authStore.setAuthenticatedCheckInit(true);
+        console.log('authStore restored')
+      }
+    });
+  }
 }
 </script>
 

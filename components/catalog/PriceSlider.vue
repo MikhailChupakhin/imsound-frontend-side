@@ -1,7 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\PriceSlider.vue -->
 
 <template>
-    <div id="slider" class="slider-container mt-5 mb-5"></div>
+    <div :id="sliderId" class="slider-container mt-5 mb-5"></div>
   </template>
   
   <script>
@@ -11,13 +11,14 @@
   
   export default {
     props: {
-      priceInterval: Object
+      priceInterval: Object,
+      sliderId: String
     },
     setup(props, { emit }) {
       const slider = ref(null);
   
       onMounted(() => {
-        const sliderElement = document.getElementById('slider');
+        const sliderElement = document.getElementById(props.sliderId);
   
         slider.value = noUiSlider.create(sliderElement, {
           start: [props.priceInterval.min, props.priceInterval.max],

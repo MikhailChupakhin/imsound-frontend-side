@@ -2,23 +2,23 @@
 
 <template>
   <div class="unvisible-sm">
-  <NuxtLink :to="`/`" class="menu-button mr-5">Главная</NuxtLink>
-  <div class="menu">
-    <NuxtLink :to="`/catalog`" class="menu-button mr-5">Каталог</NuxtLink>
-    <div class="dropdown-menu">
+    <NuxtLink :to="`/`" class="menu-button mr-5">Главная</NuxtLink>
+    <div class="menu">
+      <NuxtLink :to="`/catalog`" class="menu-button mr-5">Каталог</NuxtLink>
+      <div class="dropdown-menu">
         <ul class="categories">
-            <li class="category" v-for="category in categories" :key="category.id">
-              <NuxtLink :to="`/catalog/${category.slug}`" class="dropdown-menu-item">{{ category.name }}</NuxtLink>
-              <ul class="subcategories">
-                <li v-for="subcategory in getSubcategories(category.name)" :key="subcategory.id">
-                  <NuxtLink :to="`/catalog/${category.slug}/${subcategory.slug}`" class="dropdown-menu-item">{{ subcategory.name }}</NuxtLink>
-                </li>
-              </ul>
-            </li>
+          <li class="category" v-for="category in categories" :key="category.id">
+            <NuxtLink :to="`/catalog/${category.slug}`" class="dropdown-menu-item">{{ category.name }}</NuxtLink>
+            <ul class="subcategories">
+              <li v-for="subcategory in getSubcategories(category.slug)" :key="subcategory.id">
+                <NuxtLink :to="`/catalog/${category.slug}/${subcategory.slug}`" class="dropdown-menu-item">{{ subcategory.name }}</NuxtLink>
+              </li>
+            </ul>
+          </li>
         </ul>
+      </div>
     </div>
-  </div>
-  <NuxtLink :to="`/blog`" class="menu-button">Блог</NuxtLink>
+    <NuxtLink :to="`/blog`" class="menu-button">Блог</NuxtLink>
   </div>
 </template>
 
@@ -26,9 +26,10 @@
 export default {
   inject: ['categories', 'subcategories'],
   methods: {
-    getSubcategories(categoryName) {
-      const category = this.subcategories.find(subcategory => subcategory.category_name === categoryName);
-      return category ? category.subcategories_pack : [];
+    getSubcategories(categorySlug) {
+      const subcategories = Array.from(this.subcategories).flatMap(obj => obj.subcategories_pack);
+      const filteredSubcategories = subcategories.filter(subcategory => subcategory.parent_category_slug === categorySlug);
+      return filteredSubcategories;
     }
   }
 };
@@ -51,45 +52,44 @@ export default {
   text-shadow: 0 0 1px #8B0000, 0 0 1px #8B0000;
   color: #8B0000;
 }
-
+.dropdown-menu-item:hover {
+  text-shadow: 0 0 1px #8B0000, 0 0 1px #8B0000;
+  color: #8B0000;
+}
 .menu:hover .dropdown-menu {
     display: block;
 }
-
 .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #efefef;
+    border-radius: 3px;
     min-width: 160px;
     z-index: 1;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-
 .categories {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
-
 .category {
     position: relative;
 }
-
 .category a {
     display: block;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
 }
-
 .category a:hover {
-    background-color: #f1f1f1;
+    background-color: #dadada;
 }
-
 .subcategories {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #efefef;
+    border-radius: 3px;
     min-width: 160px;
     left: 100%;
     top: 0;
@@ -97,16 +97,13 @@ export default {
     list-style: none;
     padding: 0;
 }
-
 .category:hover .subcategories {
     display: block;
 }
-
 .dropdown-menu-item {
     width: 300px;
 }
-
 .dropdown-menu-item:hover {
-    background-color: #f1f1f1;
+    background-color: #dadada;
 }
 </style>

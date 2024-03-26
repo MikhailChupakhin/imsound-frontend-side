@@ -3,8 +3,8 @@
 <template>
   <MainHeader />
   <div class="main_container">
-    <PromotionalSlidersCarousel />
-    <PromotionalBannersTop />
+    <PromotionalSlidersCarousel :sliders="sliders" />
+    <PromotionalBannersTop :banners_top="banners_top"/>
     <PromotionalFeaturedProductsGrid />
     <IndexSubscriptionEmail />
   </div>
@@ -16,27 +16,31 @@ import { provide } from 'vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import MainFooter from '~/components/footer/MainFooter.vue';
 
+import { useBaseStore } from '~/store/baseData';
+
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'index/';
 
+const baseStore = useBaseStore();
+
 const { data } = await useAsyncData(
   'data',
-  () => $fetch(`${BASE_API_URL}${endpoint}`)
+  () => $fetch(`${BASE_API_URL}${endpoint}`, {
+    method: 'GET',
+  })
 );
 
+console.log('Loading baseData in Index')
+const baseData = baseStore.baseResponse;
+provide('categories', baseData.categories);
+provide('subcategories', baseData.subcategories);
 
-provide('categories', data.value.categories);
-provide('subcategories', data.value.subcategories);
-
-
-provide('sliders', data.value.sliders_and_banners.sliders);
-provide('banners_top', data.value.sliders_and_banners.banners);
+const sliders = data.value.sliders_and_banners.sliders;
+const banners_top = data.value.sliders_and_banners.banners;
 provide('featured_products', data.value.featured_products);
-
 provide('company_info', data.value.company_info);
 provide('clients_info', data.value.clients_info);
-
 </script>
 
 <style scoped>

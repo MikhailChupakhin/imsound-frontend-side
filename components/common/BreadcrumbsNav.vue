@@ -40,8 +40,14 @@ export default {
 </script>
 
 <style scoped>
+.home {
+    height: auto;
+}
+
+
 .home_container {
-    height: 150px;
+    height: auto;
+    margin-top: 95px;
 }
 
 .background-image {
@@ -53,6 +59,7 @@ export default {
     margin-block-start: 0;
     color: #ffffff;
     font-size: 2.5rem;
+    padding-bottom: 1rem;
 }
 
 .p-breadcrumb {

@@ -1,14 +1,14 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\FeaturedProducts.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\FeaturedProducts.vue
 
 <template>
   <div class="products">
     <div class="p-container">
       <div class="p-grid p-gap-4">
-          <div v-for="product in featuredProducts" :key="product.id" class="product">
+          <div v-for="product in featuredProducts" :key="product.id">
             <div class="product_image">
-              <img :src="'https://imsound.ru' + product.image" :alt="product.name">
+              <img :src="BASE_API_MEDIA + product.image" :alt="product.name">
             </div>
-            <div v-if="product.is_new" class="product_extra product_new">
+            <div v-if="product.is_new">
               <a href="#">New</a>
             </div>
             <div class="product_content">
@@ -29,6 +29,8 @@
   
 <script setup>
 import { ref, inject } from 'vue';
+const config = useRuntimeConfig();
+const BASE_API_MEDIA = config.public.apiMedia;
 
 const featuredProducts = inject('featured_products', []);
 
@@ -36,7 +38,6 @@ function formatPrice(price) {
   return parseFloat(price).toFixed(2).replace('.', ',');
 }
 
-// Функция для получения URL детальной страницы продукта
 function getProductDetailURL(slug, id) {
   return 'catalog/' + slug + '_' + id;
 }
@@ -48,4 +49,4 @@ function getProductDetailURL(slug, id) {
   max-width: 100%;
   height: auto;
 }
-</style>
+</style> -->

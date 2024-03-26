@@ -1,71 +1,132 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[category_slug]\[subcategory_slug].vue -->
 
 <template>
-  <div class="main_container">
+  <div v-if="requestDataSuccessful" class="main_container">
     <MainHeader />
     <BreadcrumbsNav />
-    <div class="sidebar_container">
-      <SidebarNav />
-      <div class="content_container">
+    <div class="content-wrapper grid">
+      <SidebarBuiltin />
+      <SidebarAside />
+      <div class="content-area col-10">
         <CatalogTags />
         <CatalogSorting @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
+        <PaginationBar />
       </div>
     </div>
+    <FooterBottom />
   </div>
 </template>
 
 <script setup>
 import { provide } from 'vue';
+import { useBaseStore } from '~/store/baseData';
 
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
-import SidebarNav from '~/components/catalog/SidebarNav.vue';
 import CatalogTags from '~/components/catalog/CatalogTags.vue';
 import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
+import PaginationBar from '~/components/common/PaginationBar.vue';
+import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
+import SidebarAside from '~/components/catalog/SidebarAside.vue';
+import FooterBottom from '~/components/footer/FooterBottom.vue';
 
-const route = useRoute();
+const baseStore = useBaseStore();
 const config = useRuntimeConfig()
+const route = useRoute()
+const router = useRouter();
+
 const BASE_API_URL = config.public.apiBase;
 const endpoint = `catalog/${route.params.category_slug}/${route.params.subcategory_slug}/`;
 
 const queryParams = useRoute().query
-console.log('Query параметры:', queryParams);
-
 const queryString = new URLSearchParams(queryParams).toString();
 
-const { data } = await useAsyncData(
-  'data',
-  () => $fetch(`${BASE_API_URL}${endpoint}?${queryString}`)
-);
-
 const viewMode = ref('grid');
-const updateViewMode = (mode) => {
-  viewMode.value = mode;
-};
+  const updateViewMode = (mode) => {
+    viewMode.value = mode;
+  };
 
-provide('categories', data.value.results.categories);
-provide('subcategories', data.value.results.subcategories);
-provide('breadcrumbs', data.value.results.breadcrumbs);
-provide('tags_data', data.value.results.tags_data);
-provide('products_quantity', data.value.count);
-provide('products_list', data.value.results.product_list);
+let requestDataSuccessful = false;
+const paginationParam = 9;
+const response = await fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
+  method: 'GET',
+  headers: {
+    'PAGINATIONPARAM': paginationParam,
+  }
+});
+
+if (response.status === 200) {
+  const data = await response.json();
+
+  const productsList = ref(data.results.product_list);
+  provide('products_list', productsList);
+
+  const productsQuantity = ref(data.count);
+  provide('products_quantity', productsQuantity);
+
+  const selectedRowsPerPage = ref(12);
+  provide('selectedRowsPerPage', selectedRowsPerPage);
+
+  const APIpath = ref('catalog/');
+  provide('APIpath', APIpath);
+
+  const APIqueryString = ref('');
+  provide('APIqueryString', APIqueryString);
+
+  const minPrice = ref('');
+  const maxPrice = ref('');
+  const inStock = ref(false);
+  const selectedManufacturers = ref([]);
+  provide('minPrice', minPrice);
+  provide('maxPrice', maxPrice);
+  provide('inStock', inStock);
+  provide('selectedManufacturers', selectedManufacturers);
+
+  const sortingOption = ref('');
+  provide('sortingOption', sortingOption);
+
+  const currentPage = ref('1');
+  provide('currentPage', currentPage);
+
+  const baseData = baseStore.baseResponse;
+  provide('categories', baseData.categories);
+  provide('subcategories', baseData.subcategories);
+  
+  provide('manufacturers', data.results.manufacturers);
+  provide('price_interval', data.results.price_interval);
+  provide('breadcrumbs', data.results.breadcrumbs);
+  provide('tags_data', data.results.tags_data);
+
+  provide('page_next', data.next);
+  provide('page_previous', data.previous);
+
+  provide('company_info', data.company_info);
+  provide('clients_info', data.clients_info);
+  requestDataSuccessful = true;
+} else {
+  console.log('Request failed with status:', response.status);
+  router.push('/404')
+}
 </script>
 
 <style scoped>
 .main_container {
+  overflow-x: hidden;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar_container {
+.content-wrapper {
   display: flex;
-  flex: 1;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-
-.content_container {
-  width: 100%;
-  margin-left: 20px;
+.content-area {
+  flex: 1;
 }
 </style>

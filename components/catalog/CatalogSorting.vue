@@ -1,8 +1,8 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogSorting.vue -->
 
 <template>
-    <div class="border mt-5">
-        <div class="sorting-wrapper border">
+    <div>
+        <div class="sorting-wrapper mt-2 border-1 border-round-sm surface-border">
             <div class="view-mode-buttons">
                 <a @click="setGridViewMode">
                     <i class="fa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -18,17 +18,17 @@
                 </a>
             </div>
             <div class="products_quantity">
-                Всего товаров: {{ productsQuantity }}
+                Товаров: {{ productsQuantity }}
             </div>
             <div class="sorting">
-                <select class="border mr-5" v-model="sortingOption">
+                <select class="sort-select mr-2" v-model="sortingOption">
                     <option value="">По умолчанию</option>
                     <option value="name_asc">По названию (А-Я)</option>
                     <option value="name_desc">По названию (Я-А)</option>
                     <option value="price_asc">По цене (возрастание)</option>
                     <option value="price_desc">По цене (убывание)</option>
                 </select>
-                <button class="border" @click="sortProducts">Сортировать</button>
+                <CommonInterfaceButton buttonText="Сортировать" @click="sortProducts" />
             </div>
         </div>
     </div>
@@ -145,4 +145,16 @@ export default {
     height: 1em;
 }
 
+.sort-select {
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+@media screen and (max-width: 487px) {
+    .sort-select {
+        font-size: 0.8rem;
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
 </style>

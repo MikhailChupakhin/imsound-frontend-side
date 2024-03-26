@@ -14,9 +14,7 @@
                             <form @submit.prevent="subscribe" class="newsletter_form">
                                 <input type="hidden">
                                 <input v-model="email" type="email" class="newsletter_input" required="required">
-                                <button type="submit" class="newsletter_button trans_200">
-                                    <span>Подписаться</span>
-                                </button>
+                                <ButtonAnimated buttonText="Подписаться" :handleClick="subscribe" />
                             </form>
                         </div>
                     </div>
@@ -28,6 +26,7 @@
     
 <script>
 import axios from 'axios';
+import ButtonAnimated from '~/components/common/ButtonAnimated.vue';
 
 export default {
     data() {
@@ -51,6 +50,9 @@ export default {
                 console.error('Ошибка при подписке на новости:', error);
             });
         }
+    },
+    components: {
+        ButtonAnimated
     }
 };
 </script>
@@ -73,63 +75,11 @@ export default {
     border-bottom: solid 2px #787878;
     outline: 0;
     text-align: center;
+    margin-bottom: 1rem;
 }
 .newsletter_title {
     font-size: 30px;
     font-weight: 500;
     color: #1b1b1b;
-}
-.newsletter_button {
-    position: relative;
-    width: 178px;
-    height: 61px;
-    border: solid 2px #1b1b1b;
-    background: #fff;
-    cursor: pointer;
-    margin-top: 25px;
-    overflow: hidden;
-}
-.trans_200 {
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -ms-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-}
-.newsletter_button span {
-    display: block;
-    position: relative;
-    z-index: 10;
-    font-size: 16px;
-    font-weight: 600;
-    color: #1b1b1b;
-    background: 0 0;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -ms-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-}
-.newsletter_button:hover span {
-    color: #fff;
-}
-.newsletter_button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #1b1b1b;
-    z-index: 0;
-    opacity: 0;
-    transform: rotate(45deg);
-    transform-origin: bottom right;
-    transition: all 0.3s ease;
-}
-
-.newsletter_button:hover::after {
-    opacity: 1;
-    transform: rotate(0deg);
 }
 </style>

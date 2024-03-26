@@ -3,7 +3,7 @@
 <template>
   <a :href="getProductDetailURL(product.slug, product.id)">
     <div class="product-image">
-      <img :src="'https://imsound.ru' + product.image" :alt="product.name">
+      <img :src="BASE_API_MEDIA + product.image" :alt="product.name">
     </div>
     <div class="product-details">
       <h2>{{ product.name }}</h2>
@@ -11,21 +11,21 @@
     </div>
   </a>
 </template>
-  
-<script>
-export default {
-  props: {
-    product: {
-      type: Object,
-      required: true
-    }
-  },
-  methods: {
-    getProductDetailURL(slug, id) {
-      return 'catalog/' + slug + '_' + id;
-    }
+
+<script setup>
+const config = useRuntimeConfig();
+const BASE_API_MEDIA = config.public.apiMedia;
+
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true
   }
-};
+});
+
+function getProductDetailURL(slug, id) {
+  return 'catalog/' + slug + '_' + id;
+}
 </script>
   
 <style scoped>

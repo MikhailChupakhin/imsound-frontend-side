@@ -2,16 +2,16 @@
 
 <template>
   <div class="banners-container mt-5">
-    <div class="small-banner" :style="{ backgroundImage: 'url(' + 'https://imsound.ru' + banners[0].image + ')' }">
-      <a :href="getBannerLink(banners[0])" class="banner-link">
+    <div class="small-banner" :style="{ backgroundImage: 'url(' + BASE_API_MEDIA + banners[0].image + ')' }">
+      <a class="banner-link">
         <div class="banner-content">
           <h3 class="banner-title">{{ banners[0].name }}</h3>
           <p class="banner-description">{{ banners[0].description }}</p>
         </div>
       </a>
     </div>
-    <div class="large-banner" :style="{ backgroundImage: 'url(' + 'https://imsound.ru' + banners[1].image + ')' }">
-      <a :href="getBannerLink(banners[1])" class="banner-link">
+    <div class="large-banner" :style="{ backgroundImage: 'url(' + BASE_API_MEDIA + banners[1].image + ')' }">
+      <a class="banner-link">
         <div class="banner-content">
           <h3 class="banner-title">{{ banners[1].name }}</h3>
           <p class="banner-description">{{ banners[1].description }}</p>
@@ -22,15 +22,12 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
-
-const banners = inject('banners_top', []);
-const categories = inject('categories', []);
-
-const getBannerLink = (banner) => {
-  const category = categories.find(cat => cat.id === banner.parent_category);
-  return `/categories/${category.slug}/${banner.slug}`;
-};
+const props = defineProps({
+  banners_top: Array,
+});
+const banners = props.banners_top
+const config = useRuntimeConfig();
+const BASE_API_MEDIA = config.public.apiMedia;
 </script>
 
 <style scoped>

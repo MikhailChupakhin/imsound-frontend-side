@@ -4,23 +4,21 @@
   <div class="sidebar-nav">
     <div v-for="(category, index) in categories" :key="index">
       <div class="category">
-        <NuxtLink :to="`/catalog/${category.slug}`" class="category-name" @click="toggleCategory(index)">{{ category.name
-        }}</NuxtLink>
-        <div class="arrow-container" @click="toggleSubcategories(index)">
+        <NuxtLink :to="`/catalog/${category.slug}`" class="category-name" @click="toggleCategory(index)">{{category.name}}</NuxtLink>
+        <div class="arrow-container" @click="toggleSubcategories(index)" role="button">
           <div class="arrow" :class="{ open: isSubcategoryOpen(index) }"><img src="/static/svg/chevron.svg"
               class="svg-icon-l chevron" alt="Раскрывающийся список"></div>
         </div>
       </div>
       <div v-if="isSubcategoryOpen(index)" class="subcategories">
-        <div v-for="(subcategory, subIndex) in getSubcategories(category.name)" :key="subIndex" class="subcategory">
-          <NuxtLink :to="`/catalog/${category.slug}/${subcategory.slug}`" class="subcategory-name">{{ subcategory.name }}
-          </NuxtLink>
+        <div v-for="(subcategory, subIndex) in getSubcategories(category.slug)" :key="subIndex" class="subcategory">
+          <NuxtLink :to="`/catalog/${category.slug}/${subcategory.slug}`" class="subcategory-name">{{ subcategory.name}}</NuxtLink>
         </div>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
 export default {
   inject: ['categories', 'subcategories'],
@@ -40,14 +38,16 @@ export default {
     isSubcategoryOpen(index) {
       return this.openSubcategories.includes(index);
     },
-    getSubcategories(categoryName) {
-      const category = this.subcategories.find(subcategory => subcategory.category_name === categoryName);
-      return category ? category.subcategories_pack : [];
+    getSubcategories(categorySlug) {
+      // Преобразование прокси объекта в массив
+      const subcategories = Array.from(this.subcategories).flatMap(obj => obj.subcategories_pack);
+      const filteredSubcategories = subcategories.filter(subcategory => subcategory.parent_category_slug === categorySlug);
+      return filteredSubcategories;
     },
   }
 };
 </script>
-  
+
 <style scoped>
 .category {
   cursor: pointer;
@@ -57,18 +57,19 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-
 .arrow-container {
   min-width: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .subcategories {
   padding-left: 20px;
 }
-
+.subcategories {
+  max-height: 300px;
+  overflow-y: auto;
+}
 .subcategory {
   padding: 8px;
   border-bottom: 1px solid #eee;
@@ -96,6 +97,7 @@ export default {
   filter: drop-shadow(0 0 1px #8B0000) drop-shadow(0 0 1px #8B0000);
   fill: #8B0000;
 }
+
 .open .chevron {
   transform: rotate(180deg);
 }

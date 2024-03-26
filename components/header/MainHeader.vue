@@ -43,7 +43,7 @@ export default {
   width: 100%;
   background-color: #fff;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-
+  top: 0%;
 }
 .wrapper {
   margin-left: 15px;
@@ -67,10 +67,10 @@ export default {
   align-items: center;
 }
 
-@media screen and (max-width: 767px) {
-  .header {
-    position: fixed;
-    z-index: 1000;
-  }
+
+.header {
+  position: fixed;
+  z-index: 99;
 }
+
 </style>

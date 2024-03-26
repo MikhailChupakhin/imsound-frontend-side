@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start"
   },
   "devDependencies": {
     "nuxt": "^3.9.3",
@@ -17,12 +18,14 @@
   },
   "dependencies": {
     "@auth/core": "^0.17.0",
+    "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.7",
     "dotenv": "^16.4.1",
     "next-auth": "4.21.1",
     "nouislider": "^15.7.1",
     "primeflex": "^3.3.1",
     "primevue": "^3.48.1",
-    "qs": "^6.11.2"
+    "qs": "^6.11.2",
+    "vuex": "^4.1.0"
   }
 }

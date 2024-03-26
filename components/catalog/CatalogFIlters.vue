@@ -29,7 +29,7 @@
             </div>
             <div class="grid">
                 <div class="col-12">
-                    <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval"
+                    <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval" :sliderId="sliderId"
                         @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
                 </div>
             </div>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="text-center">
-            <button @click="applyFilters" class="interface-btn-1">Применить</button>
+            <CommonInterfaceButton buttonText="Применить" @click="applyFilters" />
         </div>
     </div>
 </template>
@@ -67,11 +67,14 @@
 <script>
 import { ref } from 'vue';
 import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
-import { formatPrice } from '~/utils/priceFormatter.js';
+import { formatPrice, formatPriceShort } from '~/utils/priceFormatter.js';
 
 export default {
     components: {
         CatalogPriceSlider,
+    },
+    props: {
+        sliderId: String,
     },
     inject: ['manufacturers', 'price_interval'],
     setup() {
@@ -135,11 +138,11 @@ export default {
         };
 
         const formattedMinPrice = computed(() => {
-            return formatPrice(minPrice.value);
+            return formatPriceShort(minPrice.value);
         });
 
         const formattedMaxPrice = computed(() => {
-            return formatPrice(maxPrice.value);
+            return formatPriceShort(maxPrice.value);
         });
 
         return {
@@ -194,13 +197,14 @@ input[type="number"] {
     text-align: center;
     color: #8B0000;
 }
-</style>
-
-<style>
 .p-inputnumber,
 .p-inputtext {
     width: 70px !important;
 }
+</style>
+
+<style>
+
 ul.manufacturers-list {
     list-style-type: none;
     padding-left: 0;
@@ -218,7 +222,6 @@ ul.manufacturers-list {
 }
 
 .interface-btn-1:hover {
-
     background-color: rgb(58, 77, 146);
 }
 </style>

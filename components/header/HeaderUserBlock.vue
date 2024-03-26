@@ -2,18 +2,18 @@
 
 <template>
   <div class="container flex py-2">
-    <button class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 flex items-center">
+    <NuxtLink id="cart-button":to="isAuthenticated ? '/users/cart/' : '/users/cart-guest/'" class="cart-button bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 mr-2 flex items-center">
       <img src="/static/svg/cart-trolley.svg" class="svg-icon-l mr-2" alt="Корзина">
-      <span class="cart-text mt-1">Корзина</span>
-    </button>
+      <span class="cart-text">Корзина</span>
+    </NuxtLink>
     <div class="flex items-center menu-container">
       <button v-if="isAuthenticated" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2"
         @click="showMenu = !showMenu">Меню</button>
       <button v-else @click="openLoginModal"
         class="bg-green-500 hover:bg-green-700 text-white font-bold rounded px-4 py-2">Войти</button>
       <div v-show="showMenu" class="menu bg-white shadow-md z-10">
-        <NuxtLink :to="`/users/profile/`" class="auth-menu-item">Профиль</NuxtLink>
-        <NuxtLink :to="`/`" class="auth-menu-item">Заказы</NuxtLink>
+        <NuxtLink :to="'/users/profile/'" class="auth-menu-item">Профиль</NuxtLink>
+        <NuxtLink to="'/users/my-orders/'" class="auth-menu-item">Мои заказы</NuxtLink>
         <a @click="logout" class="auth-menu-danger border-t border-gray-200">Выйти</a>
       </div>
     </div>
@@ -52,92 +52,120 @@
   </div>
 </template>
 
+<script setup>
 
-<script>
-export default {
-  data() {
-    return {
-      isAuthenticated: false,
-      showMenu: false,
-      showLoginModal: false,
-      formData: {
-        username: '',
-        password: '',
-      },
-      errorMessage: null,
-      rememberMe: false,
-    };
-  },
-  mounted() {
-    if (localStorage.getItem('rememberedUsername')) {
-      this.formData.username = localStorage.getItem('rememberedUsername');
+import { useAuthStore } from '~/store/useAuthStore';
+
+const authData = useAuthStore();
+
+const isAuthenticated = ref(false);
+const showMenu = ref(false);
+const showLoginModal = ref(false);
+const formData = reactive({
+  username: '',
+  password: '',
+});
+const errorMessage = ref(null);
+const rememberMe = ref(false);
+
+const router = useRouter();
+
+
+onMounted(() => {
+  if (localStorage.getItem('rememberedUsername')) {
+    formData.username = localStorage.getItem('rememberedUsername');
+  }
+  if (localStorage.getItem('rememberedPassword')) {
+    formData.password = localStorage.getItem('rememberedPassword');
+  }
+  checkAuthentication();
+  checkQueryParams();
+});
+
+async function checkAuthentication() {
+  const cookies = document.cookie;
+  const accessTokenCookieExists = cookies.includes('accessToken');
+
+  isAuthenticated.value = accessTokenCookieExists;
+}
+
+function openLoginModal() {
+  showLoginModal.value = true;
+  emit('open-modal');
+}
+
+function closeLoginModal() {
+  showLoginModal.value = false;
+}
+
+async function submitForm() {
+  try {
+    const config = useRuntimeConfig()
+    const BASE_API_URL = config.public.apiBase;
+    const endpoint = 'token/'
+    const response = await fetch(`${BASE_API_URL}${endpoint}`, {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: formData.username,
+        password: formData.password,
+      })
+    });
+    if (rememberMe.value) {
+      localStorage.setItem('rememberedUsername', formData.username);
+      localStorage.setItem('rememberedPassword', formData.password);
+    } else {
+      localStorage.removeItem('rememberedUsername');
+      localStorage.removeItem('rememberedPassword');
     }
-    if (localStorage.getItem('rememberedPassword')) {
-      this.formData.password = localStorage.getItem('rememberedPassword');
+    const responseData = await response.json();
+    if (responseData.detail == 'No active account found with the given credentials') {
+      console.log(responseData)
+      errorMessage.value = 'Неверные учетные данные!';
+    } else {
+      // На localhost браузер не принимает куки с флагами HttpOnly; Secure (из за отсутствия https?)
+
+      // document.cookie = `accessToken=${responseData.access}; path=/; HttpOnly; Secure`;
+      // document.cookie = `refreshToken=${responseData.refresh}; path=/; HttpOnly; Secure`;
+
+      document.cookie = `accessToken=${responseData.access}; path=/;`;
+      document.cookie = `refreshToken=${responseData.refresh}; path=/;`;
+
+      isAuthenticated.value = true;
+      authData.setAuthenticated(true);
+
+      closeLoginModal();
+      await router.push('/');
     }
-    this.isAuthenticated = localStorage.getItem('accessToken') !== null;
-    this.checkQueryParams();
-  },
-  methods: {
-    openLoginModal() {
-      this.showLoginModal = true;
-      this.$emit('open-modal');
-    },
-    closeLoginModal() {
-      this.showLoginModal = false;
-    },
-    async submitForm() {
-      try {
-        const config = useRuntimeConfig()
-        const BASE_API_URL = config.public.apiBase;
-        const endpoint = 'token/'
-        const responseData = await $fetch(`${BASE_API_URL}${endpoint}`, {
-          method: 'post',
-          body: JSON.stringify({
-            username: this.formData.username,
-            password: this.formData.password,
-          })
-        });
-        if (this.rememberMe) {
-          localStorage.setItem('rememberedUsername', this.username);
-          localStorage.setItem('rememberedPassword', this.password);
-        } else {
-          localStorage.removeItem('rememberedUsername');
-          localStorage.removeItem('rememberedPassword');
-        }
+ 
 
-        localStorage.setItem('accessToken', responseData.access);
-        localStorage.setItem('refreshToken', responseData.refresh);
-        this.isAuthenticated = true;
-        this.closeLoginModal();
-        await this.$router.push('/');
+    
 
-      } catch (error) {
-        console.error('Ошибка при отправке запроса:', error);
-        if (error.message === 'Failed to fetch') {
-          this.errorMessage = 'Ошибка при отправке запроса. Пожалуйста, проверьте ваше интернет-соединение';
-        } else {
-          this.errorMessage = 'Неверные учетные данные';
-        }
-      }
-    },
-    logout() {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      this.showMenu = false;
-      this.isAuthenticated = false;
-      this.$router.push('/');
-    },
-    checkQueryParams() {
-      // Проверяем параметры запроса и открываем модальное окно, если необходимо
-      const queryParams = this.$route.query;
-      if (queryParams.showLoginModal === 'true') {
-        this.showLoginModal = true;
-      }
+  } catch (error) {
+    console.error('Ошибка при отправке запроса:', error);
+    if (error.message === 'Failed to fetch') {
+      errorMessage.value = 'Ошибка при отправке запроса.';
+    } else {
+      errorMessage.value = 'Неверные учетные данные!';
     }
   }
-};
+}
 
+function logout() {
+  document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  showMenu.value = false;
+  isAuthenticated.value = false;
+  authData.setAuthenticated(false);
+  router.push('/');
+}
+
+function checkQueryParams() {
+  const queryParams = router.currentRoute.value.query;
+  if (queryParams.showLoginModal === 'true') {
+    showLoginModal.value = true;
+  }
+}
 </script>
 
 <style scoped>
@@ -230,7 +258,11 @@ input[type="password"] {
 
 button {
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
+}
+.cart-button {
+  text-decoration: none;
+  border-radius: 10px;
 }
 
 button[type="submit"] {

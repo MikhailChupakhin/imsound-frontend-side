@@ -37,7 +37,6 @@ export default {
     },
     methods: {
         toggleMenu() {
-            console.log('Меню нажато')
             this.showMenu = !this.showMenu;
         },
     }

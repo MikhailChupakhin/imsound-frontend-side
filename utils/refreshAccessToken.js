@@ -4,8 +4,8 @@
 export async function refreshAccessToken(BASE_API_URL) {
     try {
         console.log('TOKEN REFRESHING')
-        const refresh = localStorage.getItem('refreshToken');
-   
+        const refresh = getRefreshTokenFromCookie();
+        console.log('refreshToken', refresh)
         if (!refresh) {
             return null;
         }
@@ -21,8 +21,8 @@ export async function refreshAccessToken(BASE_API_URL) {
         if (response.access) {
             console.log('Получен новый access token')
             console.log(response.access);
-            
-            localStorage.setItem('accessToken', response.access);
+            // document.cookie = `accessToken=${response.access}; path=/; HttpOnly; Secure`;
+            document.cookie = `accessToken=${response.access}; path=/;`;
 
             return 1;
         } else {
@@ -33,4 +33,18 @@ export async function refreshAccessToken(BASE_API_URL) {
         console.error('Ошибка при выполнении запроса:', error);
         return null;
     }
+}
+
+function getRefreshTokenFromCookie() {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        const cookieParts = cookie.split('=');
+      
+        if (cookieParts[0] === 'refreshToken') {
+            return cookieParts[1];
+        }
+    }
+  
+    return null;
 }

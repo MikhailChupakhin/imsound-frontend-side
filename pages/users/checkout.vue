@@ -117,6 +117,8 @@ const handleCheckout = async (selectedPaymentMethod) => {
       if (response.status === 201) {
         CartStore.commit('resetCart');
         router.push({ path: '/users/order-success' });
+      } else {
+        console.log(response.status)
       }
     } else {
       const endpoint = 'orders/checkout/guest/';
@@ -124,6 +126,8 @@ const handleCheckout = async (selectedPaymentMethod) => {
       if (response.status === 201) {
         CartStore.commit('resetCart');
         router.push({ path: '/users/order-success' });
+      } else {
+        console.log(response.status)
       }
     }
   } catch (error) {

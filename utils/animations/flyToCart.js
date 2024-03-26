@@ -3,9 +3,6 @@
 export function flyToCartAnimation(element, context, xA, yA, xB, yB) {
     const productImgClone = element.cloneNode(true);
 
-    console.log('xA', xA, 'yA', yA);
-    console.log('xB', xB, 'yB', yB);
-
     const originalWidth = context.$el.offsetWidth;
     productImgClone.style.width = `${originalWidth / 2}px`;
     productImgClone.style.height = 'auto';
@@ -19,7 +16,6 @@ export function flyToCartAnimation(element, context, xA, yA, xB, yB) {
 
     document.body.appendChild(productImgClone);
     
-    // debugger;
     setTimeout(() => {
         productImgClone.style.transition = 'transform 1s, opacity 1s, width 1s, height 1s';
         productImgClone.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.5)`;

@@ -4,7 +4,7 @@
   <header class="header">
     <div class="wrapper">
       <div class="header_container">
-        <HeaderTopRow />
+        <HeaderTopRow :class="{ 'hidden': scrolledDown }"/>
         <div class="header_components">
           <SiteLogo />
           <HeaderHamburgerMenu />
@@ -34,6 +34,22 @@ export default {
     HeaderUserBlock,
     HeaderHamburgerMenu
   },
+  data() {
+    return {
+      scrolledDown: false
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      this.scrolledDown = window.scrollY > 0;
+    }
+  }
 }
 
 </script>
@@ -72,5 +88,7 @@ export default {
   position: fixed;
   z-index: 99;
 }
-
+.hidden {
+  display: none !important;
+}
 </style>

@@ -49,7 +49,7 @@ html, body {
 }
 
 .hb {
-  width: 40px;
+  width: 2.1rem;
   margin: 0 auto;
   display: block;
 }

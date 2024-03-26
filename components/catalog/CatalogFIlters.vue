@@ -7,23 +7,18 @@
         </div>
         <div>
             <div class="grid">
-                <div class="col-5">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
                         <input type="text" v-model.number="formattedMinPrice" @input="updateSliderFromMin($event)"
-                            class="form-control custom-input" inputmode="numeric" style="width: 100%;">
+                            class="form-control min-price-input" inputmode="numeric" style="width: 100%;">
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-                        <div class="mt-4">-</div>
-                    </div>
-                </div>
-                <div class="col-5">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
                         <input type="text" v-model.number="formattedMaxPrice" @input="updateSliderFromMax($event)"
-                            class="form-control custom-input" inputmode="numeric" style="width: 100%;">
+                            class="form-control" inputmode="numeric" style="width: 100%;">
                     </div>
                 </div>
             </div>
@@ -162,8 +157,6 @@ export default {
             formattedMaxPrice,
         };
     },
-
-
 };
 </script>
 
@@ -172,46 +165,30 @@ export default {
     display: flex;
     flex-direction: column;
 }
-
 .form-group label {
     margin-bottom: 5px;
 }
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-
 .form-group input[type="text"] {
-    text-align: center;
-    color: #8B0000;
-}
-
-.form-group input[type="number"] {
     text-align: center;
     color: #8B0000;
 }
 .p-inputnumber,
 .p-inputtext {
-    width: 70px !important;
+    max-width: 73px !important;
+}
+.min-price-input {
+    margin-right: 0.6rem;
 }
 </style>
 
 <style>
-
 ul.manufacturers-list {
     list-style-type: none;
     padding-left: 0;
 }
 .interface-btn-1 {
-    padding: 5px 10px;
-    font-size: 18px;
+    padding: 0.3rem 0.5rem;
+    font-size: 1.1rem;
     font-weight: 500;
     border-radius: 10px;
     background-color: rgba(73, 192, 232, 0.84);
@@ -220,7 +197,6 @@ ul.manufacturers-list {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .interface-btn-1:hover {
     background-color: rgb(58, 77, 146);
 }

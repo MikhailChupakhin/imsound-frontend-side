@@ -34,10 +34,10 @@ export default {
 <style scoped>
 
 .search_icon {
-  margin-right: 10px;
+  margin-right: 0.3rem;
   fill: #333;
-  width: 30px;
-  height: 30px
+  width: 2.1rem;
+  height: 2.1rem;
 }
 
 .search_icon svg {

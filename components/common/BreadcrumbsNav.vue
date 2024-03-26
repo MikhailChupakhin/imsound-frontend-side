@@ -43,25 +43,21 @@ export default {
 .home {
     height: auto;
 }
-
-
 .home_container {
     height: auto;
-    margin-top: 95px;
+    margin-top: 5.2rem;
 }
-
 .background-image {
     background-image: url('~/assets/categories.jpg');
 }
-
 .h1 {
     margin-left: 1rem;
     margin-block-start: 0;
     color: #ffffff;
     font-size: 2.5rem;
-    padding-bottom: 1rem;
+    line-height: 2.5rem;
+    padding-bottom: 0.7rem;
 }
-
 .p-breadcrumb {
     background-color: transparent;
     border: none;
@@ -72,5 +68,9 @@ export default {
 .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
     margin: 0 0.5rem 0 0.5rem;
     color: #ffffff;
+}
+.p-breadcrumb {
+    padding-top: 0.4rem;
+    padding-bottom: 0rem;
 }
 </style>

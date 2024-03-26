@@ -181,19 +181,31 @@ export default {
 }
 
 h2 {
-  margin-block-start: 0.4em;
-  margin-block-end: 0.4em;
+  margin-block-start: 0.3rem;
+  margin-block-end: 0.3rem;
 }
-
+@media screen and (min-width: 787px) {
+  h2 {
+    margin-block-start: 0.1rem;
+    margin-block-end: 0.1rem;
+  }
+}
 h2 a {
-  line-height: 20px;
+  line-height: 1.1rem;
   display: block;
   font-weight: 500;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #272727;
   text-transform: capitalize;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
-
+@media screen and (max-width: 480px) {
+  h2 a {
+    line-height: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
 .total-price {
   font-weight: 600;
   font-size: 1rem;

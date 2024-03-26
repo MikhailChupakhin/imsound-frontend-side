@@ -56,7 +56,7 @@ const toggleSidebar = () => {
 }
 .aside-view {
     position: fixed;
-    top: 100px;
+    top: 0px;
     bottom: 0;
     left: -270px;
     width: 300px;

@@ -2,7 +2,7 @@
 
 <template>
     <div>
-        <div class="sorting-wrapper mt-2 border-1 border-round-sm surface-border">
+        <div class="sorting-wrapper border-1 border-round-sm surface-border">
             <div class="view-mode-buttons">
                 <a @click="setGridViewMode">
                     <i class="fa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -21,7 +21,7 @@
                 Товаров: {{ productsQuantity }}
             </div>
             <div class="sorting">
-                <select class="sort-select mr-2" v-model="sortingOption">
+                <select class="sort-select" v-model="sortingOption">
                     <option value="">По умолчанию</option>
                     <option value="name_asc">По названию (А-Я)</option>
                     <option value="name_desc">По названию (Я-А)</option>
@@ -126,35 +126,50 @@ export default {
   
 <style scoped>
 .sorting-wrapper {
-    padding: 5px;
+    padding: 0.2rem;
+    margin-top: 0.3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .view-mode-buttons {
+    margin-left: 0.3rem;
     display: flex;
     align-items: center;
 }
-
-.view-mode-buttons a {
-    margin-right: 10px;
-}
-
 .view-mode-buttons svg {
-    height: 1em;
+    fill: var(--blue-500);
 }
-
+.view-mode-buttons a {
+    margin-right: 0.8rem;
+}
+.view-mode-buttons svg {
+    height: 1.8rem;
+}
+@media screen and (min-width: 487px) {
+    .view-mode-buttons svg {
+        height: 1.2rem;
+    }
+}
 .sort-select {
-    border-radius: 10px;
+    border-radius: 0.7rem;
     font-size: 1.2rem;
+    margin-right: 0.3rem;
 }
 @media screen and (max-width: 487px) {
     .sort-select {
         font-size: 0.8rem;
-        max-width: 110px;
+        max-width: 140px;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+.products_quantity {
+    display: none;
+}
+@media screen and (min-width: 487px) {
+    .products_quantity {
+        display: block;
     }
 }
 </style>

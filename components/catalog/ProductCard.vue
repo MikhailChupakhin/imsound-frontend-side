@@ -38,7 +38,6 @@ import QuantityVue from '~/components/productcard/Quantity.vue';
 import CartStore from '~/store/cart.js';
 import { flyToCartAnimation } from '~/utils/animations/flyToCart';
 
-
 export default {
   components: {
     QuantityVue
@@ -120,7 +119,6 @@ export default {
           CartStore.commit('addCartItem', { productInfo, quantity });
           const productImg = this.$el.querySelector('.product-img');
           await flyToCartAnimation(productImg, this, xA, yA, xB, yB);
-          console.log(responseData.message);
         }else if (responseData.code === 2) {
           console.log(responseData.message);
         }
@@ -145,14 +143,10 @@ export default {
         const response = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
         const responseData = await response.json();
 
-        console.log(responseData.code, responseData.message)
         if (responseData.code === 0 || responseData.code === 1) {
-          console.log('quantity', quantity)
-          console.log('добавляем товар в стор', productInfo)
           CartStore.commit('addCartItem', { productInfo, quantity });
           const productImg = this.$el.querySelector('.product-img');
           await flyToCartAnimation(productImg, this, xA, yA, xB, yB);
-          console.log(responseData.message);
         }else if (responseData.code === 2) {
           console.log(responseData.message);
         }
@@ -168,7 +162,6 @@ export default {
         const apiUrl = BASE_API_URL + endpoint;
 
         const response = await fetch(apiUrl);
-        console.log(response)
         if (!response.ok) {
           throw new Error('Ошибка выполнения запроса');
         }

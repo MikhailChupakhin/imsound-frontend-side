@@ -114,14 +114,14 @@ const handleCheckout = async (selectedPaymentMethod) => {
     if (isAuthenticated.value) {
       const endpoint = 'orders/checkout/auth/';
       const response = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
-      if (response.statusText === 'Created') {
+      if (response.status === '201') {
         CartStore.commit('resetCart');
         router.push({ path: '/users/order-success' });
       }
     } else {
       const endpoint = 'orders/checkout/guest/';
       const response = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
-      if (response.statusText === 'Created') {
+      if (response.status === '201') {
         CartStore.commit('resetCart');
         router.push({ path: '/users/order-success' });
       }

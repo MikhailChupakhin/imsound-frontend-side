@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogFiltersModal.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogModalFilters.vue -->
 
 <template>
     <div class="unvisible-filters mt-2">

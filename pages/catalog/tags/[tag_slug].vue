@@ -8,7 +8,7 @@
             <SidebarBuiltin />
             <div class="content-area col-10">
                 <CatalogTags />
-                <CatalogFiltersModal />
+                <CatalogModalFilters />
                 <CatalogSorting @update:viewMode="updateViewMode" />
                 <ProductsBlock :viewMode="viewMode" />
                 <PaginationBar />
@@ -29,7 +29,7 @@ import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';
 import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
-import CatalogFiltersModal from '~/components/catalog/CatalogFiltersModal.vue';
+import CatalogModalFilters from '~/components/catalog/CatalogModalFilters.vue';
 
 const config = useRuntimeConfig()
 const route = useRoute()

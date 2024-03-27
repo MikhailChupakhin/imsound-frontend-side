@@ -39,7 +39,6 @@ export default {
       return this.openSubcategories.includes(index);
     },
     getSubcategories(categorySlug) {
-      // Преобразование прокси объекта в массив
       const subcategories = Array.from(this.subcategories).flatMap(obj => obj.subcategories_pack);
       const filteredSubcategories = subcategories.filter(subcategory => subcategory.parent_category_slug === categorySlug);
       return filteredSubcategories;
@@ -51,7 +50,7 @@ export default {
 <style scoped>
 .category {
   cursor: pointer;
-  padding: 8px;
+  padding: 0.5rem;
   border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
@@ -64,14 +63,14 @@ export default {
   justify-content: center;
 }
 .subcategories {
-  padding-left: 20px;
+  padding-left: 1.1rem;
 }
 .subcategories {
   max-height: 300px;
   overflow-y: auto;
 }
 .subcategory {
-  padding: 8px;
+  padding: 0.5rem;
   border-bottom: 1px solid #eee;
 }
 

@@ -5,6 +5,7 @@
         <aside class="aside-view">
             <div class="sidebar-content flex flex-row">
                 <div class="sidebar-left">
+                    <p class="text-lg font-semibold text-center">Навигация</p>
                     <SidebarNav />
                     <CatalogFIlters sliderId="'priceSliderAside'" />
                 </div>
@@ -46,10 +47,12 @@ const toggleSidebar = () => {
 .sidebar-area {
     max-height: 100%;
     overflow-y: auto;
+    margin-right: 0.3rem;
 }
 .sidebar-left {
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: inline-block;
 }
 .sidebar-right  {
     background-color: transparent;
@@ -58,9 +61,8 @@ const toggleSidebar = () => {
     position: fixed;
     top: 0px;
     bottom: 0;
-    left: -270px;
-    width: 300px;
-    
+    left: -300px;
+    max-width: 350px;
     z-index: 999;
     transition: left 0.5s ease;
 

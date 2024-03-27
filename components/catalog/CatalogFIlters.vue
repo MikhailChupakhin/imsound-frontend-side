@@ -7,14 +7,14 @@
         </div>
         <div>
             <div class="grid">
-                <div class="col-6">
+                <div class="input-field">
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
                         <input type="text" v-model.number="formattedMinPrice" @input="updateSliderFromMin($event)"
                             class="form-control min-price-input" inputmode="numeric" style="width: 100%;">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="input-field">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
                         <input type="text" v-model.number="formattedMaxPrice" @input="updateSliderFromMax($event)"
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="grid">
-                <div class="col-12">
+                <div class="p-slider">
                     <CatalogPriceSlider v-if="price_interval" :priceInterval="price_interval" :sliderId="sliderId"
                         @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
                 </div>
@@ -161,9 +161,23 @@ export default {
 </script>
 
 <style scoped>
+.grid {
+    margin-right: 0rem;
+    margin-left: 0rem;
+}
+.input-field {
+    width: 50%;
+}
+.p-slider {
+    width: calc(100% - 1rem);
+    text-align: center;
+    margin: 1.5rem auto 1rem;
+}
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 .form-group label {
     margin-bottom: 5px;

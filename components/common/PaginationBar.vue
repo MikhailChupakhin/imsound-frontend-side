@@ -1,7 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\PaginationBar.vue -->
 
 <template>
-    <Paginator class="m-5" :template="{
+    <Paginator class="m-1" :template="{
         '640px': 'PrevPageLink PageLinks NextPageLink',
         '960px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         '1300px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',

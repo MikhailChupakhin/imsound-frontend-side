@@ -62,8 +62,8 @@ export default {
   top: 0%;
 }
 .wrapper {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
 }
   
 .header_container {

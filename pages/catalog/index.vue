@@ -117,10 +117,12 @@ provide('clients_info', data.value.clients_info);
   display: flex;
   flex-wrap: wrap;
   margin-top: 0.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
+  padding-top: 0.2rem;
 }
 .content-area {
   flex: 1;
+  padding: 0px;
 }
 </style>

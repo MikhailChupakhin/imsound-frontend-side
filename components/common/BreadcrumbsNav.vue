@@ -51,7 +51,8 @@ export default {
     background-image: url('~/assets/categories.jpg');
 }
 .h1 {
-    margin-left: 1rem;
+    margin-left: 0.9rem;
+    margin-right: 0.9rem;
     margin-block-start: 0;
     color: #ffffff;
     font-size: 2.5rem;

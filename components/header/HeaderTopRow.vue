@@ -52,4 +52,15 @@ export default {
 .header-contact a {
   text-decoration: none;
 }
+
+@media screen and (max-width: 325px) {
+  .header-contact {
+    display: flex;
+    align-items: flex-end;
+  }
+  .header-contact span {
+    padding-left: 0.2rem;
+    font-size: 0.8rem;
+  }
+}
 </style>

@@ -5,7 +5,7 @@
         <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
-                <!-- <CatalogFilters sliderId="'priceSliderAside'"/> -->
+                <CatalogFilters sliderId="'priceSliderAside'"/>
                 <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
             </div>
         </div>
@@ -14,8 +14,7 @@
 
 <script setup>
 import { ref } from 'vue';
-// import CatalogFilters from '~/components/catalog/CatalogFilters.vue';
-
+// import CatalogFilters from './CatalogFilters.vue';
 const showMenu = ref(false);
 
 </script>

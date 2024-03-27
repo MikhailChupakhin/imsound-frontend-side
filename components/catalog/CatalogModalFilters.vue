@@ -14,7 +14,7 @@
 
 <script setup>
 import { ref } from 'vue';
-// import CatalogFilters from './CatalogFilters.vue';
+import CatalogFilters from './CatalogFIlters.vue';
 const showMenu = ref(false);
 
 </script>

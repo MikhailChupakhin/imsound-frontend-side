@@ -62,7 +62,7 @@
 <script>
 import { ref } from 'vue';
 import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
-import { formatPrice, formatPriceShort } from '~/utils/priceFormatter.js';
+import { formatPriceShort } from '~/utils/priceFormatter.js';
 
 export default {
     components: {

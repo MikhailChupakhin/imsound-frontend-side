@@ -1,6 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\SidebarAside.vue -->
 
-<template>
+<!-- <template>
     <div class="sidebar-area unvisible-md-lg">
         <aside class="aside-view">
             <div class="sidebar-content flex flex-row">
@@ -77,4 +77,4 @@ const toggleSidebar = () => {
 .toggle-sidebar-button.rotate {
     transform: rotate(180deg);
 }
-</style>
+</style> -->

@@ -6,9 +6,9 @@
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
       <SidebarBuiltin />
-      <SidebarAside />
       <div class="content-area col-10">
         <CatalogTags />
+        <CatalogFiltersModal />
         <CatalogSorting @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
         <PaginationBar />
@@ -29,8 +29,8 @@ import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';
 import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
-import SidebarAside from '~/components/catalog/SidebarAside.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
+import CatalogFiltersModal from '~/components/catalog/CatalogFiltersModal.vue';
 
 const baseStore = useBaseStore();
 const config = useRuntimeConfig()

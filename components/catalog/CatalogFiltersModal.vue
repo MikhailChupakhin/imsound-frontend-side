@@ -29,7 +29,6 @@ const showMenu = ref(false);
     border-radius: 5px;
     cursor: pointer;
 }
-
 .menu-container-expanded {
     position: fixed;
     top: 0;

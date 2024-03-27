@@ -3,14 +3,17 @@
 <template>
   <header class="header">
     <div class="wrapper">
-      <div class="header_container">
+      <div class="header-container">
         <HeaderTopRow :class="{ 'hidden': scrolledDown }"/>
-        <div class="header_components">
+        <div class="header-components">
           <SiteLogo />
-          <HeaderHamburgerMenu />
           <HeaderMenu />
-          <HeaderSearchPanel />
-          <HeaderUserBlock />
+          <div class="flex flex-wrap gap-3">
+            <HeaderSearchPanel />
+            <HeaderCart />
+            <HeaderUser />
+            <HeaderHamburgerMenu />
+          </div>
         </div>
       </div>
     </div>
@@ -22,7 +25,9 @@ import HeaderTopRow from './HeaderTopRow.vue';
 import SiteLogo from '../common/SiteLogo.vue';
 import HeaderMenu from './HeaderMenu.vue';
 import HeaderSearchPanel from './HeaderSearchPanel.vue';
-import HeaderUserBlock from './HeaderUserBlock.vue';
+
+import HeaderCart from './HeaderCart.vue';
+import HeaderUser from './HeaderUser.vue';
 import HeaderHamburgerMenu from './HeaderHamburgerMenu.vue';
 
 export default {
@@ -31,7 +36,8 @@ export default {
     SiteLogo,
     HeaderMenu,
     HeaderSearchPanel,
-    HeaderUserBlock,
+    HeaderCart,
+    HeaderUser,
     HeaderHamburgerMenu
   },
   data() {
@@ -66,17 +72,16 @@ export default {
   margin-right: 0.9rem;
 }
   
-.header_container {
+.header-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   top: 0;
   width: 100%;
-  
   z-index: 1000;
 }
 
-.header_components {
+.header-components {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

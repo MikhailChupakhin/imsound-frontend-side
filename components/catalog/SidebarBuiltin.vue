@@ -1,9 +1,9 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\assemblies\SidebarBuiltin.vue -->
 
 <template>
-  <div class="sidebar-area unvisible-sm col-2">
-    <SidebarNav />
+  <div class="sidebar-area unvisible-sidebar col-2">
     <CatalogFIlters sliderId="'priceSliderBuiltin'" />
+    <SidebarNav />
   </div>
 </template>
 

@@ -2,7 +2,6 @@
 
 <template>
   <div class="unvisible-sm">
-    <NuxtLink :to="`/`" class="menu-button mr-5">Главная</NuxtLink>
     <div class="menu">
       <NuxtLink :to="`/catalog`" class="menu-button mr-5">Каталог</NuxtLink>
       <div class="dropdown-menu">
@@ -18,6 +17,7 @@
         </ul>
       </div>
     </div>
+    <NuxtLink :to="`/`" class="menu-button mr-5">Главная</NuxtLink>
     <NuxtLink :to="`/blog`" class="menu-button">Блог</NuxtLink>
   </div>
 </template>
@@ -99,9 +99,6 @@ export default {
 }
 .category:hover .subcategories {
     display: block;
-}
-.dropdown-menu-item {
-    width: 300px;
 }
 .dropdown-menu-item:hover {
     background-color: #dadada;

@@ -2,7 +2,7 @@
 
 <template>
     <div>
-        <div class="sorting-wrapper border-1 border-round-sm surface-border">
+        <div class="sorting-wrapper">
             <div class="view-mode-buttons">
                 <a @click="setGridViewMode">
                     <i class="fa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -28,7 +28,7 @@
                     <option value="price_asc">По цене (возрастание)</option>
                     <option value="price_desc">По цене (убывание)</option>
                 </select>
-                <CommonInterfaceButton buttonText="Сортировать" @click="sortProducts" />
+                <CommonInterfaceButton buttonText="cортировать" @click="sortProducts" />
             </div>
         </div>
     </div>
@@ -133,12 +133,11 @@ export default {
     align-items: center;
 }
 .view-mode-buttons {
-    margin-left: 0.3rem;
     display: flex;
     align-items: center;
 }
 .view-mode-buttons svg {
-    fill: var(--blue-500);
+    fill: rgba(65, 65, 65, 0.804);
 }
 .view-mode-buttons a {
     margin-right: 0.8rem;

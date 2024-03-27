@@ -53,8 +53,8 @@
             </div>
         </div>
 
-        <div class="text-center">
-            <CommonInterfaceButton buttonText="Применить" @click="applyFilters" />
+        <div class="text-center mb-2">
+            <CommonInterfaceButton buttonText="Применить" @click="applyFilters" :customStyle="{ width: '100%' }" />
         </div>
     </div>
 </template>
@@ -199,19 +199,5 @@ export default {
 ul.manufacturers-list {
     list-style-type: none;
     padding-left: 0;
-}
-.interface-btn-1 {
-    padding: 0.3rem 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-radius: 10px;
-    background-color: rgba(73, 192, 232, 0.84);
-    color: #000000; 
-    border: 1px solid gray;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.interface-btn-1:hover {
-    background-color: rgb(58, 77, 146);
 }
 </style>

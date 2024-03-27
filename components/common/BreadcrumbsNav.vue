@@ -2,8 +2,9 @@
 
 <template>
     <div class="home">
-        <div class="home_container background-image">
+        <div class="home_container">
             <div class="home_content">
+                <h1 class="h1">{{ breadcrumbs[breadcrumbs.length - 1][1] }}</h1>
                 <Breadcrumb :model="formattedBreadcrumbs">
                     <template #item="{ item, props }">
                         <router-link v-if="item.route" :to="item.route" custom>
@@ -17,7 +18,6 @@
                         </a>
                     </template>
                 </Breadcrumb>
-                <h1 class="h1">{{ breadcrumbs[breadcrumbs.length - 1][1] }}</h1>
             </div>
         </div>
     </div>
@@ -47,17 +47,14 @@ export default {
     height: auto;
     margin-top: 5.2rem;
 }
-.background-image {
-    background-image: url('~/assets/categories.jpg');
-}
+
 .h1 {
     margin-left: 0.9rem;
     margin-right: 0.9rem;
     margin-block-start: 0;
-    color: #ffffff;
+    color: #000000;
     font-size: 2.5rem;
     line-height: 2.5rem;
-    padding-bottom: 0.7rem;
 }
 .p-breadcrumb {
     background-color: transparent;

@@ -2,7 +2,7 @@
 
 <template>
     <div class="unvisible-md-lg">
-        <svg class="hb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" stroke="#000" stroke-width=".6"
+        <svg class="svg-icon-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" stroke="#000" stroke-width=".6"
             fill="rgba(0,0,0,0)" stroke-linecap="round" style="cursor: pointer" @click="toggleMenu">
             <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
                 <animate dur="0.2s" attributeName="d"
@@ -20,10 +20,13 @@
                 <animate dur="0.001s" attributeName="width" values="0;10" fill="freeze" begin="reverse.begin" />
             </rect>
         </svg>
-        <div v-show="showMenu" class="menu bg-white shadow-md z-10">
-            <NuxtLink :to="`/`" class="menu-item">Главная</NuxtLink>
-            <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
-            <NuxtLink :to="`/`" class="menu-item">Блог</NuxtLink>
+        <div v-show="showMenu" class="menu-container-expanded">
+            <div class="menu bg-white shadow-md z-10">
+                <NuxtLink :to="`/`" class="menu-item">Главная</NuxtLink>
+                <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
+                <NuxtLink :to="`/`" class="menu-item">Блог</NuxtLink>
+                <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
+            </div>
         </div>
     </div>
 </template>
@@ -49,7 +52,7 @@ html, body {
 }
 
 .hb {
-  width: 2.1rem;
+  width: 2rem;
   margin: 0 auto;
   display: block;
 }
@@ -58,15 +61,25 @@ html, body {
     position: relative;
 }
 
-.menu {
-  position: absolute;
-  top: 100%;
+.menu-container-expanded {
+  position: fixed;
+  top: 0;
   left: 0;
-  background-color: #fff;
-  padding: 10px;
-  border: 1px solid #ccc;
-  list-style: none;
-  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.menu {
+  width: 20rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .menu-item {
@@ -79,5 +92,14 @@ html, body {
 
 .menu-item:hover {
   background-color: #f0f0f0;
+}
+
+.auth-menu-close {
+  display: block;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

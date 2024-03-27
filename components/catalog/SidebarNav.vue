@@ -2,12 +2,13 @@
 
 <template>
   <div class="sidebar-nav">
+    <p class="text-lg font-semibold text-center">Навигация</p>
     <div v-for="(category, index) in categories" :key="index">
       <div class="category">
         <NuxtLink :to="`/catalog/${category.slug}`" class="category-name" @click="toggleCategory(index)">{{category.name}}</NuxtLink>
         <div class="arrow-container" @click="toggleSubcategories(index)" role="button">
           <div class="arrow" :class="{ open: isSubcategoryOpen(index) }"><img src="/static/svg/chevron.svg"
-              class="svg-icon-l chevron" alt="Раскрывающийся список"></div>
+              class="svg-icon-1 chevron" alt="Раскрывающийся список"></div>
         </div>
       </div>
       <div v-if="isSubcategoryOpen(index)" class="subcategories">

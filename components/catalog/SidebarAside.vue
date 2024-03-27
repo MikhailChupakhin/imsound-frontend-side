@@ -5,13 +5,12 @@
         <aside class="aside-view">
             <div class="sidebar-content flex flex-row">
                 <div class="sidebar-left">
-                    <p class="text-lg font-semibold text-center">Навигация</p>
                     <SidebarNav />
                     <CatalogFIlters sliderId="'priceSliderAside'" />
                 </div>
-                <div class="sidebar-right flex align-self-center align-items-center justify-content-center ml-5">
+                <div class="sidebar-right flex align-self-center align-items-center justify-content-center ml-3">
                     <div class="toggle-sidebar-button" @click="toggleSidebar"><img src="/static/svg/chevron-aside.svg"
-              class="svg-icon-xl" alt="Меню навигации и фильтрации"></div>
+              class="svg-icon-3" alt="Меню навигации и фильтрации"></div>
                 </div>
             </div>
         </aside>

@@ -42,8 +42,7 @@ export default {
 
 <style>
 .slider-container {
-  margin-left: 1rem;
-  width: 90%;
+  width: 100%;
   height: 0.4rem;
 }
 

@@ -1,12 +1,11 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogTags.vue -->
 
 <template>
-  <div class="grid align-items-center border-1 border-round-sm surface-border p-1">
-    <div class="tags-heading col-2 md:col-1 lg:col-1 pl-2">Тэги</div>
+  <div class="grid align-items-center">
     <div class="tags-list col-10 md:col-11 lg:col-11 flex align-items-center">
-      <div class="tags flex flex-row flex-wrap">
+      <div class="tags flex flex-row flex-wrap gap-1">
         <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="`/catalog/tags/${tag.slug}`" class="tag_link">
-          {{ tag.name }}
+          {{ tag.name.toLowerCase() }}
         </NuxtLink>
       </div>
     </div>
@@ -31,9 +30,9 @@ export default {
 }
 
 .tag_link {
-  padding: 0.3rem;
+  padding: 0.2rem 0.4rem;
   margin-right: 0.2rem;
-  background-color: rgb(207, 228, 228);
+  background-color: rgb(236, 236, 236);
   border-radius: 0.8rem;
   border: 1px solid #eee;
   text-decoration: none;

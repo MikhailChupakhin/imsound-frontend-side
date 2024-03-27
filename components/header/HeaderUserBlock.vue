@@ -3,7 +3,7 @@
 <template>
   <div class="container flex py-2">
     <NuxtLink id="cart-button":to="isAuthenticated ? '/users/cart/' : '/users/cart-guest/'" class="cart-button bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 mr-2 flex items-center">
-      <img src="/static/svg/cart-trolley.svg" class="svg-icon-l mr-2" alt="Корзина">
+      <img src="/static/svg/cart-trolley.svg" class="svg-icon-2 mr-2" alt="Корзина">
       <span class="cart-text">Корзина</span>
     </NuxtLink>
     <div class="flex items-center menu-container">

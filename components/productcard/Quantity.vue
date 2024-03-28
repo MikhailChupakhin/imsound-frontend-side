@@ -2,9 +2,9 @@
 
 <template>
     <div class="quantity-control">
-        <button class="quantity-btn" @click="decrement($event)">-</button>
+        <div class="quantity-btn decr" @click="decrement($event)">-</div>
         <input class="quantity-input" type="number" v-model="quantity" min="1" :max="maxValue" @change="updateQuantity" />
-        <button class="quantity-btn" @click="increment($event)">+</button>
+        <div class="quantity-btn incr" @click="increment($event)">+</div>
     </div>
 </template>
   
@@ -72,8 +72,8 @@ export default {
 }
 
 .quantity-btn {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 2rem;
     text-align: center;
     justify-content: center;
     font-size: 1rem;
@@ -81,12 +81,27 @@ export default {
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 50%;
+    -webkit-tap-highlight-color: transparent;
+    -moz-focus-inner: none;
+    outline: none;
+    line-height: 1.8rem;
+}
+.quantity-btn.decr {
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+}
+.quantity-btn.incr {
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 40%;
+}
+
+.quantity-btn:active {
+    outline: none;
+    background-color: #003874;
+    box-shadow: none;
 }
 
 .quantity-input {
-    margin-left: 1px;
-    margin-right: 1px;
     width: 2.5rem;
     height: 2rem;
     text-align: center;
@@ -94,6 +109,8 @@ export default {
     padding: 0.3rem;
     -moz-appearance: textfield;
     appearance: textfield;
+    border: 0.2px solid #ccc;
+    border-radius: 0;
 }
 
 .quantity-input::-webkit-outer-spin-button,

@@ -25,7 +25,7 @@ export default {
   font-size: 1.2rem;
   font-weight: 500;
   border-radius: 10px;
-  background-color: rgba(246, 160, 23, 0.804);
+  background-color: rgba(246, 160, 23);
   border: 1px solid gray;
   color: #000000;
   cursor: pointer;

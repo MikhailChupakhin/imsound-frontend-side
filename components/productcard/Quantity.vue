@@ -2,14 +2,15 @@
 
 <template>
     <div class="quantity-control">
-        <button class="quantity-btn" @click="decrement">-</button>
+        <button class="quantity-btn" @click="decrement($event)">-</button>
         <input class="quantity-input" type="number" v-model="quantity" min="1" :max="maxValue" @change="updateQuantity" />
-        <button class="quantity-btn" @click="increment">+</button>
+        <button class="quantity-btn" @click="increment($event)">+</button>
     </div>
 </template>
   
 <script>
 import { ref } from 'vue';
+import { showError } from '~/utils/animations/showError';
 
 export default {
     props: {
@@ -24,42 +25,28 @@ export default {
     setup(props, { emit }) {
         const quantity = ref(props.initialQuantity);
 
-        const showError = (message) => {
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = message;
-        errorMessage.classList.add('error-message');
-        document.body.appendChild(errorMessage);
-
-        setTimeout(() => {
-            errorMessage.classList.add('fade-in');
-        }, 10);
-
-        setTimeout(() => {
-            errorMessage.classList.remove('fade-in');
-            errorMessage.classList.add('fade-out');
-        }, 800);
-
-        setTimeout(() => {
-            errorMessage.remove();
-        }, 1500);
-        };
-
-        const decrement = () => {
+        const decrement = (event) => {
             if (quantity.value > 1) {
                 quantity.value--;
                 emit('quantity-change', quantity.value);
             } else {
-                showError('Зачем ты это делаешь?');
+                const x = event.clientX;
+                const y = event.clientY;
+                const message = 'Зачем ты это делаешь?'
+                showError(message, x, y);
             }
         };
 
-        const increment = () => {
+        const increment = (event) => {
             console.log(quantity.value, props.maxValue)
             if (props.initialQuantity + quantity.value <= props.maxValue) {
                 quantity.value++;
                 emit('quantity-change', quantity.value);
             } else {
-                showError('Увы, больше нет...');
+                const x = event.clientX;
+                const y = event.clientY;
+                const message = 'Увы, больше у нас нет...'
+                showError(message, x, y);
             }
         };
 

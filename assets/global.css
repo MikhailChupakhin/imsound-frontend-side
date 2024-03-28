@@ -63,16 +63,15 @@ h1 {
 
 .error-message {
   position: fixed;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(246, 160, 23, 0.804);
+  background-color: rgba(246, 160, 23);
   color: #000000;
   padding: 10px 20px;
   border-radius: 10px;
   z-index: 9999;
   opacity: 0;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 
 .error-message.fade-in {
@@ -90,6 +89,6 @@ h1 {
   width: 0;
   height: 0;
   border-top: 2rem solid transparent;
-  border-right: 2rem solid rgba(246, 160, 23, 0.804);
+  border-right: 2rem solid rgba(246, 160, 23);
   transform: rotate(-90deg);
 }

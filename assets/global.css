@@ -57,6 +57,39 @@ h1 {
   }
 }
 
-/* * {
+* {
   user-select: none;
-} */
+}
+
+.error-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(246, 160, 23, 0.804);
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error-message.fade-in {
+  opacity: 1;
+}
+
+.error-message.fade-out {
+  opacity: 0;
+}
+
+.error-message::before {
+  content: "";
+  position: fixed;
+  top: 2rem;
+  width: 0;
+  height: 0;
+  border-top: 2rem solid transparent;
+  border-right: 2rem solid rgba(246, 160, 23, 0.804);
+  transform: rotate(-90deg);
+}

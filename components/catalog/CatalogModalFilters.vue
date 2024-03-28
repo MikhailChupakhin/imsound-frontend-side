@@ -4,7 +4,7 @@
     <div class="unvisible-filters mt-2">
         <div class="flex">
             <div class="products_quantity">
-                    <strong>1202</strong> товара 
+                <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
             </div>
             <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
         </div>
@@ -20,8 +20,10 @@
 <script setup>
 import { ref } from 'vue';
 import CatalogFilters from './CatalogFIlters.vue';
-const showMenu = ref(false);
+import pluralize from '~/utils/func/pluralize.js';
 
+const showMenu = ref(false);
+const productsQuantity = inject('products_quantity');
 </script>
 
 <style scoped>

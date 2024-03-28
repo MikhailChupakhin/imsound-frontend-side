@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="products_quantity">
-                Товаров: {{ productsQuantity }}
+                <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
             </div>
             <div class="sorting">
                 <select class="sort-select" v-model="sortingOption">
@@ -36,6 +36,7 @@
   
 <script>
 import { computed, inject } from 'vue';
+import pluralize from '~/utils/func/pluralize.js';
 
 export default {
     setup() {
@@ -107,6 +108,7 @@ export default {
         };
 
         return {
+            pluralize,
             minPrice,
             maxPrice,
             inStock,

@@ -53,14 +53,14 @@ export default {
   text-decoration: none;
 }
 
-@media screen and (max-width: 325px) {
+@media screen and (max-width: 500px) {
   .header-contact {
     display: flex;
     align-items: flex-end;
   }
   .header-contact span {
     padding-left: 0.2rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 </style>

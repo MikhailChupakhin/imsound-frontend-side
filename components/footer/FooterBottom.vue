@@ -16,7 +16,6 @@
 <script>
 import SiteLogo from '../common/SiteLogo.vue';
 
-
 export default {
     components: {
         SiteLogo

@@ -60,6 +60,7 @@ export default {
     background-color: transparent;
     border: none;
 }
+
 </style>
 
 <style>
@@ -71,4 +72,5 @@ export default {
     padding-top: 0.4rem;
     padding-bottom: 0rem;
 }
+.p-icon {color: #2196F3;}
 </style>

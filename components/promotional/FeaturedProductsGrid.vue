@@ -2,7 +2,7 @@
 
 <template>
     <div class="grid">
-        <div class="lg:col-3 md:col-6 sm:col-12" v-for="product in products" :key="product.id">
+        <div class="lg:col-3 md:col-6 sm:col-6" v-for="product in products" :key="product.id">
             <FeaturedProductCard :product="product" />
         </div>
     </div>

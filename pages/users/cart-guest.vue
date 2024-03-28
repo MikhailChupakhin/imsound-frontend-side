@@ -144,12 +144,12 @@ const deleteItem = (item) => {
 }
 
 .btn-back {
-  margin-top: 20px;
-  background-color: var(--blue-500);
-  color: white;
-  padding: 10px 20px;
+  margin-top: 1.1rem;
+  background-color: rgba(246, 160, 23, 0.804);
+  color: rgb(0, 0, 0);
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.7rem;
   text-decoration: none;
   transition: background-color 0.3s;
 }

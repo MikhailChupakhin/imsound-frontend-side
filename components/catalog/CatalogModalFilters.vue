@@ -2,7 +2,12 @@
 
 <template>
     <div class="unvisible-filters mt-2">
-        <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
+        <div class="flex">
+            <div class="products_quantity">
+                    <strong>1202</strong> товара 
+            </div>
+            <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
+        </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
                 <CatalogFilters sliderId="'priceSliderAside'"/>
@@ -20,6 +25,11 @@ const showMenu = ref(false);
 </script>
 
 <style scoped>
+.products_quantity {
+    white-space: nowrap;
+    display: inline-block;
+    padding-right: 1rem;
+}
 .filter-button {
     padding: 0.5rem 1rem;
     background-color: #007bff;

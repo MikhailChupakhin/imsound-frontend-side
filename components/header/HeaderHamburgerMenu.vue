@@ -25,6 +25,7 @@
                 <NuxtLink :to="`/`" class="menu-item">Главная</NuxtLink>
                 <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
                 <NuxtLink :to="`/`" class="menu-item">Блог</NuxtLink>
+                <SidebarNav />
                 <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
             </div>
         </div>
@@ -32,6 +33,8 @@
 </template>
 
 <script>
+import SidebarNav from '~/components/catalog/SidebarNav.vue';
+
 export default {
     data() {
         return {
@@ -42,6 +45,9 @@ export default {
         toggleMenu() {
             this.showMenu = !this.showMenu;
         },
+    },
+    components: {
+        SidebarNav
     }
 }
 </script>
@@ -95,6 +101,7 @@ html, body {
 }
 
 .auth-menu-close {
+  margin-top: 1rem;
   display: block;
   border: 1px solid #333;
   border-radius: 5px;

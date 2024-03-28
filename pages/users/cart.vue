@@ -118,13 +118,11 @@ const deleteItem = (item) => {
   margin-right: 10px;
   margin-bottom: 1rem;
 }
-
 .output-section {
   margin-top: 1rem;
   background-color: #f2f4f8;
   border-radius: 5px;
 }
-
 .background {
   display: flex;
   flex-direction: column;
@@ -136,22 +134,21 @@ const deleteItem = (item) => {
   padding-top: 5rem;
   color: white;
 }
-
 .footer {
   margin-top: 0;
 }
-
 .btn-back {
-  margin-top: 20px;
-  background-color: var(--blue-500);
-  color: white;
-  padding: 10px 20px;
+  margin-top: 1.1rem;
+  background-color: rgba(246, 160, 23, 0.804);
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.7rem;
   text-decoration: none;
   transition: background-color 0.3s;
 }
-
 .btn-back:hover {
   background-color: #0056b3;
 }

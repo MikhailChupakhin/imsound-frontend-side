@@ -28,7 +28,7 @@
                     <option value="price_asc">По цене (возрастание)</option>
                     <option value="price_desc">По цене (убывание)</option>
                 </select>
-                <CommonInterfaceButton buttonText="cортировать" @click="sortProducts" />
+                <CommonInterfaceButton buttonText="сортировать" @click="sortProducts" />
             </div>
         </div>
     </div>
@@ -158,7 +158,7 @@ export default {
 @media screen and (max-width: 487px) {
     .sort-select {
         font-size: 0.8rem;
-        max-width: 140px;
+        max-width: 8rem;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -166,7 +166,7 @@ export default {
 .products_quantity {
     display: none;
 }
-@media screen and (min-width: 487px) {
+@media screen and (min-width: 926px) {
     .products_quantity {
         display: block;
     }

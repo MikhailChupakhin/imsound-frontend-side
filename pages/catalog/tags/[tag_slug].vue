@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\tag\[tag_slug].vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\tags\[tag_slug].vue -->
 
 <template>
     <div v-if="requestDataSuccessful" class="main_container">
@@ -36,7 +36,7 @@ const route = useRoute()
 const router = useRouter();
 
 const BASE_API_URL = config.public.apiBase;
-const endpoint = `tags/${route.params.tag_slug}/`;
+const endpoint = `catalog/tags/${route.params.tag_slug}/`;
 
 const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();
@@ -48,7 +48,12 @@ const updateViewMode = (mode) => {
 
 let requestDataSuccessful = false;
 const paginationParam = 9;
-const response = await fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
+let url = `${BASE_API_URL}${endpoint}`;
+if (queryString) {
+    url += `?${queryString}`;
+}
+
+const response = await fetch(url, {
     method: 'GET',
     headers: {
         'PAGINATIONPARAM': paginationParam,

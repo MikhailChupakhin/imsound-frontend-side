@@ -10,8 +10,8 @@
     </div>
     <div v-show="showMenu" class="menu-container-expanded">
       <div class="menu bg-white shadow-md z-10">
-        <NuxtLink :to="'/users/profile/'" class="auth-menu-item">Ваши заказы</NuxtLink>
-        <NuxtLink to="'/users/my-orders/'" class="auth-menu-item">Ваш профиль</NuxtLink>
+        <NuxtLink :to="'/users/profile/'" class="auth-menu-item">Ваш профиль</NuxtLink>
+        <NuxtLink :to="'/users/my-orders/'" class="auth-menu-item">Ваши заказы</NuxtLink>
         <a @click="logout" class="auth-menu-danger border-t border-gray-200">Выйти из профиля</a>
         <div class="menu-divider"></div>
         <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>

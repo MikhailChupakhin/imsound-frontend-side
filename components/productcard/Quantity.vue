@@ -78,8 +78,7 @@ export default {
     justify-content: center;
     font-size: 1rem;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #dddddd;
     border: none;
     -webkit-tap-highlight-color: transparent;
     -moz-focus-inner: none;
@@ -97,7 +96,7 @@ export default {
 
 .quantity-btn:active {
     outline: none;
-    background-color: #003874;
+    background-color: #b3b2b2;
     box-shadow: none;
 }
 

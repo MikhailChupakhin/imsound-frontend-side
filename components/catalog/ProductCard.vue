@@ -256,7 +256,7 @@ h2 a {
 
 @media screen and (max-width: 440px) {
     .add-to-cart-btn {
-      width: 50%;
+      width: 6.5rem;
     }
 }
 

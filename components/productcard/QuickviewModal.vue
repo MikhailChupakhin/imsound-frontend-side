@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header text-center">Быстрый просмотр {{ productInfo.product.name }}</div>
             <div class="view-btn">
-                <CommonInterfaceButton buttonText="Переключиться" @click="toggleView" />
+                <CommonInterfaceButton buttonText="Переключиться" @click="toggleView" :customStyle="{ width: '100%' }"/>
             </div>
             <div class="grid mt-1 mb-3">
                 <div class="col-12 md:col-4 lg:col-4">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="cls-btn">
-                <CommonInterfaceButton buttonText="Закрыть" @click="closeModal" />
+                <CommonInterfaceButton buttonText="Закрыть" @click="closeModal" :customStyle="{ width: '100%' }" />
             </div>
         </div>
     </div>
@@ -117,41 +117,41 @@ window.addEventListener('resize', () => {
     }
 }
 .modal-descr {
-    margin-bottom: 10px;
-    height: 350px;
+    margin-bottom: 0.8rem;
+    height: 14rem;
     overflow-y: auto;
     margin-bottom: 1rem;
 }
 .modal-characteristics {
-    margin-bottom: 10px;
-    height: 350px;
+    margin-bottom: 0.8rem;
+    height: 14rem;
     overflow-y: auto;
 }
 
 .characteristics-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 1.2rem;
 }
 .characteristics-table td {
-    padding: 8px;
+    padding: 0.5rem;
     border: 1px solid #ddd;
 }
 .characteristics-table td:first-child {
     font-weight: bold;
     width: 40%;
 }
-.cls-btn {
-    width: fit-content;
-    padding: 5px;
+.cls-btn { 
+    width: 50%;
     margin-top: 1.5rem;
     position: absolute;
-    bottom: 10px;
+    bottom: 0.8rem;
     left: 50%;
     transform: translateX(-50%);
 }
 .view-btn {
-  margin-top: 10px;
+    width: 50%;
+  margin-bottom: 0.8rem;
   margin: 0 auto;
 }
 @media screen and (min-width: 769px) {

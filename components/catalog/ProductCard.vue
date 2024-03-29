@@ -4,8 +4,14 @@
   <div :class="{ 'product-card text-center': true, 'comparison': isInComparisonList }" @mouseenter="showCartButton" @mouseleave="hideCartButton">
     <div class="card-border">
       <!-- <Skeleton v-if="ImgIsLoading" class="skeleton"></Skeleton> -->
-      <img class="product-img" :src="productInfo.image" alt="{{ productInfo.name }} Image" @load="imageLoaded" loading="lazy">
-      <h2><a>{{ productInfo.name }}</a></h2>
+      <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
+        <img class="product-img" to="`/catalog/${productInfo.slug}/${productInfo.id}`" :src="productInfo.image" alt="{{ productInfo.name }} Image" @load="imageLoaded" loading="lazy">
+      </router-link>
+      <h2>
+        <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
+          {{ productInfo.name }}
+        </router-link>
+      </h2>
       <div class="total-price"><a>{{ formatPrice(visiblePrice) }}</a></div>
       <div v-if="productInfo.quantity > 0" class="flex justify-content-center mb-4">
         <QuantityVue :initialQuantity="1" :max-value="productInfo.quantity" @quantity-change="updateQuantity" />
@@ -222,6 +228,7 @@ h2 a {
   font-weight: 500;
   font-size: 1.1rem;
   color: #272727;
+  text-decoration: none;
   text-transform: capitalize;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }

@@ -1,15 +1,26 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[product_slug]_[product_id].vue -->
 
 <template>
-  <div>
+  <div class="main_container">
     <MainHeader />
-    <h1>Product Details</h1>
+    <BreadcrumbsNav />
+    <div class="content-wrapper grid">
+      <div class="content-area col-10">
+        <pre>{{ data }}</pre>
+      </div>
+    </div>
+    <FooterBottom />
   </div>
 </template>
   
 <script setup>
-import { provide } from 'vue';
+import { useBaseStore } from '~/store/baseData';
 import MainHeader from '~/components/header/MainHeader.vue'
+import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
+
+import FooterBottom from '~/components/footer/FooterBottom.vue';
+
+const baseStore = useBaseStore();
 
 const route = useRoute();
 const config = useRuntimeConfig()
@@ -21,9 +32,9 @@ const { data } = await useAsyncData(
   () => $fetch(`${BASE_API_URL}${endpoint}`)
 );
 
-// console.log(data.value.results.categories)
-// console.log(data.value.results.subcategories)
+const baseData = baseStore.baseResponse;
+provide('categories', baseData.categories);
+provide('subcategories', baseData.subcategories);
 
-provide('categories', data.value.categories);
-provide('subcategories', data.value.subcategories);
+provide('breadcrumbs', data.value.breadcrumbs);
 </script>

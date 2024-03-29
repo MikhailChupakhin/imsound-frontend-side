@@ -4,6 +4,7 @@
   <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products_block_container border-1 border-round-sm surface-border mt-2">
     <ProductCard v-for="(product, index) in productsList" :key="index" :productInfo="product" :open-quickview-modal="openQuickviewModal" :is-authenticated="isAuthenticated" />
     <QuickviewModal v-if="showQuickviewModal" :productInfo="quickviewProduct" :is-visible="showQuickviewModal" @close-modal="closeQuickviewModal" />
+    <ComparisonIcon v-if="shouldShowComparisonIcon" />
   </div>
 </template>
   
@@ -11,9 +12,12 @@
 import { ref, inject } from 'vue';
 
 import ProductCard from './ProductCard.vue';
+import ComparisonIcon from './ComparisonIcon.vue';
 import QuickviewModal from '~/components/productcard/QuickviewModal.vue';
+import  comparisonList from '~/store/comparison.js';
 
 import { useAuthStore } from '~/store/useAuthStore';
+
 const authData = useAuthStore();
 const isAuthenticated = ref(authData.isAuthenticated);
 
@@ -31,6 +35,10 @@ const openQuickviewModal = (data) => {
 const closeQuickviewModal = () => {
   showQuickviewModal.value = false;
 };
+
+const comparisonItemsCount = computed(() => comparisonList.getters.getComparisonItems.length);
+const shouldShowComparisonIcon = computed(() => comparisonItemsCount.value >= 2);
+
 </script>
   
 <style scoped>

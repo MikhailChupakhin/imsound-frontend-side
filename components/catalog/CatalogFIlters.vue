@@ -28,14 +28,10 @@
                         @sliderValuesChanged="handleSliderValuesChanged" ref="sliderRef" />
                 </div>
             </div>
-            <div class="grid">
-                <div class="col-9">
-                    <label class="form-check-label">Только в наличии</label>
-                </div>
-                <div class="col-3">
-                    <div class="form-group">
-                        <input type="checkbox" v-model="inStock" class="form-check-input">
-                    </div>
+            <div class="flex justify-content-between">
+                <label class="form-check-label">Только в наличии</label>
+                <div class="form-group">
+                    <input type="checkbox" v-model="inStock" class="form-check-input">
                 </div>
             </div>
 
@@ -199,5 +195,9 @@ export default {
 ul.manufacturers-list {
     list-style-type: none;
     padding-left: 0;
+}
+.form-check-input {
+    min-width: 1rem;
+    min-height: 1rem;
 }
 </style>

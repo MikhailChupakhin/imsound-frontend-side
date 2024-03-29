@@ -32,7 +32,7 @@ export default {
             } else {
                 const x = event.clientX;
                 const y = event.clientY;
-                const message = 'Зачем ты это делаешь?'
+                const message = 'Хули ты делаешь?'
                 showError(message, x, y);
             }
         };

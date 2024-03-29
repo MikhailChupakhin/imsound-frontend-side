@@ -143,7 +143,7 @@ export default {
 
 <style>
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: #9ff02f;
+    background: rgba(246, 160, 23);
     border-color: #E3F2FD;
     color: #495057;
 }

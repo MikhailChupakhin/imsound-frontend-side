@@ -37,7 +37,7 @@ export default {
 @media screen and (max-width: 440px) {
     .interface-btn-1 {
       padding: 3px 3px;
-      font-size: 0.8rem;
+      font-size: 1rem;
       font-weight: 300;
     }
 }

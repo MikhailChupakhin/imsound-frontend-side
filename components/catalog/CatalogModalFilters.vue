@@ -2,11 +2,9 @@
 
 <template>
     <div class="unvisible-filters mt-2">
-        <div class="flex">
-            <div class="products_quantity">
-                <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
-            </div>
-            <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
+        <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
+        <div class="products_quantity">
+            <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
         </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">

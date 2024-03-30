@@ -7,12 +7,13 @@
     </div>
     <div class="product-details">
       <h2>{{ product.name }}</h2>
-      <div class="product-price">{{ product.total_price }}</div>
+      <div class="product-price">{{ formatPrice(product.total_price) }}</div>
     </div>
   </a>
 </template>
 
 <script setup>
+import { formatPrice } from '~/utils/priceFormatter.js';
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
 

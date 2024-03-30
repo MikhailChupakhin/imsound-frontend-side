@@ -33,7 +33,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import { computed, inject } from 'vue';
 import pluralize from '~/utils/func/pluralize.js';
@@ -76,9 +76,9 @@ export default {
             emit('update:viewMode', 'list');
         };
 
-        const sortProducts = async() => {
+        const sortProducts = async () => {
             const sortParam = sortingOptionValue.value ? `&sort=${sortingOptionValue.value}` : '';
-             
+
 
             // Техдолг, вынести в отдельную функцию
             let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
@@ -125,38 +125,46 @@ export default {
     }
 };
 </script>
-  
+
 <style scoped>
 .sorting-wrapper {
+    white-space: nowrap;
     padding: 0.2rem;
     margin-top: 0.3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .view-mode-buttons {
     display: flex;
     align-items: center;
 }
+
 .view-mode-buttons svg {
     fill: rgba(65, 65, 65, 0.804);
 }
+
 .view-mode-buttons a {
     margin-right: 0.8rem;
 }
+
 .view-mode-buttons svg {
     height: 1.8rem;
 }
+
 @media screen and (min-width: 487px) {
     .view-mode-buttons svg {
         height: 1.2rem;
     }
 }
+
 .sort-select {
     border-radius: 0.7rem;
     font-size: 1.2rem;
     margin-right: 0.3rem;
 }
+
 @media screen and (max-width: 487px) {
     .sort-select {
         font-size: 0.8rem;
@@ -165,9 +173,11 @@ export default {
         text-overflow: ellipsis;
     }
 }
+
 .products_quantity {
     display: none;
 }
+
 @media screen and (min-width: 926px) {
     .products_quantity {
         display: block;

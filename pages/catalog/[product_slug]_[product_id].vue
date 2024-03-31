@@ -8,19 +8,19 @@
       <div class="content-area col-10">
         <div class="grid">
           <div class="col-12 md:col-6 lg:col-6">
-            <ProductImages :image="data.product.image" />
+            <ProductImages :image="productData.product.image" />
           </div>
           <div class="col-12 md:col-6 lg:col-6">
-            <ProductDetailsActions :productData="data.product"
-                                   :productChars="data.characteristics"
-                                   :productRating="data.average_rating"/>
+            <ProductDetailsActions :productData="productData.product"
+                                   :productChars="productData.characteristics"
+                                   :productRating="productData.average_rating"/>
           </div>
           <div class="col-12">
-            <ProductDescrReviews :productDescr="data.product.description"
-                                 :productReviews="data.reviews"/>
+            <ProductDescrReviews :productDescr="productData.product.description"
+                                 :productReviews="productData.reviews"/>
           </div>
           <div class="col-12">
-            <ProductCarousel :products="data.recommended_products "/>
+            <ProductCarousel :products="productData.recommended_products "/>
           </div>
           <div class="col-12">
             <ProductCallMe />
@@ -51,8 +51,8 @@ const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
 const endpoint = `catalog/${route.params.product_slug}/${route.params.product_id}/`;
 
-const { data } = await useAsyncData(
-  'data',
+const { data: productData } = await useAsyncData(
+  'productData',
   () => $fetch(`${BASE_API_URL}${endpoint}`)
 );
 
@@ -60,7 +60,8 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
-provide('breadcrumbs', data.value.breadcrumbs);
+provide('breadcrumbs', productData.value.breadcrumbs);
+
 </script>
 
 <style scoped>

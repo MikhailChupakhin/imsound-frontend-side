@@ -2,8 +2,17 @@
 
 <template>
   <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products_block_container border-1 border-round-sm surface-border mt-2">
-    <ProductCard v-for="(product, index) in productsList" :key="index" :productInfo="product" :open-quickview-modal="openQuickviewModal" :is-authenticated="isAuthenticated" />
-    <QuickviewModal v-if="showQuickviewModal" :productInfo="quickviewProduct" :is-visible="showQuickviewModal" @close-modal="closeQuickviewModal" />
+    <ProductCard v-for="(product, index) in productsList" :key="index"
+                                                          :productInfo="product"
+                                                          :open-quickview-modal="openQuickviewModal"
+                                                          :openBuyOneClickModal="openBuyOneClickModal"
+                                                          :is-authenticated="isAuthenticated" />
+    <QuickviewModal v-if="showQuickviewModal" :productInfo="quickviewProduct"
+                                              :is-visible="showQuickviewModal"
+                                              @close-modal="closeQuickviewModal" />
+    <BuyOneClickModal v-if="showBuyOneClickModal" :productInfo="buyoneclickProduct"
+                                                  :is-visible="showBuyOneClickModal"
+                                                  @close-modal="closeBuyOneClickModal" />
     <ComparisonIcon v-if="shouldShowComparisonIcon" />
   </div>
 </template>
@@ -17,6 +26,7 @@ import QuickviewModal from '~/components/productcard/QuickviewModal.vue';
 import  comparisonList from '~/store/comparison.js';
 
 import { useAuthStore } from '~/store/useAuthStore';
+import BuyOneClickModal from '../productcard/BuyOneClickModal.vue';
 
 const authData = useAuthStore();
 const isAuthenticated = ref(authData.isAuthenticated);
@@ -27,13 +37,25 @@ const { viewMode } = defineProps({ viewMode: String });
 const showQuickviewModal = ref(false);
 const quickviewProduct = ref(null);
 
+const showBuyOneClickModal = ref(false);
+const buyoneclickProduct = ref(null);
+
 const openQuickviewModal = (data) => {
   quickviewProduct.value = data;
   showQuickviewModal.value = true;
 };
 
+const openBuyOneClickModal = (data) => {
+  buyoneclickProduct.value = data;
+  showBuyOneClickModal.value = true;
+};
+
 const closeQuickviewModal = () => {
   showQuickviewModal.value = false;
+};
+
+const closeBuyOneClickModal = () => {
+  showBuyOneClickModal.value = false;
 };
 
 const comparisonItemsCount = computed(() => comparisonList.getters.getComparisonItems.length);

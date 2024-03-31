@@ -24,8 +24,8 @@ const endpoint = 'index/';
 
 const baseStore = useBaseStore();
 
-const { data } = await useAsyncData(
-  'data',
+const { data: indexData } = await useAsyncData(
+  'indexData',
   () => $fetch(`${BASE_API_URL}${endpoint}`, {
     method: 'GET',
   })
@@ -36,11 +36,11 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
-const sliders = data.value.sliders_and_banners.sliders;
-const banners_top = data.value.sliders_and_banners.banners;
-provide('featured_products', data.value.featured_products);
-provide('company_info', data.value.company_info);
-provide('clients_info', data.value.clients_info);
+const sliders = indexData.value.sliders_and_banners.sliders;
+const banners_top = indexData.value.sliders_and_banners.banners;
+provide('featured_products', indexData.value.featured_products);
+provide('company_info', indexData.value.company_info);
+provide('clients_info', indexData.value.clients_info);
 </script>
 
 <style scoped>

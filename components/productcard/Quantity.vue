@@ -10,7 +10,7 @@
   
 <script>
 import { ref } from 'vue';
-import { showError } from '~/utils/animations/showError';
+import { showMessage } from '~/utils/animations/showMessage';
 
 export default {
     props: {
@@ -33,7 +33,7 @@ export default {
                 const x = event.clientX;
                 const y = event.clientY;
                 const message = 'Хули ты делаешь?'
-                showError(message, x, y);
+                showMessage(message, x, y);
             }
         };
 
@@ -46,7 +46,7 @@ export default {
                 const x = event.clientX;
                 const y = event.clientY;
                 const message = 'Увы, больше у нас нет...'
-                showError(message, x, y);
+                showMessage(message, x, y);
             }
         };
 

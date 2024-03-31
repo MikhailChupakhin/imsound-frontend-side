@@ -43,8 +43,8 @@ const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();
 
 const paginationParam = 9;
-const { data } = await useAsyncData(
-  'data',
+const { data: catalogData } = await useAsyncData(
+  'indexData',
   () => $fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
     method: 'GET',
     headers: {
@@ -58,10 +58,10 @@ const updateViewMode = (mode) => {
   viewMode.value = mode;
 };
 
-const productsList = ref(data.value.results.product_list);
+const productsList = ref(catalogData.value.results.product_list);
 provide('products_list', productsList);
 
-const productsQuantity = ref(data.value.count);
+const productsQuantity = ref(catalogData.value.count);
 provide('products_quantity', productsQuantity);
 
 const selectedRowsPerPage = ref(12);
@@ -92,16 +92,16 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
-provide('manufacturers', data.value.results.manufacturers);
-provide('price_interval', data.value.results.price_interval);
-provide('breadcrumbs', data.value.results.breadcrumbs);
-provide('tags_data', data.value.results.tags_data);
+provide('manufacturers', catalogData.value.results.manufacturers);
+provide('price_interval', catalogData.value.results.price_interval);
+provide('breadcrumbs', catalogData.value.results.breadcrumbs);
+provide('tags_data', catalogData.value.results.tags_data);
 
-provide('page_next', data.value.next);
-provide('page_previous', data.value.previous);
+provide('page_next', catalogData.value.next);
+provide('page_previous', catalogData.value.previous);
 
-provide('company_info', data.value.company_info);
-provide('clients_info', data.value.clients_info);
+provide('company_info', catalogData.value.company_info);
+provide('clients_info', catalogData.value.clients_info);
 
 </script>
 

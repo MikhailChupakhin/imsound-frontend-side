@@ -1,6 +1,6 @@
-// C:\Users\user1\VSCProjects\imsound-frontend-side\utils\animations\showError.js    
+// C:\Users\user1\VSCProjects\imsound-frontend-side\utils\animations\showMessage.js    
 
-export function showError(message, x, y) {
+export function showMessage(message, x, y) {
     const errorMessage = document.createElement('div');
     errorMessage.textContent = message;
     errorMessage.classList.add('error-message');

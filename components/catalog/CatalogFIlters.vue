@@ -61,14 +61,18 @@ import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
 import { formatPriceShort } from '~/utils/priceFormatter.js';
 
 export default {
+    props: {
+        closeMenu: {
+            type: Function,
+            default: () => null
+        },
+        sliderId: String,
+    },
     components: {
         CatalogPriceSlider,
     },
-    props: {
-        sliderId: String,
-    },
     inject: ['manufacturers', 'price_interval'],
-    setup() {
+    setup(props) {
         const minPrice = inject('minPrice');
         const maxPrice = inject('maxPrice');
         const inStock = inject('inStock');
@@ -82,7 +86,6 @@ export default {
         const selectedRowsPerPage = inject('selectedRowsPerPage');
 
         const applyFilters = async () => {
-            // Лучше вынести в отдельную функцию
             let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;
             if (selectedManufacturers.value.length > 0) {
                 const manufacturerNames = selectedManufacturers.value.map(manufacturer => manufacturer.name);
@@ -91,12 +94,11 @@ export default {
             if (inStock.value) {
                 queryString += '&in_stock=true';
             }
-            //
+
             const BASE_API_URL = useRuntimeConfig().public.apiBase;
             APIpath.value = window.location.pathname.slice(1);
             APIqueryString.value = queryString;
             const apiUrl = BASE_API_URL + APIpath.value + '/' + queryString;
-
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
@@ -104,6 +106,9 @@ export default {
                 productsQuantity.value = data.count;
                 currentPage.value = 1;
                 selectedRowsPerPage.value = 12;
+                if (typeof props.closeMenu === 'function') {
+                    props.closeMenu();
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

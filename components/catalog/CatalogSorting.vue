@@ -39,9 +39,6 @@ import { computed, inject } from 'vue';
 import pluralize from '~/utils/func/pluralize.js';
 
 export default {
-    props: {
-        deviceType: String
-    },
     setup() {
         const { emit } = getCurrentInstance();
         const minPrice = inject('minPrice');
@@ -160,6 +157,7 @@ export default {
 }
 
 .sort-select {
+    padding: 0.3rem 0.1rem;
     border-radius: 0.7rem;
     font-size: 1.2rem;
     margin-right: 0.3rem;

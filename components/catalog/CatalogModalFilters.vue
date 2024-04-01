@@ -8,7 +8,7 @@
         </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
-                <CatalogFilters sliderId="'priceSliderAside'"/>
+                <CatalogFilters sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
                 <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
             </div>
         </div>
@@ -22,6 +22,10 @@ import pluralize from '~/utils/func/pluralize.js';
 
 const showMenu = ref(false);
 const productsQuantity = inject('products_quantity');
+
+const closeMenu = () => {
+    showMenu.value = false;
+}
 </script>
 
 <style scoped>

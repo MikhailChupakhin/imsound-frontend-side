@@ -5,12 +5,12 @@
         <svg class="svg-icon-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" stroke="#000" stroke-width=".6"
             fill="rgba(0,0,0,0)" stroke-linecap="round" style="cursor: pointer" @click="toggleMenu">
             <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
-                <animate dur="0.2s" attributeName="d"
+                <animate dur="0.3s" attributeName="d"
                     values="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7;M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7" fill="freeze"
                     begin="start.begin" />
-                <animate dur="0.2s" attributeName="d"
+                <animate dur="0.3s" attributeName="d"
                     values="M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7;M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7" fill="freeze"
-                    begin="reverse.begin" />
+                    begin="closeMenu.click" />
             </path>
             <rect width="10" height="10" stroke="none">
                 <animate dur="2s" id="reverse" attributeName="width" begin="click" />
@@ -26,7 +26,7 @@
                 <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
                 <NuxtLink :to="`/`" class="menu-item">Блог</NuxtLink>
                 <SidebarNav />
-                <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
+                <a @click="toggleMenu" id="closeMenu" class="auth-menu-close">Закрыть меню</a>
             </div>
         </div>
     </div>

@@ -261,7 +261,6 @@ h2 a {
   position: relative;
   transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-
 .product-card:hover .card-border {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 2;

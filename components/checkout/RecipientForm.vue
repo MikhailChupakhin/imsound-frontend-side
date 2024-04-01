@@ -8,7 +8,7 @@
             <input :id="key" :type="field.type" :placeholder="field.placeholder" v-model="formData[key]" :required="field.required"
                 class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
                 :class="{ 'error-field': formErrors[key] }">
-            <div v-if="formErrors[key]" class="error-message">{{ formErrors[key] }}</div>
+            <div v-if="formErrors[key]" class="form-error">{{ formErrors[key] }}</div>
         </div>
     </form>
 </template>
@@ -43,7 +43,7 @@ console.log('errors in RecipientForm', formErrors);
 .error-field {
   border-color: red !important;
 }
-.error-message {
+.form-error {
   color: red;
   font-size: 0.8em;
   margin-top: 0.5em;

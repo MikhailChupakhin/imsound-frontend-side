@@ -17,7 +17,7 @@
                         </svg></i>
                 </a>
             </div>
-            <div class="products_quantity">
+            <div class="products_quantity"> 
                 <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
             </div>
             <div class="sorting">
@@ -39,6 +39,9 @@ import { computed, inject } from 'vue';
 import pluralize from '~/utils/func/pluralize.js';
 
 export default {
+    props: {
+        deviceType: String
+    },
     setup() {
         const { emit } = getCurrentInstance();
         const minPrice = inject('minPrice');
@@ -67,18 +70,15 @@ export default {
         });
 
         const setGridViewMode = () => {
-            console.log('grid clicked');
             emit('update:viewMode', 'grid');
         };
 
         const setListViewMode = () => {
-            console.log('list clicked');
             emit('update:viewMode', 'list');
         };
 
         const sortProducts = async () => {
             const sortParam = sortingOptionValue.value ? `&sort=${sortingOptionValue.value}` : '';
-
 
             // Техдолг, вынести в отдельную функцию
             let queryString = `?min_price_value=${minPrice.value}&max_price_value=${maxPrice.value}`;

@@ -67,6 +67,7 @@ const shouldShowComparisonIcon = computed(() => comparisonItemsCount.value >= 2)
 .products_block_container {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 1.6rem;
 }
 .grid-mode .product-card {
     width: 33.33%;

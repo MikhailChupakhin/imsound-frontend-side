@@ -142,6 +142,9 @@ export default {
 </script>
 
 <style>
+.p-paginator {
+    padding: 0.5rem 0.5rem;
+}
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: rgba(246, 160, 23);
     border-color: #E3F2FD;

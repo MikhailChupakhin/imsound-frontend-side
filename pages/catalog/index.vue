@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+
 import { provide } from 'vue';
 import { useBaseStore } from '~/store/baseData';
 
@@ -52,6 +53,24 @@ const { data: catalogData } = await useAsyncData(
     }
   })
 );
+// /////
+// const deviceType = ref('list');
+
+// const updateDeviceType = () => {
+//   if (window.innerWidth < 600) {
+//     deviceType.value = 'mobile';
+//     viewMode.value = 'list';
+//   } else {
+//     deviceType.value = 'desktop';
+//     viewMode.value = 'grid';
+//   }
+// };
+
+// onBeforeMount(() => {
+//   updateDeviceType();
+//   console.log(deviceType.value)
+// });
+// /////
 
 const viewMode = ref('grid');
 const updateViewMode = (mode) => {

@@ -243,6 +243,8 @@ h2 a {
     font-size: 1rem;
     font-weight: 500;
     height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 .total-price {

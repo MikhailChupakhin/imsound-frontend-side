@@ -297,7 +297,7 @@ h2 a {
 .card-menu {
   align-items: center;
   position: absolute;
-  top: 10%;
+  top: 25%;
   right: 10px;
   transform: translateY(-50%);
   padding: 5px 3px;

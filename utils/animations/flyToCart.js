@@ -10,6 +10,7 @@ export function flyToCartAnimation(element, context, xA, yA, xB, yB) {
     productImgClone.style.left = `${xA}px`;
     productImgClone.style.top = `${yA}px`;
     productImgClone.style.position = 'fixed';
+    productImgClone.style.zIndex = '100';
     const deltaX = xB - xA;
     const deltaY = yB - yA;
     console.log('deltaX', deltaX, 'deltaY', deltaY);

@@ -105,7 +105,7 @@ export default {
       const buttonRect = cartButton.getBoundingClientRect();
 
       const headerRect = document.querySelector('header').getBoundingClientRect();
-      const xB = buttonRect.left + window.scrollX - headerRect.left;
+      const xB = buttonRect.left + window.scrollX - headerRect.left - 30;
       const yB = buttonRect.top - headerRect.top;
 
       if (this.isAuthenticated) {
@@ -242,6 +242,7 @@ h2 a {
     line-height: 1rem;
     font-size: 1rem;
     font-weight: 500;
+    height: 2rem;
   }
 }
 .total-price {
@@ -265,11 +266,12 @@ h2 a {
 }
 .add-to-cart-btn {
   width: 33%;
-  background-color: #007bff;
-  color: #fff;
+  background-color: rgba(246, 160, 23);
+  color: #000000;
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid gray;
   cursor: pointer;
   position: absolute;
   left: 50%;
@@ -279,7 +281,7 @@ h2 a {
   z-index: 5;
 }
 .preorder-btn {
-  background-color: #983c14;
+  background-color: rgb(193, 111, 111);
 }
 @media screen and (min-width: 601px) {
     .add-to-cart-btn {

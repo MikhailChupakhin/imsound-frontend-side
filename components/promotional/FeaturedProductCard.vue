@@ -39,26 +39,22 @@ a {
   height: auto;
   margin-bottom: 10px;
 }
-
 .product-details h2 {
   font-size: 18px;
   margin-bottom: 5px;
   text-align: center;
 }
-
 .product-details p {
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
 }
-
 .product-price {
   font-size: 16px;
   font-weight: bold;
   color: #333;
   text-align: center;
 }
-
 @media only screen and (max-width: 767px) {
   .product-price {
     border-bottom: 0.25px solid #333;

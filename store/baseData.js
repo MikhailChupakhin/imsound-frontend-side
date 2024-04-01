@@ -1,5 +1,5 @@
 // C:\Users\user1\VSCProjects\imsound-frontend-side\store\baseData.js
-/// тестовый комментарий 1
+/// тестовый комментарий 11111111
 import { defineStore } from 'pinia';
 
 export const useBaseStore = defineStore('base', {

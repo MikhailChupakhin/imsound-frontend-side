@@ -249,13 +249,11 @@ h2 a {
   font-size: 1rem;
   margin-bottom: 0.3rem;
 }
-
 .product-card {
   display: flex;
   flex-direction: column;
   position: relative;
 }
-
 .card-border {
   position: relative;
   transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -288,7 +286,6 @@ h2 a {
       opacity: 0;
     }
 }
-
 @media screen and (max-width: 475px) {
     .add-to-cart-btn {
       width: 6.5rem;

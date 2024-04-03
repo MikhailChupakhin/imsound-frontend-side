@@ -55,6 +55,10 @@ export default {
     color: #000000;
     font-size: 2.5rem;
     line-height: 2.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 .p-breadcrumb {
     background-color: transparent;

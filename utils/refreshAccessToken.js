@@ -3,9 +3,7 @@
 // Функция обновления токена
 export async function refreshAccessToken(BASE_API_URL) {
     try {
-        console.log('TOKEN REFRESHING')
         const refresh = getRefreshTokenFromCookie();
-        console.log('refreshToken', refresh)
         if (!refresh) {
             return null;
         }
@@ -19,8 +17,6 @@ export async function refreshAccessToken(BASE_API_URL) {
         });
 
         if (response.access) {
-            console.log('Получен новый access token')
-            console.log(response.access);
             // document.cookie = `accessToken=${response.access}; path=/; HttpOnly; Secure`;
             document.cookie = `accessToken=${response.access}; path=/;`;
 

@@ -15,19 +15,16 @@ async function authRequestHandler(BASE_API_URL, endpoint, method, body = null, h
         try {
             const url = BASE_API_URL + endpoint
             const response = await sendAuthRequest(url, method, body, headers);
-            console.log(response)
             if (response.status === 401) {
                 const refreshResult = await refreshAccessToken(BASE_API_URL);
 
                 if (refreshResult !== 1) {
-                    console.log('Токен НЕ обновлен!')
                     document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                     document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                     authStore.setAuthenticated(false);
                     await router.push({ path: '/', query: { showLoginModal: true }});
                     return null;
                 } else {
-                    console.log('Токен обновлен!')
                     const updatedResponse = await sendAuthRequest(url, method, body, headers);
                     authStore.setAuthenticated(true);
                     return updatedResponse;

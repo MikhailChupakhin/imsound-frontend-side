@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\blog\index.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\blog\category\[tag_slug].vue -->
 
 <template>
   <div class="main_container">
@@ -36,11 +36,12 @@ import BlogPagination from '~/components/blog/BlogPagination.vue'
 
 const baseStore = useBaseStore();
 
+const route = useRoute();
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
-const endpoint = 'blog/';
 
-const activeTag = ref('None');
+const endpoint = `blog/tag/${route.params.tag_slug}`;
+const activeTag = ref(route.params.tag_slug);
 
 const { data: blogData } = await useAsyncData(
   'blogData',
@@ -50,6 +51,7 @@ const { data: blogData } = await useAsyncData(
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
+
 const breadcrumbs = ref(blogData.value.breadcrumbs);
 provide('breadcrumbs', breadcrumbs);
 
@@ -61,9 +63,6 @@ const articlesCount = ref(blogData.value.pagination.count)
 provide('tags_data', blogData.value.tags_data);
 
 const blogCategories = ref(blogData.value.blog_categories);
-
-const currentPage = ref(blogData.value.pagination.current_page);
-provide('currentPage', currentPage);
 const articlesQty = ref(blogData.value.pagination.articles_qty);
 provide('articlesQty', articlesQty);
 
@@ -80,31 +79,29 @@ const handleCategoryChange = async (selectedCategory) => {
     articlesList.value = responseData.pagination.results;
   }
 };
-
 const updateArticleList = (newArticleList) => {
   articlesList.value = newArticleList;
 };
 </script>
 
 <style scoped>
-  .main_container {
-    overflow-x: hidden;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .content-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-  }
-  .blog-content{
+.main_container {
+  overflow-x: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.blog-content{
     width: 98%;
     margin: 0 auto;
-  }
-  .content-area {
-    flex: 1;
-    padding: 0px;
-  }
+}
+.content-area {
+  flex: 1;
+  padding: 0px;
+}
 </style>

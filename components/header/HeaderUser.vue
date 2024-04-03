@@ -117,7 +117,6 @@ async function submitForm() {
     }
     const responseData = await response.json();
     if (responseData.detail == 'No active account found with the given credentials') {
-      console.log(responseData)
       errorMessage.value = 'Неверные учетные данные!';
     } else {
       // На localhost браузер не принимает куки с флагами HttpOnly; Secure (из за отсутствия https?)

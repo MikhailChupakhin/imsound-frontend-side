@@ -45,7 +45,6 @@ export default {
                     };
                     const apiResponse = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
                     const responseData = await apiResponse.json();
-                    console.log(responseData);
                     handleResponseData(responseData);
                 })();
             } else {
@@ -63,7 +62,6 @@ export default {
 
         
         const inputQuantity = async () => {
-            console.log('inputQuantity:', quantity.value);
             if (isUserAuthenticated.value) {
                 (async () => {
                     const endpoint = 'users/cart/update/'
@@ -73,11 +71,9 @@ export default {
                     };
                     const apiResponse = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
                     const responseData = await apiResponse.json();
-                    console.log(responseData);
                     handleResponseData(responseData);
                 })();
             } else {
-                console.log('user is guest');
                 const endpoint = 'users/cart_guest/update/';
                 const body = JSON.stringify({'product_id': props.productId, 'operation_type': operation});
                 // Доделать при возвращении к гостевой логике
@@ -106,9 +102,7 @@ export default {
         };
 
         const handleResponseData = (responseData) => {
-            if (responseData.message === 'performed') {
-                console.log('Operation performed successfully');
-                console.log('new quantity', responseData.upd_qty)
+            if (responseData.message === 'performed') {s
                 quantity.value = responseData.upd_qty;
                 emit('quantity-change', { productId: props.productId, quantity: quantity.value });
                 emit('update-item', { productId: props.productId, quantity: quantity.value });
@@ -117,7 +111,6 @@ export default {
             } else if (responseData.error === 'maximal') {
                 console.log('Reached maximal value');
             } else if (responseData.message === 'excess') {
-                console.log('excess: set maximal value');
                 quantity.value = responseData.upd_qty;
                 emit('quantity-change', { productId: props.productId, quantity: quantity.value });
             }

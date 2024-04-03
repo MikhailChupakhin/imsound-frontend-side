@@ -25,7 +25,6 @@ const CartStore = createStore({
       }
     },
     removeCartItem(state, productId) {
-      console.log('productId', productId)
       state.cartItems = state.cartItems.filter(item => String(item.productInfo.id) !== String(productId));
     },
     updateTotalPrice(state, totalPrice) {

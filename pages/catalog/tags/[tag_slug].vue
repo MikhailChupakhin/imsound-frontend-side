@@ -7,7 +7,7 @@
         <div class="content-wrapper grid">
             <SidebarBuiltin />
             <div class="content-area col-10">
-                <CatalogTags />
+                <TagsCloud :linkPath="'/catalog/tags/'" :activeTag="activeTag"/>
                 <CatalogModalFilters />
                 <CatalogSorting @update:viewMode="updateViewMode" />
                 <ProductsBlock :viewMode="viewMode" />
@@ -23,7 +23,7 @@ import { provide } from 'vue';
 
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
-import CatalogTags from '~/components/catalog/CatalogTags.vue';
+import TagsCloud from '~/components/common/TagsCloud.vue';
 import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';
@@ -37,6 +37,7 @@ const router = useRouter();
 
 const BASE_API_URL = config.public.apiBase;
 const endpoint = `catalog/tags/${route.params.tag_slug}/`;
+const activeTag = ref(route.params.tag_slug);
 
 const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();

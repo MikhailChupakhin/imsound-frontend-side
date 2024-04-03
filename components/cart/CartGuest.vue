@@ -26,8 +26,6 @@ onMounted(async () => {
         cartItems.value = await response.value.cart_items;
         deliveryMethods.value = await response.value.delivery_methods;
 
-        console.log('cartItems', cartItems)
-        console.log('deliveryMethods', deliveryMethods)
     } catch (error) {
         console.error('Ошибка при загрузке корзины:', error);
     }

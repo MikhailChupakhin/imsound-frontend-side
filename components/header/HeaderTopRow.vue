@@ -29,7 +29,6 @@ export default {
       if (!authStore.isAuthenticatedCheckInit) {
         restoreAuthStateFromCookie(authStore);
         authStore.setAuthenticatedCheckInit(true);
-        console.log('authStore restored')
       }
     });
   }

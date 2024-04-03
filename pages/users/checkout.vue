@@ -92,10 +92,7 @@ import CartStore from '~/store/cart';
 
 const handleCheckout = async (selectedPaymentMethod) => {
   const recipientFormData = formData.value;
-  console.log('recipientFormData', recipientFormData)
-
   const requiredFields = getRequiredFields();
-  console.log('requiredFields', requiredFields)
 
   if (!validateFormData(recipientFormData, requiredFields)) {
     return;

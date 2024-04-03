@@ -79,7 +79,6 @@ const CartItemsStored = computed(() => {
       quantity: item.quantity
     };
   });
-  console.log('CartItemsStored', convertedCartItems)
   return convertedCartItems;
 });
 
@@ -99,7 +98,6 @@ if (process.client) {
     deliveryMethods.value = response.value.delivery_methods;
   })();
 }
-console.log('cartItems', cartItems)
 
 const deleteItem = (item) => {
   cartItems.value = cartItems.value.filter(cartItem => cartItem.product.id !== item.product.id);

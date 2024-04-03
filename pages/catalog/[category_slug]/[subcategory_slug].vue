@@ -7,7 +7,7 @@
     <div class="content-wrapper grid">
       <SidebarBuiltin />
       <div class="content-area col-10">
-        <CatalogTags />
+        <TagsCloud :linkPath="'/catalog/tags/'" />
         <CatalogModalFilters />
         <CatalogSorting @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
@@ -24,7 +24,7 @@ import { useBaseStore } from '~/store/baseData';
 
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
-import CatalogTags from '~/components/catalog/CatalogTags.vue';
+import TagsCloud from '~/components/common/TagsCloud.vue';
 import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';

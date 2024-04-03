@@ -1,14 +1,14 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\PaginationBar.vue -->
 
 <template>
-    <Paginator class="m-1" :template="{
+    <nav><Paginator class="m-1" :template="{
         '640px': 'PrevPageLink PageLinks NextPageLink',
         '960px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         '1300px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
-    }" :rows="selectedRowsPerPage || 12" :totalRecords="totalRecords || 0" :rowsPerPageOptions="[12, 18, 36, 99]"
+        }" :rows="selectedRowsPerPage || 12" :totalRecords="totalRecords || 0" :rowsPerPageOptions="[12, 18, 36, 99]"
         @click="handleClick" @change="handleChangeRowsPerPage">
-    </Paginator>
+    </Paginator></nav>
 </template>
   
 <script>
@@ -25,9 +25,6 @@ export default {
         const productsList = inject('products_list');
         const selectedRowsPerPage = inject('selectedRowsPerPage');
 
-        // NOTE: При текущей реализации API бэкенда, которое отдает URL страниц пагинации(previous и next) не используются.
-        // Если оставим +- так как сделал - заменю их в API просто на номер текущей страницы.
-
         const APIpath = inject('APIpath');
         const APIqueryString = inject('APIqueryString');
         const currentPage = inject('currentPage');
@@ -36,7 +33,6 @@ export default {
         const previousRowsPerPage = ref();
         
         watch(productsQuantity, (newValue) => {
-            // console.log('TOTAL RECORDS', totalRecords)
             totalRecords.value = newValue;
         });
 
@@ -55,7 +51,6 @@ export default {
                         const newValue = parseInt(dropdownLabel.innerText);
                         if (!isNaN(newValue) && !isNaN(previousRowsPerPage.value) && newValue !== previousRowsPerPage.value) {
                             selectedRowsPerPage.value = newValue;
-                            console.log('Selected rows per page changed to:', selectedRowsPerPage.value);
                             handleChangeRowsPerPage(selectedRowsPerPage.value);
                             previousRowsPerPage.value = newValue;
                         }

@@ -196,12 +196,10 @@ export default {
       if (productIndex !== -1) {
         comparisonList.commit('removeItem', productInfo.id);
         const message = 'Удалил из списка сравнения';
-        console.log(message);
         showMessage(message, x, y);
       } else {
         comparisonList.commit('addItem', { productInfo });
         const message = 'Добавил в список сравнения';
-        console.log(message);
         showMessage(message, x, y);
       }
     },
@@ -243,8 +241,10 @@ h2 a {
     font-size: 1rem;
     font-weight: 500;
     height: 2rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 .total-price {

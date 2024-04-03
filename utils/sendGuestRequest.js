@@ -5,7 +5,6 @@ export async function sendGuestRequest(url, method, body = null, headers) {
         headers = {};
     } else {
         let guestToken = localStorage.getItem('guestToken');
-        console.log('guestToken', guestToken)
         guestToken = checkExpiredToken(guestToken);
         if (!guestToken) {
             guestToken = generateGuestToken();

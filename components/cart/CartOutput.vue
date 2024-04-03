@@ -43,7 +43,6 @@ import { useAuthStore } from '~/store/useAuthStore';
 const router = useRouter();
 const route = useRoute();
 const authData = useAuthStore();
-console.log('Статус аутентификации:', authData.isAuthenticated);
 
 const computedCartTotalPrice = computed(() => {
   return CartStore.getters.getCartTotalPrice;

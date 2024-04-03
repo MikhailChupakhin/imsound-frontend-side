@@ -94,7 +94,6 @@ const updateSumm = (item, responseData) => {
 };
 
 const updateItem = (item, data) => {
-  console.log('updateItem emmited')
   const itemToUpdate = computedCartItems.value.find(cartItem => cartItem.product.id === data.productId);
   if (itemToUpdate) {
     itemToUpdate.quantity = data.quantity;

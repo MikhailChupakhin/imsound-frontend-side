@@ -11,7 +11,6 @@ async function guestRequestHandler(BASE_API_URL, endpoint, method, body = null, 
         try {
             const url = BASE_API_URL + endpoint
             const response = await sendGuestRequest(url, method, body, headers);
-            console.log(response)
             return response;
         } catch (error) {
             console.error('Ошибка при выполнении запроса:', error);

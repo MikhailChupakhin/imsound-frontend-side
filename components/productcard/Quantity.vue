@@ -38,7 +38,6 @@ export default {
         };
 
         const increment = (event) => {
-            console.log(quantity.value, props.maxValue)
             if (props.initialQuantity + quantity.value <= props.maxValue) {
                 quantity.value++;
                 emit('quantity-change', quantity.value);

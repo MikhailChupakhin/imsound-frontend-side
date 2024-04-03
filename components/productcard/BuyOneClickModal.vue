@@ -43,7 +43,6 @@ let nameUser = '';
 
 const handleFormSubmit = (product_id, event) => {
     const screenWidth = window.innerWidth;
-    console.log('screenWidth', screenWidth);
     const x = event.clientX;
     const y = event.clientY;
     submitForm(product_id, screenWidth, x, y);
@@ -81,8 +80,6 @@ const submitForm = async (product_id, screenWidth, x, y) => {
             const message = 'Произошла ошибка при создании заявки';
             showMessage(message, 100, y);
         }
-        
-        console.log(response)
     }
 };
 

@@ -15,7 +15,6 @@
 const isOpen = ref(false);
 
 const openModal = () => {
-  console.log('open нажато')
   isOpen.value = true;
 };
 

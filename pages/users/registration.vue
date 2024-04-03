@@ -104,7 +104,6 @@ async function registerUser() {
     };
 
     const validateFormData = (formData) => {
-        console.log(formData)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         Object.keys(formData.value).forEach(key => {
             if (!formData.value[key]) {

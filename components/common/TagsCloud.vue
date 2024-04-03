@@ -1,10 +1,10 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogTags.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\TagsCloud.vue -->
 
 <template>
   <div class="grid align-items-center">
     <div class="tags-list col-10 md:col-11 lg:col-11 flex align-items-center">
       <div class="tags flex flex-row flex-wrap gap-1">
-        <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="`/catalog/tags/${tag.slug}`" class="tag_link">
+        <NuxtLink v-for="(tag, index) in tags_data" :key="index" :to="linkPath + tag.slug" class="tag-link" :class="{ 'active-tag': tag.slug === activeTag }">
           {{ tag.name.toLowerCase() }}
         </NuxtLink>
       </div>
@@ -14,7 +14,23 @@
 
 <script>
 export default {
+  props: {
+    linkPath: {
+      type: String,
+    },
+    activeTag: {
+      type: String,
+      required: false,
+    },
+  },
   inject: ['tags_data'],
+  methods: { isActive(tag) {
+    if (activeTag == tag) {
+      return true;
+    }
+  }
+
+},
 };
 </script>
 
@@ -29,7 +45,7 @@ export default {
   padding: 0.1rem;
 }
 
-.tag_link {
+.tag-link {
   padding: 0.2rem 0.4rem;
   margin-right: 0.2rem;
   background-color: rgb(236, 236, 236);
@@ -39,7 +55,10 @@ export default {
   color: black;
 }
 
-.tag_link:hover {
+.tag-link:hover {
   background-color: #999;
+}
+.active-tag {
+  background-color: rgba(246, 160, 23);
 }
 </style>

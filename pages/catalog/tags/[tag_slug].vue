@@ -48,7 +48,7 @@ const updateViewMode = (mode) => {
 };
 
 let requestDataSuccessful = false;
-const paginationParam = 9;
+const paginationParam = 12;
 let url = `${BASE_API_URL}${endpoint}`;
 if (queryString) {
     url += `?${queryString}`;

@@ -8,7 +8,7 @@
         <div class="flex justify-content-between">
             <p class="flex align-items-center justify-content-center">{{ articleInfo.views_counter }} просмотров</p>
             <p v-if="articleInfo.reading_time" class="flex align-items-center justify-content-center" title="Время на прочтение">
-                <strong>{{ articleInfo.reading_time }} минут</strong>
+                <strong>{{ pluralize(articleInfo.reading_time, 'минут') }}</strong>
             </p>
             <p v-else></p>
         </div>
@@ -21,6 +21,8 @@
 </template>
   
 <script setup>
+import pluralize from '~/utils/func/pluralize.js';
+
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
 

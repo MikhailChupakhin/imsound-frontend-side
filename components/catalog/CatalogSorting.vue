@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="products_quantity"> 
-                <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
+                <strong>{{ pluralize(productsQuantity, 'товар') }}</strong>
             </div>
             <div class="sorting">
                 <select class="sort-select" v-model="sortingOption">

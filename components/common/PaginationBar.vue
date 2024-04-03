@@ -7,7 +7,7 @@
         '1300px': 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
         default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
         }" :rows="selectedRowsPerPage || 12" :totalRecords="totalRecords || 0" :rowsPerPageOptions="[12, 18, 36, 99]"
-        @click="handleClick" @change="handleChangeRowsPerPage">
+        @click="handleClick(selectedRowsPerPage, $event)" @change="handleChangeRowsPerPage">
     </Paginator></nav>
 </template>
   
@@ -94,7 +94,8 @@ export default {
             currentPage.value = newPageNumCalc;
         };
 
-        const handleClick = async (event) => {
+        const handleClick = async (selectedRowsPerPageValue, event) => {
+            const paginationParam = selectedRowsPerPageValue;
             if (event.target.classList.contains('p-paginator-page')) {
                 const clickedElement = event.target;
 
@@ -110,6 +111,9 @@ export default {
 
                     const response = await fetch(apiURL, {
                         method: 'GET',
+                        headers: {
+                            'PAGINATIONPARAM': paginationParam
+                        }
                     });
 
                     const data = await response.json();

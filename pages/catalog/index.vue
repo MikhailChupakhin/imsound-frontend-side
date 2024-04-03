@@ -43,7 +43,7 @@ const endpoint = 'catalog/';
 const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();
 
-const paginationParam = 9;
+const paginationParam = 12;
 const { data: catalogData } = await useAsyncData(
   'catalogData',
   () => $fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {

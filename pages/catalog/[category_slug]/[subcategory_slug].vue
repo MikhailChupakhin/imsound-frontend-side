@@ -49,7 +49,7 @@ const viewMode = ref('grid');
   };
 
 let requestDataSuccessful = false;
-const paginationParam = 9;
+const paginationParam = 12;
 const response = await fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
   method: 'GET',
   headers: {

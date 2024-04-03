@@ -25,7 +25,6 @@
 <script setup>
 import { useBaseStore } from '~/store/baseData';
 
-
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';

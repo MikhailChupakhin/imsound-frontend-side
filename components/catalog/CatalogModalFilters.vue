@@ -4,7 +4,7 @@
     <div class="unvisible-filters mt-2">
         <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
         <div class="products_quantity">
-            <strong>{{ productsQuantity }}</strong> {{ pluralize(productsQuantity, 'товар') }}
+            <strong>{{ pluralize(productsQuantity, 'товар') }}</strong>
         </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">

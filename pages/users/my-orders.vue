@@ -1,6 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\my-orders.vue -->
 
 <template>
+    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="main_container">
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import authRequestHandler from '@/utils/authRequestHandler';
@@ -55,8 +56,13 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/my-orders/", "Мои �
 
 const response = ref(null);
 const config = useRuntimeConfig();
+const BASE_BRANDNAME = config.public.brandName;
+
+const pageTitle = ref(`${BASE_BRANDNAME} - история заказов`);
+const metaDescription = ref(`${BASE_BRANDNAME} - история заказов`);
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'orders/my-list/';
+
 
 if (process.client) {
     (async () => {

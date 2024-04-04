@@ -2,9 +2,10 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\cart-guest.vue -->
 
 <template>
+  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
-  <!-- <pre>{{ response }}</pre> -->
+  <pre>{{ response }}</pre>
   <div class="main_container" v-show="!isCartEmpty">
     <div>
       <template v-if="!cartItems.length">
@@ -38,7 +39,7 @@
 </template>
 
 <script setup>
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import CartProducts from '~/components/cart/CartProducts.vue';
@@ -58,6 +59,12 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзина гостя"]]);
+
+const config = useRuntimeConfig();
+const BASE_BRANDNAME = config.public.brandName;
+
+const pageTitle = ref(`${BASE_BRANDNAME} - Корзина`);
+const metaDescription = ref(`${BASE_BRANDNAME} - Корзина`);
 
 const response = ref(null);
 const cartItems = ref([]);
@@ -84,7 +91,6 @@ const CartItemsStored = computed(() => {
 });
 
 
-const config = useRuntimeConfig();
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'users/cart-guest/';
 

@@ -1,6 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\profile.vue -->
 
 <template>
+  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
   <div class="main_container">
@@ -42,7 +43,7 @@
 </template>
 
 <script setup>
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import authRequestHandler from '@/utils/authRequestHandler';
@@ -55,6 +56,12 @@ provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 provide('breadcrumbs', [["/", "Главная"], ["/users/my-profile/", "Мой профиль"]]);
 
+const config = useRuntimeConfig();
+const BASE_BRANDNAME = config.public.brandName;
+
+const pageTitle = ref(`Личный кабинет | ${BASE_BRANDNAME}`);
+const metaDescription = ref(`Личный кабинет| ${BASE_BRANDNAME}`);
+
 const formData = ref({
   first_name: '',
   last_name: '',
@@ -63,7 +70,6 @@ const formData = ref({
 });
 
 const response = ref(null);
-const config = useRuntimeConfig();
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'users/profile/';
 

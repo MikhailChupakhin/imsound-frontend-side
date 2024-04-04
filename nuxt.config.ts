@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     public: {
       apiBase: '',
       apiMedia: '',
+      brandName: process.env.NUXT_PUBLIC_BRANDNAME || '',
     }
   },
 })

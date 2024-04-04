@@ -2,6 +2,7 @@
 
 <template>
   <div class="main_container">
+    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
@@ -15,14 +16,14 @@
       </div>
     </div>
     <FooterBottom />
+    <pre>{{ catalogData.results.seo_data }}</pre>
   </div>
 </template>
 
 <script setup>
-
 import { provide } from 'vue';
 import { useBaseStore } from '~/store/baseData';
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -32,7 +33,6 @@ import PaginationBar from '~/components/common/PaginationBar.vue';
 import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import CatalogModalFilters from '~/components/catalog/CatalogModalFilters.vue';
-
 
 const baseStore = useBaseStore();
 
@@ -104,6 +104,9 @@ provide('page_previous', catalogData.value.previous);
 provide('company_info', catalogData.value.company_info);
 provide('clients_info', catalogData.value.clients_info);
 
+const pageTitle = ref(catalogData.value.results.seo_data.title);
+const metaDescription = ref(catalogData.value.results.seo_data.meta_description);
+
 </script>
 
 <style scoped>
@@ -122,6 +125,7 @@ provide('clients_info', catalogData.value.clients_info);
   margin-right: 0.9rem;
   padding-top: 0.2rem;
 }
+
 .content-area {
   flex: 1;
   padding: 0px;

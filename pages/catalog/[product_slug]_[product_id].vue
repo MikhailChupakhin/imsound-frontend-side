@@ -2,6 +2,7 @@
 
 <template>
   <div class="main_container">
+    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
@@ -29,11 +30,13 @@
       </div>
     </div>
     <FooterBottom />
+    <pre>{{  productData }}</pre>
   </div>
 </template>
   
 <script setup>
 import { useBaseStore } from '~/store/baseData';
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
@@ -61,6 +64,9 @@ provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
 provide('breadcrumbs', productData.value.breadcrumbs);
+
+const pageTitle = ref(productData.value.seo_data.title);
+const metaDescription = ref(productData.value.seo_data.meta_description);
 
 </script>
 

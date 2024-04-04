@@ -2,6 +2,7 @@
 
 <template>
   <div class="main_container">
+    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="blog-content ">
@@ -19,12 +20,13 @@
       </div>
     </div>
     <FooterBottom />
+    <pre>{{ blogData.seo_data }}</pre>
   </div>
 </template>
 
 <script setup>
 import { useBaseStore } from '~/store/baseData';
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -83,6 +85,11 @@ const handleCategoryChange = async (selectedCategory) => {
 const updateArticleList = (newArticleList) => {
   articlesList.value = newArticleList;
 };
+
+const pageTitle = ref(blogData.value.seo_data.title);
+const metaDescription = ref(blogData.value.seo_data.meta_description);
+
+
 </script>
 
 <style scoped>

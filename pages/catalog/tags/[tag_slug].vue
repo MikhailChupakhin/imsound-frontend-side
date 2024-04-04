@@ -2,6 +2,7 @@
 
 <template>
     <div v-if="requestDataSuccessful" class="main_container">
+        <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
         <MainHeader />
         <BreadcrumbsNav />
         <div class="content-wrapper grid">
@@ -20,7 +21,7 @@
   
 <script setup>
 import { provide } from 'vue';
-
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -47,7 +48,10 @@ const updateViewMode = (mode) => {
     viewMode.value = mode;
 };
 
+let pageTitle = ref('');
+let metaDescription = ref('');
 let requestDataSuccessful = false;
+
 const paginationParam = 12;
 let url = `${BASE_API_URL}${endpoint}`;
 if (queryString) {
@@ -63,6 +67,9 @@ const response = await fetch(url, {
 
 if (response.status === 200) {
     const data = await response.json();
+
+    pageTitle.value = data.results.seo_data.title;
+    metaDescription.value = data.results.seo_data.title;
 
     const productsList = ref(data.results.product_list);
     provide('products_list', productsList);

@@ -31,7 +31,6 @@ const { data: indexData } = await useAsyncData(
   })
 );
 
-console.log('Loading baseData in Index')
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
@@ -41,6 +40,20 @@ const banners_top = indexData.value.sliders_and_banners.banners;
 provide('featured_products', indexData.value.featured_products);
 provide('company_info', indexData.value.company_info);
 provide('clients_info', indexData.value.clients_info);
+
+const pageTitle = ref(indexData.value.seo_data.title);
+const metaDescription = ref(indexData.value.seo_data.meta_description);
+
+useHead({
+  title: pageTitle.value,
+  meta: [
+    { charset: 'UTF-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { hid: 'description', name: 'description', content: metaDescription.value },
+    { name: 'author', content: 'by Mikhail Chupakhin, 2024' },
+  ]
+});
+
 </script>
 
 <style scoped>

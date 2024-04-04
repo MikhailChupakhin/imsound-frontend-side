@@ -1,6 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\checkout-auth.vue -->
 
 <template>
+  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
   <div class="main_container">
@@ -22,6 +23,7 @@
 </template>
 
 <script setup>
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
@@ -44,6 +46,11 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзина пользователя"], ["/users/checkout/", "Оформление заказа"]]);
+
+const BASE_BRANDNAME = config.public.brandName;
+
+const pageTitle = ref(`${BASE_BRANDNAME} - Корзина пользователя`);
+const metaDescription = ref(`${BASE_BRANDNAME} - Корзина пользователя`);
 
 if (process.client) {
   (async () => {

@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\FeaturedProductCard.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\FeaturedProductCard.vue -->
 
 <template>
   <a :href="getProductDetailURL(product.slug, product.id)">

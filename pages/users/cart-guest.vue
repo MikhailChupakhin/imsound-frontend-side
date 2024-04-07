@@ -5,7 +5,6 @@
   <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
-  <pre>{{ response }}</pre>
   <div class="main_container" v-show="!isCartEmpty">
     <div>
       <template v-if="!cartItems.length">

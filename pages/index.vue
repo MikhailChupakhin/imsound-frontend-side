@@ -2,10 +2,11 @@
 
 <template>
   <MainHeader />
+  <IndexSlidersCarousel :sliders="slidersCarouselElements" />
   <div class="main_container">
-    <PromotionalSlidersCarousel :sliders="sliders" />
-    <PromotionalBannersTop :banners_top="banners_top"/>
-    <PromotionalFeaturedProductsGrid />
+    <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements"/>
+    <!-- <IndexBannersTop :banners_top="banners_top"/> -->
+    <IndexFeaturedProductsGrid />
     <IndexSubscriptionEmail />
   </div>
   <MainFooter />
@@ -35,8 +36,11 @@ const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
-const sliders = indexData.value.sliders_and_banners.sliders;
-const banners_top = indexData.value.sliders_and_banners.banners;
+const slidersCarouselElements = ref();
+const subcategoriesCarouselElements = ref();
+// const banners_top = indexData.value.sliders_and_banners.banners;
+slidersCarouselElements.value = indexData.value.sliders_carousel;
+subcategoriesCarouselElements.value = indexData.value.subcategories_carousel;
 provide('featured_products', indexData.value.featured_products);
 provide('company_info', indexData.value.company_info);
 provide('clients_info', indexData.value.clients_info);

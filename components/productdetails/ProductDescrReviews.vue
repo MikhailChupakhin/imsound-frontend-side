@@ -1,17 +1,14 @@
 <template>
     <div class="descr-reviews-container">
-        <!-- Control buttons -->
         <div>
             <button @click="showDescription">Описание</button>
             <button @click="showReviews">Отзывы</button>
         </div>
 
-        <!-- Product description -->
         <div v-if="currentMode === 'description'">
             <div v-html="productDescr"></div>
         </div>
 
-        <!-- Product reviews -->
         <div v-else-if="currentMode === 'reviews'">
             <div v-if="productReviews.length > 0">
                 <div v-for="(review, index) in productReviews" :key="index" class="review">
@@ -49,17 +46,14 @@ const props = defineProps({
     },
 });
 
-// Функция для переключения на режим отображения описания
 const showDescription = () => {
     currentMode.value = 'description';
 };
 
-// Функция для переключения на режим отображения отзывов
 const showReviews = () => {
     currentMode.value = 'reviews';
 };
 </script>
 
 <style scoped>
-/* Стили могут быть добавлены по желанию */
 </style>

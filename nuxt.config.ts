@@ -3,7 +3,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: true,
+  ssr: false,
   pages: true,
   modules: [
     'nuxt-primevue',

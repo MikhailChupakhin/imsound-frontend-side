@@ -6,7 +6,7 @@
       <Skeleton width="100%" height="150px"></Skeleton>
     </template>
     <template v-else>
-      <Galleria ref="galleria" :value="sliders" :numVisible="5" containerStyle="max-width: 100%" :showThumbnails="false" :showIndicators="false" :circular="true" :autoPlay="true" :transitionInterval="100000" >
+      <Galleria ref="galleria" :value="sliders" :numVisible="5" containerStyle="max-width: 100%" :showThumbnails="false" :showIndicators="false" :circular="true" :autoPlay="true" :transitionInterval="10000" >
         <template #item="slotProps">
           <div class="slider-item">
             <div class="slider-media" :style="{ 'background-image': getBackgroundImage(slotProps.item) }">

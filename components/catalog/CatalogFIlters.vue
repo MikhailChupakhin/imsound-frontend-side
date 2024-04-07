@@ -50,7 +50,7 @@
         </div>
 
         <div class="text-center mb-2">
-            <CommonInterfaceButton buttonText="Применить" @click="applyFilters" :customStyle="{ width: '100%' }" />
+            <CommonInterfaceButton buttonText="применить" @click="applyFilters" :customStyle="{ width: '100%' }" />
         </div>
     </div>
 </template>

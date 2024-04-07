@@ -99,4 +99,11 @@ html, body {
   text-align: center;
   cursor: pointer;
 }
+
+html, body {
+  overflow: auto;
+}
+body.menu-open {
+  overflow: hidden;
+}
 </style>

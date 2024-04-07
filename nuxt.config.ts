@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-primevue',
     '@pinia/nuxt',
+    '@nuxtjs/google-fonts'
   ],
   primevue: true,
   css: [
@@ -23,4 +24,10 @@ export default defineNuxtConfig({
       brandName: process.env.NUXT_PUBLIC_BRANDNAME || '',
     }
   },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      'Sofia+Sans': true,
+    }
+  }
 })

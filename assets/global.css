@@ -6,6 +6,12 @@ body {
   overflow-x: hidden;
   margin: 0%;
 }
+body {
+  font-family: 'Roboto', sans-serif;
+}
+button {
+  font-family: 'Roboto', monospace;
+}
 h1 {
   margin-block-end: 0;
 }

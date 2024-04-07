@@ -4,6 +4,7 @@
   <MainHeader />
   <IndexSlidersCarousel :sliders="slidersCarouselElements" />
   <div class="main_container">
+    <Divider />
     <div v-if="screenWidth > 900">
       <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements"/>
     </div>

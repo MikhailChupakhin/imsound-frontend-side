@@ -6,6 +6,12 @@ body {
   overflow-x: hidden;
   margin: 0%;
 }
+html, body {
+  overflow: auto;
+}
+body.menu-open {
+  overflow: hidden;
+}
 body {
   font-family: 'Roboto', sans-serif;
 }

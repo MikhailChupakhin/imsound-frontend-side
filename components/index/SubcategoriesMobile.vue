@@ -6,7 +6,7 @@
         <div class="scroll-container">
             <div class="flex-container">
                 <div v-for="(subcategory, index) in subcategories" :key="subcategory.id" class="subcategory">
-                    <img class="subcategory-img" :src="BASE_API_MEDIA + '/' + subcategory.image" alt="">
+                    <img class="subcategory-img" :src="BASE_API_MEDIA + subcategory.image" alt="">
                     <div class="subcategory-name">{{ subcategory.name }}</div>
                 </div>
             </div>

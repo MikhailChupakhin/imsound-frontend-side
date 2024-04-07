@@ -47,7 +47,9 @@ const props = defineProps({
 
 @media screen and (max-width: 500px) {
     .flex-container {
-        height: 350px;
+        height: auto;
+        max-height: 30rem;
+        overflow-y: hidden;
     }
     .subcategory {
         width: 8rem;

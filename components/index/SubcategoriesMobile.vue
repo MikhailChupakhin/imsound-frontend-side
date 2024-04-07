@@ -41,8 +41,18 @@ const props = defineProps({
     margin-right: 10px;
 }
 .subcategory {
-    width: 10rem;
+    width: 13rem;
     height: 15rem;
+}
+
+@media screen and (max-width: 500px) {
+    .flex-container {
+        height: 350px;
+    }
+    .subcategory {
+        width: 8rem;
+        height: 12rem;
+    }
 }
 .subcategory-img {
     width: 100%;
@@ -50,10 +60,8 @@ const props = defineProps({
 }
 
 .subcategory-name {
-    margin-top: 8px;
-    font-size: 1.5rem;
+    margin-left: 0.2rem;
+    font-size: 1rem;
     font-weight: 500;
-    text-align: center;
-    padding: 0px 1rem;
 }
 </style>

@@ -58,9 +58,6 @@ export default {
 </script>
   
 <style scoped>
-.newsletter {
-    border-top: 0.1px solid #676666;
-}
 .container {
     display: flex;
     justify-content: center;

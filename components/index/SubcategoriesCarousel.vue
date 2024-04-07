@@ -56,6 +56,8 @@ const updateCarousel = () => {
 
 <style scoped>
 .subcategories-carousel {
+  width: 95%;
+  margin: 0 auto;
   position: relative;
   overflow-x: hidden;
 }

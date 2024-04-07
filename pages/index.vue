@@ -10,7 +10,10 @@
     <div v-else>
       <IndexSubcategoriesMobile :subcategories="subcategoriesCarouselElements"/>
     </div>
+    <Divider />
     <IndexSubscriptionEmail />
+    <Divider />
+    <IndexTextBlock />
   </div>
   <MainFooter />
 </template>
@@ -19,6 +22,7 @@
 import { provide } from 'vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import MainFooter from '~/components/footer/MainFooter.vue';
+import Divider from 'primevue/divider';
 
 import { useBaseStore } from '~/store/baseData';
 

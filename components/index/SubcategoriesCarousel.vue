@@ -64,14 +64,12 @@ const updateCarousel = () => {
   display: flex;
   align-items: center;
 }
-
 .carousel-inner {
   display: flex;
   transition: transform 0.5s ease;
   width: 90%;
   margin: 0 1rem;
 }
-
 .carousel-item {
   flex: 0 0 16.6%;
   display: flex;
@@ -79,20 +77,17 @@ const updateCarousel = () => {
   align-items: center;
   margin: 0 0.5rem;
 }
-
 .subcategory-image {
   width: 10rem;
   height: 10rem;
   overflow: hidden;
   border-radius: 8px;
 }
-
 .subcategory-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .subcategory-name {
   margin-top: 8px;
   font-size: 1.5rem;
@@ -100,7 +95,6 @@ const updateCarousel = () => {
   text-align: center;
   padding: 0px 1rem;
 }
-
 .carousel-prev,
 .carousel-next {
   position: absolute;
@@ -121,7 +115,6 @@ const updateCarousel = () => {
   background-color: rgba(203, 235, 235, 0.509);
   border-radius: 50%;
 }
-
 .carousel-prev {
   left: 10px;
 }

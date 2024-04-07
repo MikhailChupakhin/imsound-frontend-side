@@ -30,24 +30,20 @@ const props = defineProps({
     width: 100%;
     overflow-x: auto;
 }
-
 .flex-container {
     height: 485px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
-
 .flex-container>.subcategory {
     flex: 0 0 auto;
     margin-right: 10px;
 }
-
 .subcategory {
     width: 10rem;
     height: 15rem;
 }
-
 .subcategory-img {
     width: 100%;
     height: auto;

@@ -6,7 +6,7 @@
       <div class="carousel-inner">
         <div class="carousel-item" v-for="subcategory in subcategories" :key="subcategory.id">
           <div class="subcategory-image">
-            <img :src="`${BASE_API_MEDIA}/${subcategory.image}`" :alt="subcategory.name" />
+            <img :src="`${BASE_API_MEDIA}${subcategory.image}`" :alt="subcategory.name" />
           </div>
           <div class="subcategory-name">{{ subcategory.name }}</div>
         </div>

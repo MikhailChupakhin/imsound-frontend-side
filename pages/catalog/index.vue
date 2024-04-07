@@ -16,7 +16,6 @@
       </div>
     </div>
     <FooterBottom />
-    <pre>{{ catalogData.results.seo_data }}</pre>
   </div>
 </template>
 

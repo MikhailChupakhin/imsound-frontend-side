@@ -2,7 +2,6 @@
 
 <template>
   <header class="header">
-    <div class="wrapper">
       <div class="header-container">
         <HeaderTopRow :class="{ 'hidden': scrolledDown }"/>
         <div class="header-components">
@@ -16,7 +15,6 @@
           </div>
         </div>
       </div>
-    </div>
   </header>
 </template>
   
@@ -62,15 +60,20 @@ export default {
 
 <style scoped>
 .header {
+  position: fixed;
+  z-index: 99;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
   width: 100%;
+  max-width: 100%;
   background-color: #fff;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   top: 0%;
 }
-.wrapper {
-  margin-left: 0.9rem;
-  margin-right: 0.9rem;
-}
+/* .wrapper {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+} */
   
 .header-container {
   display: flex;
@@ -86,12 +89,6 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-}
-
-
-.header {
-  position: fixed;
-  z-index: 99;
 }
 .hidden {
   display: none !important;

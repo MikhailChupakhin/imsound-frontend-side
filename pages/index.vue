@@ -4,9 +4,12 @@
   <MainHeader />
   <IndexSlidersCarousel :sliders="slidersCarouselElements" />
   <div class="main_container">
-    <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements"/>
-    <!-- <IndexBannersTop :banners_top="banners_top"/> -->
-    <IndexFeaturedProductsGrid />
+    <div v-if="screenWidth > 900">
+      <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements"/>
+    </div>
+    <div v-else>
+      <IndexSubcategoriesMobile :subcategories="subcategoriesCarouselElements"/>
+    </div>
     <IndexSubscriptionEmail />
   </div>
   <MainFooter />
@@ -31,6 +34,15 @@ const { data: indexData } = await useAsyncData(
     method: 'GET',
   })
 );
+
+const screenWidth = ref(0);
+
+onMounted(() => {
+  screenWidth.value = window.innerWidth;
+  window.addEventListener('resize', () => {
+    screenWidth.value = window.innerWidth;
+  });
+});
 
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
@@ -65,8 +77,8 @@ useHead({
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .sidebar_container {

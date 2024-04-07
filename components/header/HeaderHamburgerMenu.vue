@@ -33,6 +33,11 @@ export default {
     methods: {
         toggleMenu() {
             this.showMenu = !this.showMenu;
+            if (this.showMenu) {
+              document.body.classList.add('menu-open');
+            } else {
+              document.body.classList.remove('menu-open');
+            }
         },
     },
     components: {

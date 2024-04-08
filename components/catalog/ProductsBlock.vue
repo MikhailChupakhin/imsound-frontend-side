@@ -7,7 +7,8 @@
                                                           :productInfo="product"
                                                           :open-quickview-modal="openQuickviewModal"
                                                           :openBuyOneClickModal="openBuyOneClickModal"
-                                                          :is-authenticated="isAuthenticated" />
+                                                          :is-authenticated="isAuthenticated" 
+                                                          :cardWidth="cardWidth" />
     <QuickviewModal v-if="showQuickviewModal" :productInfo="quickviewProduct"
                                               :is-visible="showQuickviewModal"
                                               @close-modal="closeQuickviewModal" />
@@ -62,6 +63,21 @@ const closeBuyOneClickModal = () => {
 const comparisonItemsCount = computed(() => comparisonList.getters.getComparisonItems.length);
 const shouldShowComparisonIcon = computed(() => comparisonItemsCount.value >= 2);
 
+const cardWidth = ref(null);
+
+onMounted(() => {
+  // Расчет ширины карточки ProductCard в зависимости от ширины экрана и стилей
+  const screenWidth = window.innerWidth;
+  const containerWidth = document.querySelector('.products-block-container').clientWidth;
+  const gridMode = viewMode === 'grid';
+  
+  // Здесь можно реализовать логику расчета ширины карточки в зависимости от gridMode и screenWidth
+  // Например, если gridMode, то определенное количество карточек на строку и деление containerWidth на количество карточек
+  
+  // Пример простого расчета для демонстрации
+  const numCardsPerRow = gridMode ? (screenWidth > 767 ? 3 : 2) : 1; // Предполагается, что 3 карточки на строку на больших экранах, 2 на меньших, для режима grid
+  cardWidth.value = gridMode ? `${(containerWidth / numCardsPerRow)}px` : '100%'; // Предполагается отступ 10px между карточками
+});
 </script>
   
 <style scoped>

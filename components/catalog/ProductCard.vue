@@ -1,12 +1,19 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductCard.vue -->
+<!-- Решить проблему со скелетоном -->
+
 
 <template>
   <div :class="{ 'product-card text-center': true, 'comparison': isInComparisonList }" @mouseenter="showCartButton"
     @mouseleave="hideCartButton">
     <div class="card-image">
-      <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-        <img class="product-img" :src="productInfo.image" alt="{{ productInfo.name }} Image" loading="lazy">
-      </router-link>
+      <template v-if="isLoading">
+        <Skeleton width="100%" :height="cardWidth"></Skeleton>
+      </template>
+      <template v-else>
+        <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
+          <img class="product-img" :src="productInfo.image" alt="{{ productInfo.name }} Image" loading="lazy">
+        </router-link>
+      </template>
       <div class="flex flex-column card-menu">
         <div class="card-icon" @click="fetchDetailData(productInfo.id)" title="Подробнее">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +38,7 @@
           </svg>
         </div>
         <div class="card-icon mt-2" @click="handleBuyoneclick(productInfo)" title="Купить в 1 клик">
-          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 96 96">
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
             <path
               d="M41.35,77A37.48,37.48,0,1,1,70.51,63.06,1,1,0,0,1,69,61.8a35.39,35.39,0,1,0-10.23,8.65,1,1,0,1,1,1,1.74A37.55,37.55,0,0,1,41.35,77Z" />
             <path
@@ -65,11 +71,11 @@
       <div v-if="viewMode === 'list'">
         <div v-if="productInfo.quantity > 0">
           <CommonInterfaceButton buttonText="в корзину" @click="handleAddToCartClick(productInfo, $event)"
-          :customStyle="{'padding': '0.5rem 1rem !important' }" />
+            :customStyle="{ 'padding': '0.5rem 1rem !important' }" />
         </div>
         <div v-else class="cart-btn-wrapper">
           <CommonInterfaceButton buttonText="предзаказ" @click="handleBuyoneclick(productInfo)"
-          :customStyle="{ 'background-color': 'rgb(193, 111, 111)', 'padding': '0.5rem 1rem !important' }" />
+            :customStyle="{ 'background-color': 'rgb(193, 111, 111)', 'padding': '0.5rem 1rem !important' }" />
         </div>
         <div class="descr-wrapper">
           <Divider />
@@ -110,6 +116,11 @@ export default {
   components: {
     QuantityVue
   },
+  data() {
+    return {
+      isLoading: true
+    };
+  },
   props: {
     productInfo: {
       type: Object,
@@ -126,11 +137,14 @@ export default {
     },
     viewMode: {
       type: String,
-    }
+    },
+    cardWidth: {
+      type: String,
+    },
   },
   setup(props) {
-    const ImgIsLoading = ref(true);
     const selectedQuantity = ref(1);
+    const cardWidth = props.cardWidth;
 
     const visiblePrice = computed(() => {
       return props.productInfo.total_price * selectedQuantity.value;
@@ -141,13 +155,25 @@ export default {
     });
 
     return {
-      ImgIsLoading,
       visiblePrice,
       selectedQuantity,
       isInComparisonList
     };
   },
+  beforeMount() {
+    this.loadImage();
+  },
   methods: {
+    async loadImage() {
+      try {
+        const img = new Image();
+        img.src = this.productInfo.image;
+        await img.decode();
+        this.isLoading = false;
+      } catch (error) {
+        console.error('Error loading image:', error);
+      }
+    },
     updateQuantity(newQuantity) {
       this.selectedQuantity = newQuantity;
       this.visiblePrice = this.productInfo.total_price * newQuantity;
@@ -157,9 +183,6 @@ export default {
     },
     hideCartButton() {
       this.$refs.cartButton.style.opacity = '0';
-    },
-    imageLoaded() {
-      this.ImgIsLoading = false;
     },
     handleAddToCartClick(productInfo, event) {
       const xA = event.clientX;
@@ -268,8 +291,8 @@ export default {
       }
     },
     handleBuyoneclick(productInfo) {
-      this.openBuyOneClickModal(productInfo)
-    }
+      this.openBuyOneClickModal(productInfo);
+    },
   }
 };
 </script>
@@ -278,16 +301,19 @@ export default {
 .product-img {
   width: 100%;
 }
+
 h2 {
   margin-block-start: 0.3rem;
   margin-block-end: 0.3rem;
 }
+
 @media screen and (min-width: 787px) {
   h2 {
     margin-block-start: 0.1rem;
     margin-block-end: 0.1rem;
   }
 }
+
 h2 a {
   line-height: 1.1rem;
   display: block;
@@ -298,6 +324,7 @@ h2 a {
   text-transform: capitalize;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 @media screen and (max-width: 480px) {
   h2 a {
     line-height: 1rem;
@@ -310,16 +337,19 @@ h2 a {
     overflow: hidden;
   }
 }
+
 .total-price {
   font-weight: 600;
   font-size: 1rem;
   margin-bottom: 0.3rem;
 }
+
 .product-card {
   display: flex;
   flex-direction: column;
   position: relative;
 }
+
 .add-to-cart-btn {
   width: 33%;
   background-color: rgba(246, 160, 23);
@@ -352,9 +382,11 @@ h2 a {
     width: 6.5rem;
   }
 }
+
 .card-image {
   position: relative;
 }
+
 .card-menu {
   align-items: center;
   position: absolute;
@@ -368,25 +400,31 @@ h2 a {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
+
 .card-icon svg {
   width: 2rem;
   height: 2rem;
 }
+
 .product-card:hover .card-menu {
   opacity: 1;
 }
+
 .product-card:hover .add-to-cart-btn {
   opacity: 1;
 }
+
 .card-icon:hover {
   fill: #8B0000;
 }
+
 .card-menu .icon {
   width: 1.5rem;
   height: 1.5rem;
   fill: #000;
   margin-bottom: 10px;
 }
+
 .product-card.comparison::after {
   content: '';
   position: absolute;
@@ -400,30 +438,35 @@ h2 a {
   transform: rotate(45deg);
   z-index: 5;
 }
+
 .not-available-text {
   line-height: 2rem;
   font-size: 0.8rem;
 }
+
 .mobile-bumper {
   display: none;
 }
-@media screen and (max-width: 600px) {
-  .card-menu {
-    top: 40%;
-    opacity: 1;
-  }
-  .card-icon svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .mobile-bumper {
-    display: block;
-    height: 1rem;
-  }
-  .add-to-cart-btn {
-    opacity: 1;
-  }
+
+.descr-header {
+  font-size: 1.5rem;
+  font-weight: 400px;
 }
+
+.card-description {
+  padding-left: 10px;
+  padding-right: 10px;
+  max-height: 16rem;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.product-card:hover {
+  box-sizing: border-box;
+  box-shadow: 0 0 5px 5px rgba(97, 97, 97, 0.5);
+  z-index: 2;
+}
+
 @media screen and (max-width: 600px) {
   .product-card {
     position: relative;
@@ -435,13 +478,34 @@ h2 a {
     left: auto;
     top: auto;
     transform: none;
+
+    .card-menu {
+      top: 40%;
+      opacity: 1;
+    }
+
+    .card-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .mobile-bumper {
+      display: block;
+      height: 1rem;
+    }
+
+    .add-to-cart-btn {
+      opacity: 1;
+    }
   }
 }
+
 @media (max-width: 767px) {
   .descr-wrapper {
     display: none;
   }
 }
+
 @media screen and (min-width: 768px) {
   .list-mode .product-card {
     width: 100%;
@@ -450,10 +514,12 @@ h2 a {
     align-items: stretch;
     justify-content: space-between;
   }
+
   .list-mode .product-card {
     width: 50%;
     height: 100%;
   }
+
   .list-mode .product-card .card-content {
     width: 50%;
     display: flex;
@@ -461,19 +527,10 @@ h2 a {
     margin-top: 2rem;
   }
 }
-.descr-header {
-  font-size: 1.5rem;
-  font-weight: 400px;
-}
-.card-description {
-  padding-left: 10px;
-  padding-right: 10px;
-  max-height: 22rem;
-  overflow-y: auto;
-}
-.product-card:hover {
-  box-sizing: border-box;
-  box-shadow: 0 0 5px 5px rgba(97, 97, 97, 0.5);
-  z-index: 2;
+
+@media (min-width: 1100px) {
+  .card-description {
+    min-height: 22rem;
+  }
 }
 </style>

@@ -123,13 +123,13 @@ const getBackgroundImage = (item) => {
   width: 100%;
 }
 .slider-content {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .slider-title {
-  margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: 500;
   color: white;

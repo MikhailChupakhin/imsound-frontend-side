@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   ],
   plugins: [
     '~/plugins/baseDataUpdater.server.js',
+    '~/plugins/directives.js'
   ],
   runtimeConfig: {
     public: {

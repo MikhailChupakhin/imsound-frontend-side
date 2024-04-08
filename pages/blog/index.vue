@@ -20,7 +20,6 @@
       </div>
     </div>
     <FooterBottom />
-    <pre>{{ blogData.seo_data }}</pre>
   </div>
 </template>
 

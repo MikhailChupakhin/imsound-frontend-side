@@ -69,10 +69,6 @@ export default {
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   top: 0%;
 }
-/* .wrapper {
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
-} */
   
 .header-container {
   display: flex;

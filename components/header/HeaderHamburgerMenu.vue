@@ -7,12 +7,12 @@
             <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7"> 
             </path>
         </svg>
-        <div v-show="showMenu" class="menu-container-expanded">
+        <div v-show="showMenu" v-body-lock="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
                 <div class="flex flex-row">
                     <NuxtLink :to="`/`" class="menu-item">Главная</NuxtLink>
                     <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
-                    <NuxtLink :to="`/`" class="menu-item">Блог</NuxtLink>
+                    <NuxtLink :to="`/blog`" class="menu-item">Блог</NuxtLink>
                 </div>
                 <a @click="toggleMenu" id="closeMenu" class="auth-menu-close">Закрыть меню</a>
                 <SidebarNav />
@@ -33,16 +33,20 @@ export default {
     methods: {
         toggleMenu() {
             this.showMenu = !this.showMenu;
-            if (this.showMenu) {
-              document.body.classList.add('menu-open');
-            } else {
-              document.body.classList.remove('menu-open');
-            }
         },
     },
     components: {
         SidebarNav
-    }
+    },
+    mounted() {
+      watchEffect(() => {
+        if (this.showMenu) {
+          document.body.classList.add('body-locked');
+        } else {
+          document.body.classList.remove('body-locked');
+        }
+      });
+  },
 }
 </script>
   

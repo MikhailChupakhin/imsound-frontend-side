@@ -11,7 +11,7 @@
               class="svg-icon-1 chevron" alt="Раскрывающийся список"></div>
         </div>
       </div>
-      <div v-if="isSubcategoryOpen(index)" class="subcategories">
+      <div v-if="isSubcategoryOpen(index)" class="subcategories" :class="{ 'open-list': isSubcategoryOpen(index) }" >
         <div v-for="(subcategory, subIndex) in getSubcategories(category.slug)" :key="subIndex" class="subcategory">
           <NuxtLink :to="`/catalog/${category.slug}/${subcategory.slug}`" class="subcategory-name">{{ subcategory.name}}</NuxtLink>
         </div>
@@ -63,10 +63,9 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .subcategories {
   padding-left: 1.1rem;
-}
-.subcategories {
   max-height: 300px;
   overflow-y: auto;
 }
@@ -74,7 +73,6 @@ export default {
   padding: 0.5rem;
   border-bottom: 1px solid #eee;
 }
-
 .category-name,
 .subcategory-name {
   font-weight: 700;

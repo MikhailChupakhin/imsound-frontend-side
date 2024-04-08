@@ -5,6 +5,7 @@
       <img :src="BASE_API_MEDIA + articleInfo.image" :alt="articleInfo.title" class="article-image" />
       <div class="article-content">
         <h2>{{ articleInfo.title }}</h2>
+        <Divider />
         <div class="flex justify-content-between">
             <p class="flex align-items-center justify-content-center">{{ articleInfo.views_counter }} просмотров</p>
             <p v-if="articleInfo.reading_time" class="flex align-items-center justify-content-center" title="Время на прочтение">
@@ -12,9 +13,11 @@
             </p>
             <p v-else></p>
         </div>
+        <Divider />
         <div class="content-start">
             <div v-html="articleInfo.content"></div>
         </div>
+        <Divider />
         <p class="flex justify-content-end">{{ formatDate(articleInfo.created_timestamp) }}</p>
       </div>
     </div>
@@ -22,6 +25,7 @@
   
 <script setup>
 import pluralize from '~/utils/func/pluralize.js';
+import Divider from 'primevue/divider';
 
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
@@ -54,6 +58,8 @@ const formatDate = (timestamp) => {
     border-radius: 5px;
 }
 
+
+
 .article-content {
     margin-top: 1rem;
 }
@@ -68,7 +74,7 @@ const formatDate = (timestamp) => {
 .content-start div {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 6;
   overflow: hidden;
   text-overflow: ellipsis;
 }

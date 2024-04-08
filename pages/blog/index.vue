@@ -13,9 +13,13 @@
           <BlogNav :blogCategories="blogCategories" @categoryChanged="handleCategoryChange" />
         </div>
         <div class="w-full mt-2">
-          <ArticlesBlock />
           <BlogPagination :articlesCount="articlesCount" @update-article-list="updateArticleList" />
         </div>
+        <div class="w-full mt-2">
+          <ArticlesBlock />
+        </div>
+        <ScrollTop :threshold="100"/>
+        <button @click="handleStrangeButtonClick">какая-то кнопочка</button>
       </div>
     </div>
     <FooterBottom />
@@ -32,6 +36,7 @@ import FooterBottom from '~/components/footer/FooterBottom.vue';
 import ArticlesBlock from '~/components/blog/ArticlesBlock.vue';
 import BlogPagination from '~/components/blog/BlogPagination.vue'
 import useSeoData from '~/composables/useSeoData';
+import ScrollTop from 'primevue/scrolltop';
 
 const baseStore = useBaseStore();
 
@@ -84,17 +89,41 @@ const updateArticleList = (newArticleList) => {
   articlesList.value = newArticleList;
 };
 
-// const computedTitle = computed(() => blogData.value.seo_data.title);
-// const computedDescription = computed(() => blogData.value.seo_data.meta_description);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(blogData.value.seo_data.title, blogData.value.seo_data.meta_description);
+
+function applyHueRotateAnimation() {
+    console.log('кнопочка нажата')
+    const images = document.querySelectorAll('.article-card img');
+    console.log(images)
+
+    images.forEach(image => {
+        let hue = 0;
+        let increasing = true;
+
+        const applyHueRotate = () => {
+            if (increasing) {
+                hue += 1;
+                if (hue >= 360) {
+                    hue = 360;
+                    increasing = false;
+                }
+            } else {
+                hue -= 1;
+                if (hue <= 0) {
+                    hue = 0;
+                    increasing = true;
+                }
+            }
+            image.style.filter = `hue-rotate(${hue}deg)`;
+        };
+
+        setInterval(applyHueRotate, 10);
+    });
+}
+
+const handleStrangeButtonClick = () => {
+      applyHueRotateAnimation();
+    };
 
 </script>
 
@@ -119,4 +148,11 @@ useSeoData(blogData.value.seo_data.title, blogData.value.seo_data.meta_descripti
     flex: 1;
     padding: 0px;
   }
+
+.p-scrolltop.p-link {
+  background: rgba(255, 132, 0, 0.7)
+}
+.p-icon {
+  color: black;
+}
 </style>

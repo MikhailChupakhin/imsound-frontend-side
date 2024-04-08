@@ -390,17 +390,27 @@ h2 a {
 .card-menu {
   align-items: center;
   position: absolute;
-  top: 25%;
+  top: 40%;
   right: 10px;
   transform: translateY(-50%);
   padding: 5px 3px;
   background-color: rgba(238, 238, 238, 0.7);
   border-radius: 10px;
   z-index: 8;
-  opacity: 0;
+  opacity: 0.3;
   transition: opacity 0.3s ease-in-out;
 }
+@media screen and (max-width: 475px) {
+  .card-menu {
+    top: 40%;
+  }
+}
 
+@media screen and (min-width: 476px) {
+  .card-menu {
+    top: 30%;
+  }
+}
 .card-icon svg {
   width: 2rem;
   height: 2rem;
@@ -480,8 +490,7 @@ h2 a {
     transform: none;
 
     .card-menu {
-      top: 40%;
-      opacity: 1;
+      opacity: 0.3;
     }
 
     .card-icon svg {

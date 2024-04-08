@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\profile.vue -->
 
 <template>
-  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
   <div class="main_container">
@@ -43,13 +42,12 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import authRequestHandler from '@/utils/authRequestHandler';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import { useBaseStore } from '~/store/baseData';
-
+import useSeoData from '~/composables/useSeoData';
 const baseStore = useBaseStore();
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
@@ -59,9 +57,18 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/my-profile/", "Мой 
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`Личный кабинет | ${BASE_BRANDNAME}`);
-const metaDescription = ref(`Личный кабинет| ${BASE_BRANDNAME}`);
+// const computedTitle = computed(() => `${BASE_BRANDNAME} - личный кабинет!`);
+// const computedDescription = computed(() => `${BASE_BRANDNAME} - личный кабинет!`);
 
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+
+useSeoData(`${BASE_BRANDNAME} - личный кабинет`, `${BASE_BRANDNAME} - личный кабинет`);
 const formData = ref({
   first_name: '',
   last_name: '',

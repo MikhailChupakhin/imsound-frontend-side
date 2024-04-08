@@ -2,7 +2,6 @@
 
 <template>
   <div v-if="requestDataSuccessful" class="main_container">
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
@@ -22,7 +21,6 @@
 <script setup>
 import { provide } from 'vue';
 import { useBaseStore } from '~/store/baseData';
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -32,6 +30,7 @@ import PaginationBar from '~/components/common/PaginationBar.vue';
 import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import CatalogModalFilters from '~/components/catalog/CatalogModalFilters.vue';
+import useSeoData from '~/composables/useSeoData';
 
 const baseStore = useBaseStore();
 const config = useRuntimeConfig()
@@ -45,11 +44,11 @@ const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();
 
 const viewMode = ref('grid');
+provide('viewMode', viewMode)
   const updateViewMode = (mode) => {
     viewMode.value = mode;
   };
-let pageTitle = ref('');
-let metaDescription = ref('');
+
 let requestDataSuccessful = false;
 const paginationParam = 12;
 const response = await fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
@@ -61,9 +60,6 @@ const response = await fetch(`${BASE_API_URL}${endpoint}?${queryString}`, {
 
 if (response.status === 200) {
   const data = await response.json();
-
-  pageTitle.value = data.results.seo_data.title;
-  metaDescription.value = data.results.seo_data.title;
 
   const productsList = ref(data.results.product_list);
   provide('products_list', productsList);
@@ -109,11 +105,25 @@ if (response.status === 200) {
 
   provide('company_info', data.company_info);
   provide('clients_info', data.clients_info);
+
+  // const computedTitle = computed(() => data.results.seo_data.title);
+  // const computedDescription = computed(() => data.results.seo_data.meta_description);
+
+  // useHead(() => ({
+  //   title: computedTitle.value,
+  //   meta: [
+  //     { name: 'description', content: computedDescription.value },
+  //   ],
+  // }))
+  
+  useSeoData(data.results.seo_data.title, data.results.seo_data.meta_description);
   requestDataSuccessful = true;
 } else {
   console.log('Request failed with status:', response.status);
   router.push('/404')
 }
+
+
 </script>
 
 <style scoped>

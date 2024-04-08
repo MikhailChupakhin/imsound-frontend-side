@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\my-orders.vue -->
 
 <template>
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="main_container">
@@ -37,12 +36,12 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
+
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import authRequestHandler from '@/utils/authRequestHandler';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
-
+import useSeoData from '~/composables/useSeoData';
 import { useBaseStore } from '~/store/baseData';
 import { useAuthStore } from '~/store/useAuthStore';
 import { formatPrice } from '~/utils/priceFormatter.js';
@@ -58,8 +57,17 @@ const response = ref(null);
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`${BASE_BRANDNAME} - история заказов`);
-const metaDescription = ref(`${BASE_BRANDNAME} - история заказов`);
+// const computedTitle = computed(() => `${BASE_BRANDNAME} - история заказов`);
+// const computedDescription = computed(() => `${BASE_BRANDNAME} - история заказов`);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(`${BASE_BRANDNAME} - история заказов`, `${BASE_BRANDNAME} - история заказов`);
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'orders/my-list/';
 

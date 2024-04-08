@@ -8,7 +8,7 @@
                 <p>
                     <strong class="text-5xl">Ошибка 404</strong>
                 </p>
-                <p class="error-note">Страница не существует.</p>
+                <p class="error-note">Страницы не существует.</p>
                 <div class="mt-6">
                     <NuxtLink to="/" class="home-btn">Домой</NuxtLink>
                 </div>
@@ -18,6 +18,15 @@
 </template>
   
 <script setup>
+const computedTitle = computed(() => `404! Похоже, этой страницы не существует...`);
+const computedDescription = computed(() => `404! Похоже, этой страницы не существует...`);
+
+useHead(() => ({
+    title: computedTitle.value,
+    meta: [
+      { name: 'description', content: computedDescription.value },
+    ],
+}))
 </script>
 
 <style scoped>

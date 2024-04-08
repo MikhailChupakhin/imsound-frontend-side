@@ -2,7 +2,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\cart-guest.vue -->
 
 <template>
-  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
   <div class="main_container" v-show="!isCartEmpty">
@@ -38,14 +37,13 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import CartProducts from '~/components/cart/CartProducts.vue';
 import CartDelivery from '~/components/cart/CartDelivery.vue';
 import CartOutput from '~/components/cart/CartOutput.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
-
+import useSeoData from '~/composables/useSeoData';
 import { useBaseStore } from '~/store/baseData';
 import CartStore from '~/store/cart';
 
@@ -62,8 +60,17 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзин�
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`${BASE_BRANDNAME} - Корзина`);
-const metaDescription = ref(`${BASE_BRANDNAME} - Корзина`);
+// const computedTitle = computed(() => `${BASE_BRANDNAME} - Корзина`);
+// const computedDescription = computed(() => `${BASE_BRANDNAME} - Корзина`);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(`${BASE_BRANDNAME} - Корзина`, `${BASE_BRANDNAME} - Корзина`);
 
 const response = ref(null);
 const cartItems = ref([]);

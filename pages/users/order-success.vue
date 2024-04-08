@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\order-success.vue -->
 
 <template>
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
         <div class="background">
             <p class="text-6xl font-bold">Благодарим за заказ!</p>
@@ -12,11 +11,10 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import { useBaseStore } from '~/store/baseData';
-
+import useSeoData from '~/composables/useSeoData';
 const baseStore = useBaseStore();
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
@@ -25,8 +23,17 @@ provide('subcategories', baseData.subcategories);
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`Благодарим за заказ | ${BASE_BRANDNAME}`);
-const metaDescription = ref(`Благодарим за заказ | ${BASE_BRANDNAME}`);
+// const computedTitle = computed(() => `${BASE_BRANDNAME} - благодарим за заказ!`);
+// const computedDescription = computed(() => `${BASE_BRANDNAME} - благодарим за заказ!`);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(`${BASE_BRANDNAME} - благодарим за заказ`, `${BASE_BRANDNAME} - благодарим за заказ`);
 </script>
 
 <style scoped>

@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\checkout-auth.vue -->
 
 <template>
-  <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
   <MainHeader />
   <BreadcrumbsNav />
   <div class="main_container">
@@ -23,12 +22,11 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue';
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import { useBaseStore } from '~/store/baseData';
-
+import useSeoData from '~/composables/useSeoData';
 import { useAuthStore } from '~/store/useAuthStore';
 const authData = useAuthStore();
 const isAuthenticated = ref(authData.isAuthenticated);
@@ -49,8 +47,17 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзин�
 
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`${BASE_BRANDNAME} - Корзина пользователя`);
-const metaDescription = ref(`${BASE_BRANDNAME} - Корзина пользователя`);
+// const computedTitle = computed(() => `${BASE_BRANDNAME} - Оформление заказа`);
+// const computedDescription = computed(() => `${BASE_BRANDNAME} - Оформление заказа`);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(`${BASE_BRANDNAME} - Оформление заказа`, `${BASE_BRANDNAME} - Оформление заказа`);
 
 if (process.client) {
   (async () => {

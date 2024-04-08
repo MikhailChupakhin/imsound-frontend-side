@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\users\registration.vue     -->
 
 <template>
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <div class="form-wrapper">
         <div class="col-10">
             <form @submit.prevent="registerUser">
@@ -53,14 +52,22 @@
 </template>
 
 <script setup>
-import Head from '~/components/common/Head.vue';
-
+import useSeoData from '~/composables/useSeoData';
 const router = useRouter();
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-const pageTitle = ref(`Регистрация на сайте ${BASE_BRANDNAME}`);
-const metaDescription = ref(`Регистрация на сайте ${BASE_BRANDNAME}`);
+// const computedTitle = computed(() => `Регистрация на сайте ${BASE_BRANDNAME}`);
+// const computedDescription = computed(() => `Регистрация на сайте ${BASE_BRANDNAME}`);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(`Регистрация на сайте ${BASE_BRANDNAME}`, `Регистрация на сайте ${BASE_BRANDNAME}`);
 const BASE_API_URL = config.public.apiBase;
 
 const formData = ref({

@@ -2,13 +2,12 @@
 
 <template>
     <div v-if="requestDataSuccessful" class="main_container">
-        <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
         <MainHeader />
         <BreadcrumbsNav />
         <div class="content-wrapper grid">
             <SidebarBuiltin />
             <div class="content-area col-10">
-                <TagsCloud :linkPath="'/catalog/tags/'" :activeTag="activeTag"/>
+                <TagsCloud :linkPath="'/catalog/tags/'" :activeTag="activeTag" />
                 <CatalogModalFilters />
                 <CatalogSorting @update:viewMode="updateViewMode" />
                 <ProductsBlock :viewMode="viewMode" />
@@ -18,10 +17,9 @@
         <FooterBottom />
     </div>
 </template>
-  
+
 <script setup>
 import { provide } from 'vue';
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -44,12 +42,11 @@ const queryParams = useRoute().query
 const queryString = new URLSearchParams(queryParams).toString();
 
 const viewMode = ref('grid');
+provide('viewMode', viewMode)
 const updateViewMode = (mode) => {
     viewMode.value = mode;
 };
 
-let pageTitle = ref('');
-let metaDescription = ref('');
 let requestDataSuccessful = false;
 
 const paginationParam = 12;
@@ -67,9 +64,6 @@ const response = await fetch(url, {
 
 if (response.status === 200) {
     const data = await response.json();
-
-    pageTitle.value = data.results.seo_data.title;
-    metaDescription.value = data.results.seo_data.title;
 
     const productsList = ref(data.results.product_list);
     provide('products_list', productsList);
@@ -114,12 +108,24 @@ if (response.status === 200) {
     provide('company_info', data.company_info);
     provide('clients_info', data.clients_info);
     requestDataSuccessful = true;
+
+    const computedTitle = computed(() => data.results.seo_data.title);
+    const computedDescription = computed(() => data.results.seo_data.title);
+
+    useHead(() => ({
+        title: computedTitle.value,
+        meta: [
+        { name: 'description', content: computedDescription.value },
+        ],
+    }))
 } else {
-    console.log('Request failed with status:', response.status);
-    router.push('/404')
+  console.log('Request failed with status:', response.status);
+  router.push('/404')
 }
+
+
 </script>
-  
+
 <style scoped>
 .main_container {
     overflow-x: hidden;
@@ -127,15 +133,17 @@ if (response.status === 200) {
     display: flex;
     flex-direction: column;
 }
+
 .content-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-  margin-left: 0.9rem;
-  margin-right: 0.9rem;
-  padding-top: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-left: 0.9rem;
+    margin-right: 0.9rem;
+    padding-top: 0.2rem;
 }
+
 .content-area {
-  flex: 1;
+    flex: 1;
 }
 </style>

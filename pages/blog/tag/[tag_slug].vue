@@ -2,7 +2,6 @@
 
 <template>
   <div class="main_container">
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
     <div class="blog-content ">
@@ -25,8 +24,6 @@
 
 <script setup>
 import { useBaseStore } from '~/store/baseData';
-
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
@@ -34,6 +31,7 @@ import BlogNav from '~/components/blog/BlogNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import ArticlesBlock from '~/components/blog/ArticlesBlock.vue';
 import BlogPagination from '~/components/blog/BlogPagination.vue'
+import useSeoData from '~/composables/useSeoData';
 
 const baseStore = useBaseStore();
 
@@ -67,9 +65,6 @@ const blogCategories = ref(blogData.value.blog_categories);
 const articlesQty = ref(blogData.value.pagination.articles_qty);
 provide('articlesQty', articlesQty);
 
-const pageTitle = ref(blogData.value.seo_data.title);
-const metaDescription = ref(blogData.value.seo_data.meta_description);
-
 const handleCategoryChange = async (selectedCategory) => {
   const config = useRuntimeConfig()
   const BASE_API_URL = config.public.apiBase;
@@ -86,6 +81,18 @@ const handleCategoryChange = async (selectedCategory) => {
 const updateArticleList = (newArticleList) => {
   articlesList.value = newArticleList;
 };
+
+// const computedTitle = computed(() => blogData.value.seo_data.title);
+// const computedDescription = computed(() => blogData.value.seo_data.meta_description);
+
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+
+useSeoData(blogData.value.seo_data.title, blogData.value.seo_data.meta_description);
 </script>
 
 <style scoped>

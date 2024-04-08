@@ -1,8 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[product_slug]_[product_id].vue -->
 
 <template>
-  <div class="main_container">
-    <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
+  <div class="main_container" v-if="productData">
     <MainHeader />
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
@@ -12,16 +11,15 @@
             <ProductImages :image="productData.product.image" />
           </div>
           <div class="col-12 md:col-6 lg:col-6">
-            <ProductDetailsActions :productData="productData.product"
-                                   :productChars="productData.characteristics"
-                                   :productRating="productData.average_rating"/>
+            <ProductDetailsActions :productData="productData.product" :productChars="productData.characteristics"
+              :productRating="productData.average_rating" />
           </div>
           <div class="col-12">
             <ProductDescrReviews :productDescr="productData.product.description"
-                                 :productReviews="productData.reviews"/>
+              :productReviews="productData.reviews" />
           </div>
           <div class="col-12">
-            <ProductCarousel :products="productData.recommended_products "/>
+            <ProductCarousel :products="productData.recommended_products" />
           </div>
           <div class="col-12">
             <ProductCallMe />
@@ -30,13 +28,11 @@
       </div>
     </div>
     <FooterBottom />
-    <pre>{{  productData }}</pre>
   </div>
 </template>
-  
+
 <script setup>
 import { useBaseStore } from '~/store/baseData';
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
@@ -46,6 +42,8 @@ import ProductDetailsActions from '~/components/productdetails/ProductDetailsAct
 import ProductDescrReviews from '~/components/productdetails/ProductDescrReviews.vue'
 import ProductCarousel from '~/components/productdetails/ProductCarousel.vue'
 import ProductCallMe from '~/components/productdetails/ProductCallMe.vue';
+import { useRouter } from 'vue-router';
+import useSeoData from '~/composables/useSeoData';
 
 const baseStore = useBaseStore();
 
@@ -54,19 +52,35 @@ const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
 const endpoint = `catalog/${route.params.product_slug}/${route.params.product_id}/`;
 
-const { data: productData } = await useAsyncData(
-  'productData',
-  () => $fetch(`${BASE_API_URL}${endpoint}`)
-);
-
 const baseData = baseStore.baseResponse;
 provide('categories', baseData.categories);
 provide('subcategories', baseData.subcategories);
 
-provide('breadcrumbs', productData.value.breadcrumbs);
+const { data: productData, error, status } = await useAsyncData(
+  'productData',
+  () => $fetch(`${BASE_API_URL}${endpoint}`)
+);
 
-const pageTitle = ref(productData.value.seo_data.title);
-const metaDescription = ref(productData.value.seo_data.meta_description);
+const router = useRouter();
+console.log(status)
+if (status.value == 'success') {
+  provide('breadcrumbs', productData.value.breadcrumbs);
+
+  // const computedTitle = computed(() => productData.value.seo_data.title);
+  // const computedDescription = computed(() => productData.value.seo_data.meta_description);
+
+  // useHead(() => ({
+  //   title: computedTitle.value,
+  //   meta: [
+  //     { name: 'description', content: computedDescription.value },
+  //   ],
+  // }));
+  
+  useSeoData(productData.value.seo_data.title, productData.value.seo_data.meta_description);
+} else if (status.value == 'error') {
+  console.error("Произошла ошибка при загрузке данных:", error);
+  router.push('/404');
+}
 
 </script>
 
@@ -86,6 +100,7 @@ const metaDescription = ref(productData.value.seo_data.meta_description);
   margin-right: 0.9rem;
   padding-top: 0.2rem;
 }
+
 .content-area {
   flex: 1;
   padding: 0px;

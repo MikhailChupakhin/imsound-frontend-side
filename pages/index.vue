@@ -21,7 +21,6 @@
 
 <script setup>
 import { provide } from 'vue';
-import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import MainFooter from '~/components/footer/MainFooter.vue';
 import Divider from 'primevue/divider';
@@ -41,7 +40,7 @@ const { data: indexData } = await useAsyncData(
     method: 'GET',
   })
 );
-
+useSeoData(indexData.value.seo_data.title, indexData.value.seo_data.meta_description);
 const screenWidth = ref(0);
 
 onMounted(() => {
@@ -63,8 +62,16 @@ provide('featured_products', indexData.value.featured_products);
 provide('company_info', indexData.value.company_info);
 provide('clients_info', indexData.value.clients_info);
 
-useSeoData(indexData.value.seo_data.title, indexData.value.seo_data.meta_description);
+// const computedTitle = computed(() => indexData.value.seo_data.title);
+// const computedDescription = computed(() => indexData.value.seo_data.meta_description);
 
+// useHead(() => ({
+//     title: computedTitle.value,
+//     meta: [
+//       { name: 'description', content: computedDescription.value },
+//     ],
+// }))
+useSeoData(indexData.value.seo_data.title, indexData.value.seo_data.meta_description);
 </script>
 
 <style scoped>

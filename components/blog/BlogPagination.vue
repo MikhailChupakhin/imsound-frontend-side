@@ -29,17 +29,16 @@ const APIpath = 'blog/';
 const currentPage = ref(1);
 
 const handleClick = async (event) => {
-  if (event.target.classList.contains('p-paginator-element')) {
-    let newPage;
-    const button = event.target.closest('button');
-    console.log(button)
-    if (button) {
-      if (button.classList.contains('p-paginator-next')) {
-        newPage = currentPage.value + 1;
-      } else if (button.classList.contains('p-paginator-prev')) {
-        newPage = currentPage.value > 1 ? currentPage.value - 1 : 1;
-      }
+  const target = event.target.closest('.p-paginator-prev, .p-paginator-next');
+  let newPage;
+  if (target) {
+    if (target.classList.contains('p-paginator-next')) {
+      newPage = currentPage.value + 1;
+    } else if (target.classList.contains('p-paginator-prev')) {
+      newPage = currentPage.value > 1 ? currentPage.value - 1 : 1;
     }
+    
+    console.log(newPage);
 
     try {
       const BASE_API_URL = useRuntimeConfig().public.apiBase;
@@ -47,7 +46,7 @@ const handleClick = async (event) => {
         APIpath +
         '?page=' +
         newPage;
-
+      console.log(apiURL);
       const response = await fetch(apiURL, {
         method: 'GET',
       });
@@ -65,4 +64,11 @@ const handleClick = async (event) => {
 };
 </script>
 
-<style></style>
+<style scoped>
+.p-paginator-element {
+  z-index: 3;
+}
+.p-icon {
+  z-index: 2;
+}
+</style>

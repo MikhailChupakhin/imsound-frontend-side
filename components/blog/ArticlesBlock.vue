@@ -24,16 +24,19 @@ const articlesList = inject('articlesList');
     counter-reset: items;
 }
 
+@media screen and (min-width: 1300px) {
+  .container {
+    height: 3300px;
+  }
+}
+
+
 .item {
     width: 32%;
     position: relative;
     margin-bottom: 2%;
     border-radius: 3px;
     border: 0.25px solid #000000;
-    /* box-shadow: 0 2px 2px rgba(0, 90, 250, 0.05),
-        0 4px 4px rgba(0, 90, 250, 0.05),
-        0 8px 8px rgba(0, 90, 250, 0.05),
-        0 16px 16px rgba(0, 90, 250, 0.05); */
     color: #000000;
     padding: 0.8rem;
     box-sizing: border-box;

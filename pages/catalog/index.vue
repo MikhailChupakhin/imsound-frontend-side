@@ -54,6 +54,7 @@ const { data: catalogData } = await useAsyncData(
 );
 
 const viewMode = ref('grid');
+provide('viewMode', viewMode)
 const updateViewMode = (mode) => {
   viewMode.value = mode;
 };

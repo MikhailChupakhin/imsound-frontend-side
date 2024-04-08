@@ -46,7 +46,7 @@ export default {
           document.body.classList.remove('body-locked');
         }
       });
-  },
+    },
 }
 </script>
   

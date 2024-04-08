@@ -8,15 +8,15 @@
         </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
+                <a @click="showMenu = !showMenu" class="auth-menu-close">закрыть меню</a>
                 <CatalogFilters sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
-                <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import CatalogFilters from './CatalogFIlters.vue';
 import pluralize from '~/utils/func/pluralize.js';
 
@@ -26,6 +26,14 @@ const productsQuantity = inject('products_quantity');
 const closeMenu = () => {
     showMenu.value = false;
 }
+
+watch(showMenu, (value) => {
+    if (value) {
+        document.body.classList.add('body-locked');
+    } else {
+        document.body.classList.remove('body-locked');
+    }
+});
 </script>
 
 <style scoped>

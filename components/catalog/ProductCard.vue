@@ -9,13 +9,13 @@
       </router-link>
       <div class="flex flex-column card-menu">
         <div class="card-icon" @click="fetchDetailData(productInfo.id)" title="Подробнее">
-          <svg width="2rem" height="2rem" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m16 0c8.836556 0 16 7.163444 16 16s-7.163444 16-16 16-16-7.163444-16-16 7.163444-16 16-16zm0 2c-7.7319865 0-14 6.2680135-14 14s6.2680135 14 14 14 14-6.2680135 14-14-6.2680135-14-14-14zm0 18.5c.7731986 0 1.4.6268014 1.4 1.4s-.6268014 1.4-1.4 1.4-1.4-.6268014-1.4-1.4.6268014-1.4 1.4-1.4zm0-11.5c2.209139 0 4 1.790861 4 4 0 1.8635652-1.2743978 3.429479-2.9992387 3.8737865l-.0007613 1.1262135c0 .5522847-.4477153 1-1 1s-1-.4477153-1-1v-2c0-.5522847.4477153-1 1-1 1.1045695 0 2-.8954305 2-2s-.8954305-2-2-2-2 .8954305-2 2c0 .5522847-.4477153 1-1 1s-1-.4477153-1-1c0-2.209139 1.790861-4 4-4z" />
           </svg>
         </div>
         <div class="card-icon mt-2" @click="handleComparison(productInfo, $event)" title="Сравнение">
-          <svg width="2rem" height="2rem" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
             <g id="Product_price_comparison">
               <path
                 d="M230.7843,318.5234a21.0094,21.0094,0,0,0-20.9024-18.707h-29.26V273.5928a45.6919,45.6919,0,1,0-91.3838,0v26.2236h-29.26a21.0078,21.0078,0,0,0-20.9014,18.707L24.4815,449.7441a35.0092,35.0092,0,0,0,34.7949,38.88h150.795a35.467,35.467,0,0,0,35.2509-39.3886ZM101.2384,273.5928a33.6919,33.6919,0,1,1,67.3838,0v26.2236H101.2384ZM227.5606,468.8057a23.4968,23.4968,0,0,1-17.4892,7.8183H59.2764A23.0112,23.0112,0,0,1,36.4073,451.07L51.003,319.8486a9.0214,9.0214,0,0,1,8.9756-8.0322h29.26V336.69h12V311.8164h67.3838V336.69h12V311.8164h29.26a9.0239,9.0239,0,0,1,8.9766,8.0332l14.5381,130.7119A23.4966,23.4966,0,0,1,227.5606,468.8057Z" />
@@ -31,7 +31,7 @@
           </svg>
         </div>
         <div class="card-icon mt-2" @click="handleBuyoneclick(productInfo)" title="Купить в 1 клик">
-          <svg width="2rem" height="2rem" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 96 96">
             <path
               d="M41.35,77A37.48,37.48,0,1,1,70.51,63.06,1,1,0,0,1,69,61.8a35.39,35.39,0,1,0-10.23,8.65,1,1,0,1,1,1,1.74A37.55,37.55,0,0,1,41.35,77Z" />
@@ -64,11 +64,12 @@
       <div v-else class="not-available-text mb-4">Нет в наличии</div>
       <div v-if="viewMode === 'list'">
         <div v-if="productInfo.quantity > 0">
-          <CommonInterfaceButton buttonText="в корзину" @click="handleAddToCartClick(productInfo, $event)" />
+          <CommonInterfaceButton buttonText="в корзину" @click="handleAddToCartClick(productInfo, $event)"
+          :customStyle="{'padding': '0.5rem 1rem !important' }" />
         </div>
         <div v-else class="cart-btn-wrapper">
           <CommonInterfaceButton buttonText="предзаказ" @click="handleBuyoneclick(productInfo)"
-            :customStyle="{ 'background-color': 'rgb(193, 111, 111)' }" />
+          :customStyle="{ 'background-color': 'rgb(193, 111, 111)', 'padding': '0.5rem 1rem !important' }" />
         </div>
         <div class="descr-wrapper">
           <Divider />
@@ -367,6 +368,10 @@ h2 a {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
+.card-icon svg {
+  width: 2rem;
+  height: 2rem;
+}
 .product-card:hover .card-menu {
   opacity: 1;
 }
@@ -404,7 +409,12 @@ h2 a {
 }
 @media screen and (max-width: 600px) {
   .card-menu {
+    top: 40%;
     opacity: 1;
+  }
+  .card-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .mobile-bumper {
     display: block;

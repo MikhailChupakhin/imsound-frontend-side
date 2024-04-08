@@ -5,7 +5,7 @@
     <Head :metaTitle="pageTitle" :metaDescription="metaDescription" />
     <MainHeader />
     <BreadcrumbsNav />
-    <div class="blog-content ">
+    <div class="blog-content">
       <div class="col-12 content-wrapper">
         <div class="w-full md:w-9 lg:w-10 p-2 mb-3">
           <TagsCloud :linkPath="'/blog/tag/'" :activeTag="activeTag" />
@@ -13,7 +13,7 @@
         <div class="w-full md:w-3 lg:w-2">
           <BlogNav :blogCategories="blogCategories" @categoryChanged="handleCategoryChange" />
         </div>
-        <div class="mt-2">
+        <div class="w-full mt-2">
           <ArticlesBlock />
           <BlogPagination :articlesCount="articlesCount" @update-article-list="updateArticleList" />
         </div>

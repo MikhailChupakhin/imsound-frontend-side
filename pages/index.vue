@@ -6,10 +6,10 @@
   <div class="main_container">
     <Divider />
     <div v-if="screenWidth > 900">
-      <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements"/>
+      <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements" />
     </div>
     <div v-else>
-      <IndexSubcategoriesMobile :subcategories="subcategoriesCarouselElements"/>
+      <IndexSubcategoriesMobile :subcategories="subcategoriesCarouselElements" />
     </div>
     <Divider />
     <IndexSubscriptionEmail />
@@ -21,9 +21,11 @@
 
 <script setup>
 import { provide } from 'vue';
+import Head from '~/components/common/Head.vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import MainFooter from '~/components/footer/MainFooter.vue';
 import Divider from 'primevue/divider';
+import useSeoData from '~/composables/useSeoData';
 
 import { useBaseStore } from '~/store/baseData';
 
@@ -55,25 +57,13 @@ provide('subcategories', baseData.subcategories);
 
 const slidersCarouselElements = ref();
 const subcategoriesCarouselElements = ref();
-// const banners_top = indexData.value.sliders_and_banners.banners;
 slidersCarouselElements.value = indexData.value.sliders_carousel;
 subcategoriesCarouselElements.value = indexData.value.subcategories_carousel;
 provide('featured_products', indexData.value.featured_products);
 provide('company_info', indexData.value.company_info);
 provide('clients_info', indexData.value.clients_info);
 
-const pageTitle = ref(indexData.value.seo_data.title);
-const metaDescription = ref(indexData.value.seo_data.meta_description);
-
-useHead({
-  title: pageTitle.value,
-  meta: [
-    { charset: 'UTF-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { hid: 'description', name: 'description', content: metaDescription.value },
-    { name: 'author', content: 'by Mikhail Chupakhin, 2024' },
-  ]
-});
+useSeoData(indexData.value.seo_data.title, indexData.value.seo_data.meta_description);
 
 </script>
 

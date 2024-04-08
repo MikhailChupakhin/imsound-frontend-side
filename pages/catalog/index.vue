@@ -10,7 +10,7 @@
       <div class="content-area col-10">
         <TagsCloud :linkPath="'/catalog/tags/'" />
         <CatalogModalFilters />
-        <CatalogSorting @update:viewMode="updateViewMode" />
+        <CatalogSorting :viewMode="viewMode" @update:viewMode="updateViewMode" />
         <ProductsBlock :viewMode="viewMode" />
         <PaginationBar />
       </div>

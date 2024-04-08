@@ -2,6 +2,23 @@
 // Nuxt 3.10
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: 'Default title',
+      meta: [
+        {
+          name: 'description',
+          content: 'Default description',
+        },
+        { property: 'og:title', content: 'Заголовок страницы' },
+        { property: 'og:description', content: 'Описание страницы' },
+        { property: 'og:image', content: 'https://example.com/image.jpg' },
+        { name: 'twitter:title', content: 'Заголовок страницы' },
+        { name: 'twitter:description', content: 'Описание страницы' },
+        { name: 'twitter:image', content: 'https://example.com/image.jpg' },
+      ],
+    },
+  },
   devtools: { enabled: true },
   ssr: false,
   pages: true,
@@ -30,5 +47,5 @@ export default defineNuxtConfig({
       Roboto: true,
       'Sofia+Sans': true,
     }
-  }
+  },
 })

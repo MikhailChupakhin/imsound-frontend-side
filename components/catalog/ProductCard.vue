@@ -11,7 +11,7 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <img class="product-img" :src="productInfo.image" alt="{{ productInfo.name }} Image" loading="lazy">
+          <img class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy">
         </router-link>
       </template>
       <div class="flex flex-column card-menu">

@@ -6,7 +6,14 @@
         <div class="scroll-container">
             <div class="flex-container">
                 <div v-for="(subcategory, index) in subcategories" :key="subcategory.id" class="subcategory">
-                    <img class="subcategory-img" :src="BASE_API_MEDIA + subcategory.image" alt="">
+                    <div class="card-image">
+                        <template v-if="isLoading">
+                            <Skeleton width="100%" :height="cardWidth"></Skeleton>
+                        </template>
+                        <template v-else>
+                            <NuxtImg class="subcategory-img" :src="BASE_API_MEDIA + subcategory.image" :alt="`${subcategory.name} Image`" />
+                        </template>
+                    </div>
                     <div class="subcategory-name">{{ subcategory.name }}</div>
                 </div>
             </div>
@@ -15,6 +22,8 @@
 </template>
 
 <script setup>
+import { loadImage } from '~/utils/func/loadImage';
+
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
 const props = defineProps({
@@ -22,6 +31,29 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    screenWidth: {
+        type: Number,
+        required: true,
+    }
+});
+const cardWidth = computed(() => {
+    if (props.screenWidth > 500) {
+        return "169px";
+    } else {
+        return "104px";
+    }
+});
+const isLoading = ref(true);
+
+onMounted(async () => {
+    try {
+        await Promise.all(props.subcategories.map(async (subcategory) => {
+            await loadImage(BASE_API_MEDIA + subcategory.image);
+        }));
+        isLoading.value = false;
+    } catch (error) {
+        console.error('Ошибка при загрузке изображений:', error);
+    }
 });
 </script>
 
@@ -31,7 +63,7 @@ const props = defineProps({
     overflow-x: auto;
 }
 .flex-container {
-    height: 485px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -42,7 +74,7 @@ const props = defineProps({
 }
 .subcategory {
     width: 13rem;
-    height: 15rem;
+    height: auto;
 }
 
 @media screen and (max-width: 500px) {
@@ -53,7 +85,7 @@ const props = defineProps({
     }
     .subcategory {
         width: 8rem;
-        height: 12rem;
+        height: auto;
     }
 }
 .subcategory-img {
@@ -62,8 +94,15 @@ const props = defineProps({
 }
 
 .subcategory-name {
+    text-align: center;
     margin-left: 0.2rem;
+    min-height: 32px;
     font-size: 1rem;
     font-weight: 500;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 </style>

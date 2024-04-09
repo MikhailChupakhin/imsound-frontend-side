@@ -6,7 +6,12 @@
       <div class="carousel-inner">
         <div class="carousel-item" v-for="subcategory in subcategories" :key="subcategory.id">
           <div class="subcategory-image">
-            <img :src="`${BASE_API_MEDIA}${subcategory.image}`" :alt="subcategory.name" />
+            <template v-if="isLoading">
+              <Skeleton width="100%" :height="'130px'"></Skeleton>
+            </template>
+            <template v-else>
+              <NuxtImg :src="`${BASE_API_MEDIA}${subcategory.image}`" :alt="subcategory.name" />
+            </template>
           </div>
           <div class="subcategory-name">{{ subcategory.name }}</div>
         </div>
@@ -22,6 +27,7 @@
 </template>
 
 <script setup>
+import { loadImage } from '~/utils/func/loadImage';
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
 const props = defineProps({
@@ -52,6 +58,20 @@ const updateCarousel = () => {
   );
   carouselInner.style.transform = `translateX(-${(currentIndex % (props.subcategories.length - itemsPerSlide + 1)) * (120 / itemsPerSlide)}%)`;
 };
+
+const loadImages = () => {
+  props.subcategories.forEach(subcategory => {
+    loadImage(BASE_API_MEDIA + subcategory.image).then(() => {
+      isLoading.value = false;
+    }).catch(error => {
+      console.error('Ошибка при загрузке изображения:', error);
+    });
+  });
+};
+
+const isLoading = ref(true);
+
+onMounted(loadImages);
 </script>
 
 <style scoped>

@@ -19,12 +19,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   pages: true,
-  modules: [
-    'nuxt-primevue',
-    '@pinia/nuxt',
-    '@nuxtjs/google-fonts'
-  ],
+  modules: ['nuxt-primevue', '@pinia/nuxt', '@nuxtjs/google-fonts', "@nuxt/image"],
   primevue: true,
+  image: {
+    inject: true
+  },
   css: [
     '~/assets/global.css'
   ],

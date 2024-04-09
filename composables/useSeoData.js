@@ -1,6 +1,8 @@
-export default function useSeoData(Title, Description) {
-  const computedTitle = computed(() => Title);
-  const computedDescription = computed(() => Description);
+// ~\composables\useSeoData.js
+
+export default function useSeoData(title, description) {
+  const computedTitle = computed(() => title);
+  const computedDescription = computed(() => description);
 
   useHead(() => ({
     title: computedTitle.value,

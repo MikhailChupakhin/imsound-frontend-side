@@ -103,18 +103,6 @@ provide('page_previous', catalogData.value.previous);
 provide('company_info', catalogData.value.company_info);
 provide('clients_info', catalogData.value.clients_info);
 
-// const computedTitle = computed(() => catalogData.value.results.seo_data.title);
-// const computedDescription = computed(() => catalogData.value.results.seo_data.meta_description);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//       { property: 'og:title', content: computedTitle.value },
-//       { property: 'og:description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(catalogData.value.results.seo_data.title, catalogData.value.results.seo_data.meta_description);
 </script>
 

@@ -1,6 +1,4 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductCard.vue -->
-<!-- Решить проблему со скелетоном -->
-
 
 <template>
   <div :class="{ 'product-card text-center': true, 'comparison': isInComparisonList }" @mouseenter="showCartButton"
@@ -11,9 +9,10 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <img class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy">
+          <NuxtImg class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>
       </template>
+
       <div class="flex flex-column card-menu">
         <div class="card-icon" @click="fetchDetailData(productInfo.id)" title="Подробнее">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -111,6 +110,7 @@ import comparisonList from '~/store/comparison.js';
 import { showMessage } from '~/utils/animations/showMessage';
 import { flyToCartAnimation } from '~/utils/animations/flyToCart';
 import Divider from 'primevue/divider';
+import { loadImage } from '~/utils/func/loadImage';
 
 export default {
   components: {
@@ -164,16 +164,16 @@ export default {
     this.loadImage();
   },
   methods: {
-    async loadImage() {
-      try {
-        const img = new Image();
-        img.src = this.productInfo.image;
-        await img.decode();
-        this.isLoading = false;
-      } catch (error) {
-        console.error('Error loading image:', error);
-      }
-    },
+    // async loadImage() {
+    //   try {
+    //     const img = new Image();
+    //     img.src = this.productInfo.image;
+    //     await img.decode();
+    //     this.isLoading = false;
+    //   } catch (error) {
+    //     console.error('Error loading image:', error);
+    //   }
+    // },
     updateQuantity(newQuantity) {
       this.selectedQuantity = newQuantity;
       this.visiblePrice = this.productInfo.total_price * newQuantity;

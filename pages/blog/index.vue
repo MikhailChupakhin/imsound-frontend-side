@@ -92,7 +92,6 @@ const updateArticleList = (newArticleList) => {
 useSeoData(blogData.value.seo_data.title, blogData.value.seo_data.meta_description);
 
 function applyHueRotateAnimation() {
-    console.log('кнопочка нажата')
     const images = document.querySelectorAll('.article-card img');
     console.log(images)
 
@@ -121,8 +120,37 @@ function applyHueRotateAnimation() {
     });
 }
 
+function applyTextWaveAnimation() {
+    const containers = document.querySelectorAll('.main_container');
+
+    containers.forEach(container => {
+        let waveOffset = 0;
+        let increasing = true;
+
+        const applyWaveAnimation = () => {
+            if (increasing) {
+                waveOffset += 1;
+                if (waveOffset >= 20) {
+                    waveOffset = 20;
+                    increasing = false;
+                }
+            } else {
+                waveOffset -= 1;
+                if (waveOffset <= -20) {
+                    waveOffset = -20;
+                    increasing = true;
+                }
+            }
+            container.style.textIndent = `${waveOffset}px`;
+        };
+
+        setInterval(applyWaveAnimation, 100);
+    });
+}
+
 const handleStrangeButtonClick = () => {
       applyHueRotateAnimation();
+      applyTextWaveAnimation();
     };
 
 </script>

@@ -4,12 +4,23 @@
   <MainHeader />
   <IndexSlidersCarousel :sliders="slidersCarouselElements" />
   <div class="main_container">
-    <Divider />
     <div v-if="screenWidth > 900">
       <IndexSubcategoriesCarousel :subcategories="subcategoriesCarouselElements" />
     </div>
     <div v-else>
       <IndexSubcategoriesMobile :subcategories="subcategoriesCarouselElements" :screenWidth="screenWidth"/>
+    </div>
+    <Divider />
+    <div class="grid">
+      <div class="col-12 md:col-3 lg:col-3">
+        <IndexNewProducts />
+      </div>
+      <div class="col-12 md:col-4 lg:col-4">
+        <IndexDiscounts />
+      </div>
+      <div class="col-12 md:col-5 lg:col-5">
+        <IndexNewProducts />
+      </div>
     </div>
     <Divider />
     <IndexSubscriptionEmail />

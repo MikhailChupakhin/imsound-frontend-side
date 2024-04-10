@@ -62,7 +62,17 @@
           {{ productInfo.name }}
         </router-link>
       </h2>
-      <div class="total-price"><a>{{ formatPrice(visiblePrice) }}</a></div>
+      <div class="total-price">
+        <div v-if="productInfo.discount_percentage == 0">
+            <a>{{ formatPrice(visiblePrice) }}</a>
+        </div>
+        <div v-else>
+            <a>
+                <span class="undiscounted-price">{{ formatUndiscountedPrice(visibleUndiscountedPrice) }}</span>
+                {{ formatPrice(visiblePrice) }}
+            </a>
+        </div>
+    </div>
       <div v-if="productInfo.quantity > 0" class="flex justify-content-center mb-4">
         <QuantityVue :initialQuantity="1" :max-value="productInfo.quantity" @quantity-change="updateQuantity" />
       </div>
@@ -99,11 +109,14 @@
           @click="handleBuyoneclick(productInfo)">предзаказ</button>
       </div>
     </div>
+    <div v-if="productInfo.is_new" class="new-icon">
+      <img src="/assets/img/new.png" alt="New Icon">
+    </div>
   </div>
 </template>
 
 <script>
-import { formatPrice } from '~/utils/priceFormatter.js';
+import { formatPrice, formatUndiscountedPrice } from '~/utils/priceFormatter.js';
 import QuantityVue from '~/components/productcard/Quantity.vue';
 import CartStore from '~/store/cart.js';
 import comparisonList from '~/store/comparison.js';
@@ -150,12 +163,17 @@ export default {
       return props.productInfo.total_price * selectedQuantity.value;
     });
 
+    const visibleUndiscountedPrice = computed(() => {
+      return props.productInfo.price * selectedQuantity.value;
+    });
+
     const isInComparisonList = computed(() => {
       return comparisonList.state.comparisonItems.some(item => item.productInfo.id === props.productInfo.id);
     });
 
     return {
       visiblePrice,
+      visibleUndiscountedPrice,
       selectedQuantity,
       isInComparisonList
     };
@@ -164,16 +182,16 @@ export default {
     this.loadImage();
   },
   methods: {
-    // async loadImage() {
-    //   try {
-    //     const img = new Image();
-    //     img.src = this.productInfo.image;
-    //     await img.decode();
-    //     this.isLoading = false;
-    //   } catch (error) {
-    //     console.error('Error loading image:', error);
-    //   }
-    // },
+    async loadImage() {
+      try {
+        const img = new Image();
+        img.src = this.productInfo.image;
+        await img.decode();
+        this.isLoading = false;
+      } catch (error) {
+        console.error('Error loading image:', error);
+      }
+    },
     updateQuantity(newQuantity) {
       this.selectedQuantity = newQuantity;
       this.visiblePrice = this.productInfo.total_price * newQuantity;
@@ -541,5 +559,21 @@ h2 a {
   .card-description {
     min-height: 22rem;
   }
+}
+
+.undiscounted-price {
+    color: red;
+    text-decoration: line-through;
+}
+
+.new-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1;
+}
+.new-icon img {
+  width: 4rem;
+  height: 4rem;
 }
 </style>

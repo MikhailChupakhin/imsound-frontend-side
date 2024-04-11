@@ -12,18 +12,22 @@
     </div>
     <Divider />
     <div class="grid">
-      <div class="col-12 md:col-3 lg:col-3">
-        <IndexNewProducts />
-      </div>
-      <div class="col-12 md:col-4 lg:col-4">
+      <div class="col-12 md:col-6 lg:col-3">
         <IndexDiscounts />
       </div>
-      <div class="col-12 md:col-5 lg:col-5">
+      <div class="col-12 md:col-6 lg:col-4">
+        <IndexNewProducts />
+      </div>
+      <div class="col-12 md:col-12 lg:col-5">
         <IndexNewProducts />
       </div>
     </div>
     <Divider />
+    <IndexFeaturedProductsGrid />
+    <Divider />
     <IndexSubscriptionEmail />
+    <Divider />
+    <IndexFeaturedArticles :articles="indexArticles" />
     <Divider />
     <IndexTextBlock />
   </div>
@@ -69,6 +73,8 @@ const subcategoriesCarouselElements = ref();
 slidersCarouselElements.value = indexData.value.sliders_carousel;
 subcategoriesCarouselElements.value = indexData.value.subcategories_carousel;
 provide('featured_products', indexData.value.featured_products);
+
+const indexArticles = ref(indexData.value.index_articles);
 provide('company_info', indexData.value.company_info);
 provide('clients_info', indexData.value.clients_info);
 

@@ -12,7 +12,7 @@
           <NuxtImg class="product-img" :src="productInfo.image.replace('http://', 'https://')" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>
       </template>
-
+      <!-- .replace('http://', 'https://') -->
       <div class="flex flex-column card-menu">
         <div class="card-icon" @click="fetchDetailData(productInfo.id)" title="Подробнее">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -68,8 +68,8 @@
         </div>
         <div v-else>
             <a>
-                <span class="undiscounted-price">{{ formatUndiscountedPrice(visibleUndiscountedPrice) }}</span>
-                {{ formatPrice(visiblePrice) }}
+                <div class="undiscounted-price">{{ formatPrice(visibleUndiscountedPrice) }}</div>
+                <div>{{ formatPrice(visiblePrice) }}</div>
             </a>
         </div>
     </div>
@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import { formatPrice, formatUndiscountedPrice } from '~/utils/priceFormatter.js';
+import { formatPrice } from '~/utils/priceFormatter.js';
 import QuantityVue from '~/components/productcard/Quantity.vue';
 import CartStore from '~/store/cart.js';
 import comparisonList from '~/store/comparison.js';
@@ -418,11 +418,7 @@ h2 a {
   opacity: 0.3;
   transition: opacity 0.3s ease-in-out;
 }
-@media screen and (max-width: 475px) {
-  .card-menu {
-    top: 40%;
-  }
-}
+
 
 @media screen and (min-width: 476px) {
   .card-menu {
@@ -572,8 +568,26 @@ h2 a {
   left: 1rem;
   z-index: 1;
 }
+
 .new-icon img {
   width: 4rem;
   height: 4rem;
 }
+@media screen and (max-width: 475px) {
+  .card-menu {
+    top: 40%;
+  }
+  .new-icon img {
+    width: 2rem;
+    height: 2rem;
+  }
+  .total-price {
+    height: 28px;
+    font-size: 1rem;
+  }
+  .cart-btn-wrapper {
+    margin-bottom: 0.2rem;
+  }
+}
+
 </style>

@@ -1,33 +1,17 @@
 export function formatPrice(price) {
-    const priceString = String(price);
-    
-    if (priceString.includes('.')) {
-        const parts = priceString.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
-        return parts.join('.') + ' ₽';
-    } else {
-        const formattedPrice = Number(price).toFixed(2);
-        const parts = formattedPrice.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
-        return parts.join('.') + ' ₽';
-    }
-}
+    const roundedPrice = Math.round(price * 100) / 100;
 
-export function formatUndiscountedPrice(price) {
-    const priceString = String(price);
-    
-    if (priceString.includes('.')) {
-        const parts = priceString.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
-        return parts.join('.') + ' ₽';
-    } else {
-        const formattedPrice = Number(price).toFixed(2);
-        const parts = formattedPrice.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0');
-        return parts.join('.') + ' ';
-    }
-}
+    const priceString = roundedPrice.toLocaleString('ru-RU', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        useGrouping: true,
+        currency: 'RUB',
+        style: 'currency',
+        currencyDisplay: 'symbol'
+    });
 
+    return priceString.replace(',', '.');
+}
 
 export function formatPriceShort(price) {
     const formattedPrice = Number(price).toFixed(0);

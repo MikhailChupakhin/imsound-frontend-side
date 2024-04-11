@@ -61,10 +61,12 @@ const responsiveOptions = [
 .index-article {
     display: flex;
     flex-direction: column;
-    height: 30rem;
+    height: 32rem;
 }
 .article-content-preview {
     height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .bottom-block {
     align-items: flex-end;

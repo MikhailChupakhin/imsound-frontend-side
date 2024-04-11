@@ -32,7 +32,6 @@
     <IndexTextBlock />
   </div>
   <MainFooter />
-  <pre>{{  indexData }}</pre>
 </template>
 
 <script setup>

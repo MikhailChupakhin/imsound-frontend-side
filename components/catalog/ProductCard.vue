@@ -73,10 +73,10 @@
             </a>
         </div>
     </div>
-      <div v-if="productInfo.quantity > 0" class="flex justify-content-center mb-4">
+      <div v-if="productInfo.quantity > 0" class="flex justify-content-center mt-3 mb-3">
         <QuantityVue :initialQuantity="1" :max-value="productInfo.quantity" @quantity-change="updateQuantity" />
       </div>
-      <div v-else class="not-available-text mb-4">Нет в наличии</div>
+      <div v-else class="not-available-text mt-3 mb-3">Нет в наличии</div>
       <div v-if="viewMode === 'list'">
         <div v-if="productInfo.quantity > 0">
           <CommonInterfaceButton buttonText="в корзину" @click="handleAddToCartClick(productInfo, $event)"

@@ -62,19 +62,8 @@ const { data: productData, error, status } = await useAsyncData(
 );
 
 const router = useRouter();
-console.log(status)
 if (status.value == 'success') {
   provide('breadcrumbs', productData.value.breadcrumbs);
-
-  // const computedTitle = computed(() => productData.value.seo_data.title);
-  // const computedDescription = computed(() => productData.value.seo_data.meta_description);
-
-  // useHead(() => ({
-  //   title: computedTitle.value,
-  //   meta: [
-  //     { name: 'description', content: computedDescription.value },
-  //   ],
-  // }));
   
   useSeoData(productData.value.seo_data.title, productData.value.seo_data.meta_description);
 } else if (status.value == 'error') {

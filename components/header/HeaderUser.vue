@@ -18,8 +18,7 @@
       </div>
     </div>
   </div>
-  <div v-if="showLoginModal" class="login-modal">
-
+  <div v-if="authData.isLoginModalOpen" class="login-modal">
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
       <div class="text-center mb-5">
         <CommonSiteLogo />
@@ -58,7 +57,16 @@ import { useAuthStore } from '~/store/useAuthStore';
 const authData = useAuthStore();
 const isAuthenticated = ref(false);
 const showMenu = ref(false);
-const showLoginModal = ref(false);
+const showLoginModal = ref(authData.isLoginModalOpen);
+
+window.addEventListener('open-login-modal', () => {
+  showLoginModal.value = true;
+});
+
+watch(() => showLoginModal.value, (newValue) => {
+  authData.setModalState(newValue);
+});
+
 const formData = reactive({
   username: '',
   password: '',
@@ -82,9 +90,10 @@ onMounted(() => {
 async function checkAuthentication() {
   const cookies = document.cookie;
   const accessTokenCookieExists = cookies.includes('accessToken');
-
   isAuthenticated.value = accessTokenCookieExists;
 }
+
+const emit = defineEmits(['open-modal']);
 
 function openLoginModal() {
   showLoginModal.value = true;

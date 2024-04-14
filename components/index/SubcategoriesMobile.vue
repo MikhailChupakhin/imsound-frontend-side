@@ -11,10 +11,16 @@
                             <Skeleton width="100%" :height="cardWidth"></Skeleton>
                         </template>
                         <template v-else>
-                            <NuxtImg class="subcategory-img" :src="BASE_API_MEDIA + subcategory.image" :alt="`${subcategory.name} Image`" />
+                            <router-link :to="`/catalog/${subcategory.parent_category_slug}/${subcategory.slug}`">
+                                <NuxtImg class="subcategory-img" :src="BASE_API_MEDIA + subcategory.image" :alt="`${subcategory.name} Image`" />
+                            </router-link>
                         </template>
                     </div>
-                    <div class="subcategory-name">{{ subcategory.name }}</div>
+                    <div class="subcategory-name">
+                        <router-link class="r-link":to="`/catalog/${subcategory.parent_category_slug}/${subcategory.slug}`">
+                            {{ subcategory.name }}
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -104,5 +110,10 @@ onMounted(async () => {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+.r-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 </style>

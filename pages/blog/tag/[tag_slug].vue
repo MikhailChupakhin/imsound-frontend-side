@@ -1,4 +1,4 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\blog\category\[tag_slug].vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\blog\tag\[tag_slug].vue -->
 
 <template>
   <div class="main_container">
@@ -81,16 +81,6 @@ const handleCategoryChange = async (selectedCategory) => {
 const updateArticleList = (newArticleList) => {
   articlesList.value = newArticleList;
 };
-
-// const computedTitle = computed(() => blogData.value.seo_data.title);
-// const computedDescription = computed(() => blogData.value.seo_data.meta_description);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
 
 useSeoData(blogData.value.seo_data.title, blogData.value.seo_data.meta_description);
 </script>

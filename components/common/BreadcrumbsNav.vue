@@ -4,7 +4,7 @@
     <div class="home">
         <div class="home_container">
             <div class="home_content">
-                <h1 class="h1">{{ breadcrumbs[breadcrumbs.length - 1][1] }}</h1>
+                <h1 v-if="showHeading" class="h1">{{ breadcrumbs[breadcrumbs.length - 1][1] }}</h1>
                 <Breadcrumb :model="formattedBreadcrumbs">
                     <template #item="{ item, props }">
                         <router-link v-if="item.route" :to="item.route" custom>
@@ -27,6 +27,12 @@
 
 export default {
     inject: ['breadcrumbs'],
+    props: {
+        showHeading: {
+            type: Boolean,
+            default: true
+        }
+    },
     computed: {
         formattedBreadcrumbs() {
             const slicedBreadcrumbs = this.breadcrumbs.slice(0, -1);

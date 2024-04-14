@@ -5,7 +5,8 @@ import { defineStore } from 'pinia'
 export const useAuthStore = defineStore('isAuthenticated', {
     state: () => ({
         isAuthenticated: false,
-        isAuthenticatedCheckInit: false
+        isAuthenticatedCheckInit: false,
+        isLoginModalOpen: false
       }),
     
       actions: {
@@ -14,6 +15,9 @@ export const useAuthStore = defineStore('isAuthenticated', {
         },
         setAuthenticatedCheckInit(value) {
           this.isAuthenticatedCheckInit = value;
-        }
+        },
+        setModalState(isOpen) {
+          this.isLoginModalOpen = isOpen;
+      }
       },
 })

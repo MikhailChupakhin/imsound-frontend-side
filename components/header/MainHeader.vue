@@ -52,7 +52,7 @@ export default {
   methods: {
     handleScroll() {
       this.scrolledDown = window.scrollY > 0;
-    }
+    },
   }
 }
 </script>

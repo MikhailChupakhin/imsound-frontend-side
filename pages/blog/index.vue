@@ -37,6 +37,7 @@ import ArticlesBlock from '~/components/blog/ArticlesBlock.vue';
 import BlogPagination from '~/components/blog/BlogPagination.vue'
 import useSeoData from '~/composables/useSeoData';
 import ScrollTop from 'primevue/scrolltop';
+const router = useRouter();
 
 const baseStore = useBaseStore();
 
@@ -48,7 +49,17 @@ const activeTag = ref('None');
 
 const { data: blogData } = await useAsyncData(
   'blogData',
-  () => $fetch(`${BASE_API_URL}${endpoint}`)
+  () => {
+    const { query, fullPath } = router.currentRoute.value;
+    let endpoint;
+    if (fullPath === '/blog' && !query.category) {
+      endpoint = 'blog';
+      return $fetch(`${BASE_API_URL}${endpoint}`);
+    } else if (query.category) {
+      endpoint = `blog/category/${query.category}/`;
+      return $fetch(`${BASE_API_URL}${endpoint}`);
+    }
+  }
 );
 
 const baseData = baseStore.baseResponse;
@@ -120,37 +131,28 @@ function applyHueRotateAnimation() {
     });
 }
 
-function applyTextWaveAnimation() {
-    const containers = document.querySelectorAll('.main_container');
+function applySkewAnimation() {
+    const images = document.querySelectorAll('.article-card img');
+    let time = 0;
+    const frequency = 100;
+    const amplitude = 0.2;
 
-    containers.forEach(container => {
-        let waveOffset = 0;
-        let increasing = true;
-
-        const applyWaveAnimation = () => {
-            if (increasing) {
-                waveOffset += 1;
-                if (waveOffset >= 20) {
-                    waveOffset = 20;
-                    increasing = false;
-                }
-            } else {
-                waveOffset -= 1;
-                if (waveOffset <= -20) {
-                    waveOffset = -20;
-                    increasing = true;
-                }
-            }
-            container.style.textIndent = `${waveOffset}px`;
+    images.forEach(image => {
+        const applySkew = () => {
+            time += 0.1;
+            const skew = Math.sin(time * frequency) * amplitude;
+            image.style.transform = `skewY(${skew}deg)`;
         };
 
-        setInterval(applyWaveAnimation, 100);
+        setInterval(applySkew, 10);
     });
 }
 
+
+
 const handleStrangeButtonClick = () => {
+      applySkewAnimation();
       applyHueRotateAnimation();
-      applyTextWaveAnimation();
     };
 
 </script>

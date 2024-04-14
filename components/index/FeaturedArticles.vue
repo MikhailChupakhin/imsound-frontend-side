@@ -17,7 +17,7 @@
                 <Divider />
                 <div class="bottom-block grid">
                     <div class="col-6"><svg class="svg-icon-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g data-name="32. Veiw" id="_32._Veiw"><path d="M23.909,11.582C21.943,7.311,17.5,3,12,3S2.057,7.311.091,11.582a1.008,1.008,0,0,0,0,.836C2.057,16.689,6.5,21,12,21s9.943-4.311,11.909-8.582A1.008,1.008,0,0,0,23.909,11.582ZM12,19c-4.411,0-8.146-3.552-9.89-7C3.854,8.552,7.589,5,12,5s8.146,3.552,9.89,7C20.146,15.448,16.411,19,12,19Z"/><path d="M12,7a5,5,0,1,0,5,5A5.006,5.006,0,0,0,12,7Zm0,8a3,3,0,1,1,3-3A3,3,0,0,1,12,15Z"/></g></svg> {{ slotProps.data.views_counter }}</div>
-                    <div class="col-6  flex justify-content-end"v-if="slotProps.data.reading_time">{{ pluralize(slotProps.data.reading_time, 'минут') }}</div>
+                    <div class="col-6  flex justify-content-end"v-if="slotProps.data.reading_time"><strong>{{ pluralize(slotProps.data.reading_time, 'минут') }}</strong></div>
                 </div>
             </div>
         </template>
@@ -67,6 +67,7 @@ const responsiveOptions = [
     height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    /* white-space: nowrap; */
 }
 .bottom-block {
     align-items: flex-end;

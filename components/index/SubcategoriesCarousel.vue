@@ -7,13 +7,19 @@
         <div class="carousel-item" v-for="subcategory in subcategories" :key="subcategory.id">
           <div class="subcategory-image">
             <template v-if="isLoading">
-              <Skeleton width="100%" :height="'130px'"></Skeleton>
+                <Skeleton width="100%" :height="'130px'"></Skeleton>
             </template>
             <template v-else>
-              <NuxtImg :src="`${BASE_API_MEDIA}${subcategory.image}`" :alt="subcategory.name" />
+              <router-link :to="`/catalog/${subcategory.parent_category_slug}/${subcategory.slug}`">
+                <NuxtImg :src="`${BASE_API_MEDIA}${subcategory.image}`" :alt="subcategory.name" />
+              </router-link>
             </template>
           </div>
-          <div class="subcategory-name">{{ subcategory.name }}</div>
+          <div class="subcategory-name">
+            <router-link class="r-link":to="`/catalog/${subcategory.parent_category_slug}/${subcategory.slug}`">
+              {{ subcategory.name }}
+            </router-link>
+          </div>
         </div>
       </div>
       <button class="carousel-btn carousel-prev" @click="prevSlide">
@@ -24,6 +30,7 @@
       </button>
     </div>
   </div>
+  
 </template>
 
 <script setup>
@@ -116,6 +123,8 @@ onMounted(loadImages);
   font-weight: 500;
   text-align: center;
   padding: 0px 1rem;
+  text-decoration: none;
+  color: inherit;
 }
 .carousel-prev,
 .carousel-next {
@@ -143,5 +152,11 @@ onMounted(loadImages);
 
 .carousel-next {
   right: 10px;
+}
+
+.r-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 </style>

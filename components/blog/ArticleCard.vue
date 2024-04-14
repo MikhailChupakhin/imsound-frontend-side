@@ -2,9 +2,13 @@
 
 <template>
     <div class="article-card">
-      <img :src="BASE_API_MEDIA + articleInfo.image" :alt="articleInfo.title" class="article-image" />
+      <router-link :to="`/blog/${articleInfo.slug}`">
+        <img :src="BASE_API_MEDIA + articleInfo.image" :alt="articleInfo.title" class="article-image" />
+      </router-link>
       <div class="article-content">
-        <h2>{{ articleInfo.title }}</h2>
+        <router-link class="r-link":to="`/blog/${articleInfo.slug}`">
+          <h2>{{ articleInfo.title }}</h2>
+        </router-link>
         <Divider />
         <div class="flex justify-content-between">
             <p class="flex align-items-center justify-content-center">{{ articleInfo.views_counter }} просмотров</p>
@@ -26,6 +30,7 @@
 <script setup>
 import pluralize from '~/utils/func/pluralize.js';
 import Divider from 'primevue/divider';
+import { formatDate } from '~/utils/func/formatDate';
 
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
@@ -37,10 +42,6 @@ const props = defineProps({
   }
 });
 
-const formatDate = (timestamp) => {
-  const date = new Date(props.articleInfo.created_timestamp);
-  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-};
 </script>
 
 <style scoped>
@@ -57,8 +58,6 @@ const formatDate = (timestamp) => {
     object-fit: cover;
     border-radius: 5px;
 }
-
-
 
 .article-content {
     margin-top: 1rem;
@@ -77,5 +76,10 @@ const formatDate = (timestamp) => {
   -webkit-line-clamp: 6;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.r-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 </style>

@@ -7,15 +7,10 @@
                 <h1 v-if="showHeading" class="h1">{{ breadcrumbs[breadcrumbs.length - 1][1] }}</h1>
                 <Breadcrumb :model="formattedBreadcrumbs">
                     <template #item="{ item, props }">
-                        <router-link v-if="item.route" :to="item.route" custom>
-                            <a :href="item.route" v-bind="props.action">
-                                <span :class="[item.icon, 'text-color']" />
-                                <span class="text-primary font-semibold">{{ item.label }}</span>
-                            </a>
+                        <router-link v-if="item.route" :to="item.route" v-bind="props" class="p-menuitem-link">
+                            <span :class="[item.icon, 'text-color']" />
+                            <span class="text-primary font-semibold">{{ item.label }}</span>
                         </router-link>
-                        <a v-else :href="item.url" :target="item.target" v-bind="props.action">
-                            <span class="text-color">{{ item.label }}</span>
-                        </a>
                     </template>
                 </Breadcrumb>
             </div>
@@ -70,7 +65,11 @@ export default {
     background-color: transparent;
     border: none;
 }
-
+.r-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
 </style>
 
 <style>

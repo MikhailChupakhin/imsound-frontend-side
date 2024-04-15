@@ -2,9 +2,14 @@
 
 <template>
     <div class="article-card">
-      <router-link :to="`/blog/${articleInfo.slug}`">
-        <img :src="BASE_API_MEDIA + articleInfo.image" :alt="articleInfo.title" class="article-image" />
-      </router-link>
+      <template v-if="isLoading">
+        <Skeleton width="100%" :height="'130px'"></Skeleton>
+      </template>
+      <template v-else>
+        <router-link :to="`/blog/${articleInfo.slug}`">
+          <img :src="BASE_API_MEDIA + articleInfo.image" :alt="articleInfo.title" class="article-image" />
+        </router-link>
+      </template>
       <div class="article-content">
         <router-link class="r-link":to="`/blog/${articleInfo.slug}`">
           <h2>{{ articleInfo.title }}</h2>
@@ -31,7 +36,8 @@
 import pluralize from '~/utils/func/pluralize.js';
 import Divider from 'primevue/divider';
 import { formatDate } from '~/utils/func/formatDate';
-
+import { loadImage } from '~/utils/func/loadImage';
+const isLoading = ref(true);
 const config = useRuntimeConfig();
 const BASE_API_MEDIA = config.public.apiMedia;
 

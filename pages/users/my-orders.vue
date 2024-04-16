@@ -57,16 +57,6 @@ const response = ref(null);
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `${BASE_BRANDNAME} - история заказов`);
-// const computedDescription = computed(() => `${BASE_BRANDNAME} - история заказов`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(`${BASE_BRANDNAME} - история заказов`, `${BASE_BRANDNAME} - история заказов`);
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'orders/my-list/';

@@ -57,17 +57,6 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/my-profile/", "Мой 
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `${BASE_BRANDNAME} - личный кабинет!`);
-// const computedDescription = computed(() => `${BASE_BRANDNAME} - личный кабинет!`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
-
 useSeoData(`${BASE_BRANDNAME} - личный кабинет`, `${BASE_BRANDNAME} - личный кабинет`);
 const formData = ref({
   first_name: '',

@@ -106,15 +106,6 @@ if (response.status === 200) {
   provide('company_info', data.company_info);
   provide('clients_info', data.clients_info);
 
-  // const computedTitle = computed(() => data.results.seo_data.title);
-  // const computedDescription = computed(() => data.results.seo_data.meta_description);
-
-  // useHead(() => ({
-  //   title: computedTitle.value,
-  //   meta: [
-  //     { name: 'description', content: computedDescription.value },
-  //     ],
-  // }))
   useSeoData(data.results.seo_data.title, data.results.seo_data.meta_description);
   requestDataSuccessful = true;
 } else {

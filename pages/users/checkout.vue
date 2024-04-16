@@ -47,16 +47,6 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзин�
 
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `${BASE_BRANDNAME} - Оформление заказа`);
-// const computedDescription = computed(() => `${BASE_BRANDNAME} - Оформление заказа`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(`${BASE_BRANDNAME} - Оформление заказа`, `${BASE_BRANDNAME} - Оформление заказа`);
 
 if (process.client) {

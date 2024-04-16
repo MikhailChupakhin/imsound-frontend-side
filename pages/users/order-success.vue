@@ -23,16 +23,6 @@ provide('subcategories', baseData.subcategories);
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `${BASE_BRANDNAME} - благодарим за заказ!`);
-// const computedDescription = computed(() => `${BASE_BRANDNAME} - благодарим за заказ!`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(`${BASE_BRANDNAME} - благодарим за заказ`, `${BASE_BRANDNAME} - благодарим за заказ`);
 </script>
 

@@ -1,19 +1,40 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductsBlock.vue -->
+<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ArticlesBlock.vue -->
 
 <template>
-    <div class="container">
-        <ArticleCard class="item" v-for="article in articlesList" :articleInfo="article" />
+    <div class="container" id="content-container">
+        <ArticleCard class="item" v-for="article in articlesList" :articleInfo="article" :cardWidth="cardWidth" />
     </div>
 </template>
 
 <script setup>
 import ArticleCard from './ArticleCard.vue';
 const articlesList = inject('articlesList');
+const cardWidth = ref(null);
 
+onMounted(() => {
+  const screenWidth = window.innerWidth;
+  const containerElement = document.getElementById('content-container');
+  const containerWidth = containerElement.getBoundingClientRect().width;
+
+  if (screenWidth < 450) {
+    cardWidth.value = (containerWidth - 14);
+  } else if (screenWidth >= 450 && screenWidth < 700) {
+    cardWidth.value = ((containerWidth / 2).toFixed(2) - 14);
+  } else {
+    cardWidth.value = (((containerWidth * 99) / (3 * 100)).toFixed(2) - 14);
+  }
+});
 
 </script>
 
 <style scoped>
+.item {
+    width: 33%;
+    position: relative;
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    padding: 7px;
+}
 .container {
     display: flex;
     flex-flow: column wrap;
@@ -23,32 +44,19 @@ const articlesList = inject('articlesList');
     width: 100%;
     counter-reset: items;
 }
-
 @media screen and (min-width: 1300px) {
   .container {
     height: 3300px;
   }
 }
-
-
-.item {
-    width: 32%;
-    position: relative;
-    margin-bottom: 2%;
-    border-radius: 3px;
-    border: 0.25px solid #000000;
-    color: #000000;
-    padding: 0.8rem;
-    box-sizing: border-box;
-}
-
 @media screen and (max-width: 450px) {
     .container {
         height: auto;
         flex-direction: column;
+        justify-content: center;
     }
     .item {
-        width: 95%;
+        width: 100%;
         margin-bottom: 2%;
     }
 }
@@ -56,7 +64,7 @@ const articlesList = inject('articlesList');
 
 @media (min-width: 450px) and (max-width: 700px) {
     .item {
-        width: 46%;
+        width: 50%;
         margin-bottom: 2%;
     }
     .item:nth-child(odd) {
@@ -67,12 +75,7 @@ const articlesList = inject('articlesList');
     }
 }
 
-/* .item::before {
-    counter-increment: items;
-    content: counter(items);
-} */
 @media screen and (min-width: 701px) {
-    /* Re-order items into 3 rows */
     .item:nth-child(3n+1) {
         order: 1;
     }
@@ -86,7 +89,6 @@ const articlesList = inject('articlesList');
     }
 }
 
-/* Force new columns */
 .container::before,
 .container::after {
     content: "";

@@ -60,16 +60,6 @@ provide('breadcrumbs', [["/", "Главная"], ["/users/cart/", "Корзин�
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `${BASE_BRANDNAME} - Корзина`);
-// const computedDescription = computed(() => `${BASE_BRANDNAME} - Корзина`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(`${BASE_BRANDNAME} - Корзина`, `${BASE_BRANDNAME} - Корзина`);
 
 const response = ref(null);

@@ -21,12 +21,7 @@
 const computedTitle = computed(() => `404! Похоже, этой страницы не существует...`);
 const computedDescription = computed(() => `404! Похоже, этой страницы не существует...`);
 
-useHead(() => ({
-    title: computedTitle.value,
-    meta: [
-      { name: 'description', content: computedDescription.value },
-    ],
-}))
+useSeoData(computedTitle, computedDescription);
 </script>
 
 <style scoped>

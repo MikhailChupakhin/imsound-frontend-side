@@ -57,16 +57,6 @@ const router = useRouter();
 const config = useRuntimeConfig();
 const BASE_BRANDNAME = config.public.brandName;
 
-// const computedTitle = computed(() => `Регистрация на сайте ${BASE_BRANDNAME}`);
-// const computedDescription = computed(() => `Регистрация на сайте ${BASE_BRANDNAME}`);
-
-// useHead(() => ({
-//     title: computedTitle.value,
-//     meta: [
-//       { name: 'description', content: computedDescription.value },
-//     ],
-// }))
-
 useSeoData(`Регистрация на сайте ${BASE_BRANDNAME}`, `Регистрация на сайте ${BASE_BRANDNAME}`);
 const BASE_API_URL = config.public.apiBase;
 

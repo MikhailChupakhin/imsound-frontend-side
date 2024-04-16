@@ -112,12 +112,14 @@ if (response.status === 200) {
     const computedTitle = computed(() => data.results.seo_data.title);
     const computedDescription = computed(() => data.results.seo_data.title);
 
-    useHead(() => ({
-        title: computedTitle.value,
-        meta: [
-        { name: 'description', content: computedDescription.value },
-        ],
-    }))
+    // useHead(() => ({
+    //     title: computedTitle.value,
+    //     meta: [
+    //     { name: 'description', content: computedDescription.value },
+    //     ],
+    // }))
+
+    useSeoData(computedTitle, computedDescription);
 } else {
   console.log('Request failed with status:', response.status);
   router.push('/404')

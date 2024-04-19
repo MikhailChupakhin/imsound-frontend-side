@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <NuxtImg class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy" />
+          <NuxtImg class="product-img" :src="productInfo.image.replace('http://', 'https://')" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>
       </template>
       <!-- .replace('http://', 'https://') -->

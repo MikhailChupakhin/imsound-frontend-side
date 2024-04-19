@@ -61,6 +61,16 @@ export default {
     -webkit-line-clamp: 3;
     overflow: hidden;
 }
+@media screen and (max-width: 767px) {
+  .h1 {
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+  }
+  .p-breadcrumb .p-breadcrumb-list {
+    font-size: 0.8rem;
+  }
+}
 .p-breadcrumb {
     background-color: transparent;
     border: none;
@@ -73,6 +83,10 @@ export default {
 </style>
 
 <style>
+.p-breadcrumb {
+    overflow-x: auto;
+    white-space: nowrap;
+}
 .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
     margin: 0 0.5rem 0 0.5rem;
     color: #ffffff;
@@ -82,4 +96,13 @@ export default {
     padding-bottom: 0rem;
 }
 .p-icon {color: #2196F3;}
+
+@media screen and (max-width: 767px) {
+  .p-breadcrumb {
+    padding: 0.3rem;
+  }  
+  .p-breadcrumb .p-breadcrumb-list {
+    font-size: 0.8rem;
+  }
+}
 </style>

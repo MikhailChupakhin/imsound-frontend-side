@@ -3,11 +3,11 @@
 <template>
     <div class="actions-container" :style="{ height: containerHeight }" >
         <div class="flex justify-content-between flex-wrap">
-            <div class="flex align-items-center justify-content-center text-3xl font-bold">Производитель</div>
+            <div class="flex align-items-center justify-content-center header-2 font-bold">Производитель</div>
             <div class="flex align-items-center justify-content-center text-2xl">{{ productInfo.manufacturer_name }}</div>
         </div>
         <div class="flex justify-content-between flex-wrap mt-3">
-            <div class="flex align-items-center justify-content-center text-3xl font-bold">Цена</div>
+            <div class="flex align-items-center justify-content-center header-2 font-bold">Цена</div>
             <div class="flex align-items-center justify-content-center text-2xl">
                 <div v-if="productInfo.discount_percentage > 0">
                     <span class="mr-2" style="color: red; text-decoration: line-through;">{{ formatPrice(productInfo.price) }}</span>
@@ -25,7 +25,7 @@
                 </div>
                 <div v-else class="not-available-text">Нет в наличии</div>
             </div>
-            <CommonInterfaceButton buttonText="в корзину" @click="toggleCommentForm" />
+            <CommonInterfaceButton buttonText="в корзину" @click="toggleCommentForm" :customStyle="{ width: '50%' }" />
         </div>
         <div class="flex justify-content-between flex-wrap mt-3">
             <div class="flex align-items-center justify-content-center text-xl font-bold">Наличие:<span style="color: green; margin-left: 1rem;"> {{ productInfo.quantity }}</span></div>
@@ -48,7 +48,7 @@
                 <tbody>
                     <tr v-for="(char, index) in productChars" :key="index">
                         <td>{{ char.name }}</td>
-                        <td>{{ char.value }}</td>
+                        <td class="text-center">{{ char.value }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -116,6 +116,9 @@ const updateQuantity = (newQuantity) => {
     .product-characteristics-container {
         display: none !important;
     }
+    .header-2 {
+        font-size: 1.25rem !important;
+    }
 }
 .product-characteristics-container {
   flex-grow: 1;
@@ -148,6 +151,9 @@ const updateQuantity = (newQuantity) => {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
+}
+.header-2 {
+    font-size: 1.7rem;
 }
 </style>
 

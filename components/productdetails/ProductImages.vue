@@ -39,7 +39,6 @@ function swapImages(index) {
     mainImageIndex.value = 0;
 }
 </script>
-Теперь мы используем ref для создан
 
 <style scoped>
 .product-image-container img {
@@ -53,6 +52,7 @@ function swapImages(index) {
 }
 .additional-images {
     display: flex;
+    overflow-x: auto;
 }
 .additional-image img {
     width: 7rem;

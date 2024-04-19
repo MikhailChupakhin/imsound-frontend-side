@@ -27,7 +27,7 @@
             </div>
             <div v-else>
                 <p>У этого товара еще нет отзывов, оставьте первый!</p>
-                <button class="leave-review-button">Оставить отзыв</button>
+                <CommonInterfaceButton buttonText="оставить отзыв" />
             </div>
             </p>
         </TabPanel>
@@ -36,8 +36,8 @@
                 <table class="product-characteristics-table">
                     <tbody>
                         <tr v-for="(char, index) in productChars" :key="index">
-                            <td>{{ char.name }}</td>
-                            <td>{{ char.value }}</td>
+                            <td class="font-bold">{{ char.name }}</td>
+                            <td class="text-center font-semibold">{{ char.value }}</td>
                         </tr>
                     </tbody>
                 </table>

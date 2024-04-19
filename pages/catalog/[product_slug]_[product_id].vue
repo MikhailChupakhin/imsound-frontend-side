@@ -3,20 +3,20 @@
 <template>
   <div class="main_container" v-if="productData">
     <MainHeader />
-    <BreadcrumbsNav />
     <div class="content-wrapper grid">
+      <BreadcrumbsNav />
       <div class="content-area col-10">
         <div class="grid">
           <div class="col-12 md:col-6 lg:col-6">
-            <ProductImages :image="productData.product.image" />
+            <ProductImages :image="productData.product.image" :additImages="productData.additional_images_data" />
           </div>
           <div class="col-12 md:col-6 lg:col-6">
-            <ProductDetailsActions :productData="productData.product" :productChars="productData.characteristics"
-              :productRating="productData.average_rating" />
+            <ProductDetailsActions :productInfo="productData.product" :productChars="productData.characteristics"
+              :productRating="productData.average_rating" :additImages="productData.additional_images_data" />
           </div>
           <div class="col-12">
             <ProductDescrReviews :productDescr="productData.product.description"
-              :productReviews="productData.reviews" />
+              :productReviews="productData.reviews" :productChars="productData.characteristics" />
           </div>
           <div class="col-12">
             <ProductCarousel :products="productData.recommended_products" />
@@ -27,8 +27,9 @@
         </div>
       </div>
     </div>
-    <FooterBottom />
+    <FooterBottom /> 
   </div>
+  
 </template>
 
 <script setup>
@@ -43,6 +44,7 @@ import ProductDescrReviews from '~/components/productdetails/ProductDescrReviews
 import ProductCarousel from '~/components/productdetails/ProductCarousel.vue'
 import ProductCallMe from '~/components/productdetails/ProductCallMe.vue';
 import { useRouter } from 'vue-router';
+import { formatPrice } from '~/utils/priceFormatter.js';
 import useSeoData from '~/composables/useSeoData';
 
 const baseStore = useBaseStore();
@@ -76,17 +78,17 @@ if (status.value == 'success') {
 <style scoped>
 .main_container {
   overflow-x: hidden;
-  width: 100%;
+  width:100%;
   display: flex;
   flex-direction: column;
 }
 
 .content-wrapper {
   display: flex;
+  width: 95%;
   flex-wrap: wrap;
   margin-top: 0.5rem;
-  margin-left: 0.9rem;
-  margin-right: 0.9rem;
+  margin:auto;
   padding-top: 0.2rem;
 }
 

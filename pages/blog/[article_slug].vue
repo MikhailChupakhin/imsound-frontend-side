@@ -10,13 +10,13 @@
             <ArticleBody :articleInfo="articleData.article" />
             <Divider />
             <div class="flex flex-column">
-              <h2>Статьи из той же категории</h2>
+              <h2>Статьи этой категории</h2>
               <div class="related-articles-btns">
                 <div class="col-6">
-                  <CommonInterfaceButton buttonText=" < предыдущая" @click="prevRelatedArticle" />
+                  <CommonInterfaceButton buttonText=" < назад" @click="prevRelatedArticle" />
                 </div>
                 <div class="col-6 text-right">
-                    <CommonInterfaceButton buttonText="cледующая >" @click="nextRelatedArticle" />
+                    <CommonInterfaceButton buttonText="вперед >" @click="nextRelatedArticle" />
                 </div>
               </div>
               <ArticleComments :articleId="articleData.article.id" :comments="articleData.comments" />
@@ -75,7 +75,7 @@ const prevRelatedArticle = () => {
       router.push(`/blog/${prevArticle.slug}`);
     }
   } else {
-    console.error("Свойство related_articles не является массивом.");
+    console.error("Related_articles не является массивом.");
   }
 };
 
@@ -88,7 +88,7 @@ const nextRelatedArticle = () => {
       router.push(`/blog/${nextArticle.slug}`);
     }
   } else {
-    console.error("Свойство related_articles не является массивом.");
+    console.error("Related_articles не является массивом.");
   }
 };
 </script>
@@ -101,7 +101,6 @@ const nextRelatedArticle = () => {
   padding-left: 5px;
   padding-right: 5px;
 }
-
 .content-wrapper {
   display: flex;
   flex-wrap: wrap;

@@ -34,7 +34,6 @@
 </template>
 
 <script setup>
-
 import { formatPrice } from '~/utils/priceFormatter.js';
 import ButtonAnimated from '~/components/common/ButtonAnimated.vue';
 import CartStore from '~/store/cart';

@@ -104,5 +104,8 @@ export default {
   .p-breadcrumb .p-breadcrumb-list {
     font-size: 0.8rem;
   }
+  .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
+    margin: 0 0.1rem 0 0.1rem;
+  }
 }
 </style>

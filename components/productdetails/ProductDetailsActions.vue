@@ -43,15 +43,20 @@
             </div>
         </div>
         <div class="flex justify-content-between flex-wrap product-characteristics-container mt-3">
-            <div class="flex align-items-center justify-content-center text-xl font-bold mb-2">Характеристики</div>
-            <table class="product-characteristics-table">
-                <tbody>
-                    <tr v-for="(char, index) in productChars" :key="index">
-                        <td>{{ char.name }}</td>
-                        <td class="text-center">{{ char.value }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="flex justify-content-center text-xl font-bold mb-2">Характеристики</div>
+            <template v-if="productChars && productChars.length > 0">
+                <table class="product-characteristics-table">
+                    <tbody>
+                        <tr v-for="(char, index) in productChars" :key="index">
+                            <td>{{ char.name }}</td>
+                            <td class="text-center">{{ char.value }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+            <template v-else>
+                <div>не добавлены</div>
+            </template>
         </div>
     </div>
 </template>
@@ -83,6 +88,12 @@ const containerHeight = computed(() => {
     if (additionalImagesCount.value > 0) {
         if (window.innerWidth >= 767) {
             height = `calc(${height} + 7rem)`;
+        } else {
+            height = `auto`;
+        }
+    } else {
+        if (window.innerWidth >= 767) {
+            height = `calc(${height})`;
         } else {
             height = `auto`;
         }

@@ -26,21 +26,26 @@
                 </div>
             </div>
             <div v-else>
-                <p>У этого товара еще нет отзывов, оставьте первый!</p>
-                <CommonInterfaceButton buttonText="оставить отзыв" />
+                <p class="text-xl">У этого товара еще нет отзывов, оставьте первый!</p>
+                <CommonInterfaceButton buttonText="оставить отзыв" :customStyle="{ width: '50%'}" />
             </div>
             </p>
         </TabPanel>
         <TabPanel header="Характеристики">
             <p class="m-0">
-                <table class="product-characteristics-table">
-                    <tbody>
-                        <tr v-for="(char, index) in productChars" :key="index">
-                            <td class="font-bold">{{ char.name }}</td>
-                            <td class="text-center font-semibold">{{ char.value }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <template v-if="productChars && productChars.length > 0">
+                    <table class="product-characteristics-table">
+                        <tbody>
+                            <tr v-for="(char, index) in productChars" :key="index">
+                                <td>{{ char.name }}</td>
+                                <td class="text-center">{{ char.value }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </template>
+                <template v-else>
+                    <div>Товару не добавлены характеристики</div>
+                </template>
             </p>
         </TabPanel>
     </TabView>

@@ -47,7 +47,6 @@ export default {
 .home_container {
     height: auto;
     margin-top: 5.2rem;
-    overflow-x: auto;
 }
 
 .h1 {
@@ -85,7 +84,8 @@ export default {
 
 <style>
 .p-breadcrumb {
-    white-space: nowrap;
+    overflow-x: auto;
+    white-space: wrap;
 }
 .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
     margin: 0 0.5rem 0 0.5rem;

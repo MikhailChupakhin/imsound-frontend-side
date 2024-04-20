@@ -14,8 +14,10 @@
             </div>
         </div>
         <div class="col text-center">
-            <div><strong>+1 234 567 890</strong></div>
-            <button>Перезвоните мне</button>
+            <div class="text-2xl"><strong>+1 234 567 890</strong></div>
+            <div class="mt-4">
+                <CommonInterfaceButton buttonText="перезвоните мне!" :customStyle="{ width: '100%' }" />
+            </div>
         </div>
     </div>
 </template>

@@ -25,7 +25,8 @@
                 </div>
                 <div v-else class="not-available-text">Нет в наличии</div>
             </div>
-            <CommonInterfaceButton buttonText="в корзину" @click="toggleCommentForm" :customStyle="{ width: '50%' }" />
+            <CommonInterfaceButton v-if="productInfo.quantity > 0" buttonText="в корзину" :customStyle="{ width: '50%' }" />
+                <CommonInterfaceButton v-else buttonText="предзаказ" :customStyle="{ 'background-color': 'rgb(193, 111, 111)', width: '50%' }" />
         </div>
         <div class="flex justify-content-between flex-wrap mt-3">
             <div class="flex align-items-center justify-content-center text-xl font-bold">Наличие:<span style="color: green; margin-left: 1rem;"> {{ productInfo.quantity }}</span></div>

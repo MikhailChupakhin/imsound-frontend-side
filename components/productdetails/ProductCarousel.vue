@@ -7,14 +7,12 @@
             <div class="mb-3">
                 <div class="relative mx-auto">
                     <img :src="BASE_API_MEDIA + slotProps.data.image" :alt="slotProps.data.name" class="w-full border-round" />
-                    <!-- <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverity(slotProps.data.inventoryStatus)" class="absolute" style="left:5px; top: 5px"/> -->
                 </div>
             </div>
             <div class="mb-3 font-medium">{{ slotProps.data.name }}</div>
             <div class="flex justify-content-between align-items-center">
                 <div class="mt-0 font-semibold text-xl">{{ formatPrice(slotProps.data.price) }}</div>
                 <span>
-                    <!-- <Button icon="pi pi-heart" severity="secondary" outlined /> -->
                     <Button class="ml-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

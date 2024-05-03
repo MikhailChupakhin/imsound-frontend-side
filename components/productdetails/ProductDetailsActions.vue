@@ -25,8 +25,8 @@
                 </div>
                 <div v-else class="not-available-text">Нет в наличии</div>
             </div>
-            <CommonInterfaceButton v-if="productInfo.quantity > 0" buttonText="в корзину" :customStyle="{ width: '50%' }" />
-                <CommonInterfaceButton v-else buttonText="предзаказ" :customStyle="{ 'background-color': 'rgb(193, 111, 111)', width: '50%' }" />
+            <CommonInterfaceButton class="cart-button" v-if="productInfo.quantity > 0" @click="addToCart($event)" buttonText="в корзину" :customStyle="{ width: '50%' }" />
+            <CommonInterfaceButton v-else buttonText="предзаказ" @click="openBuyOneClickModal(productInfo)" :customStyle="{ 'background-color': 'rgb(193, 111, 111)', width: '50%' }" />
         </div>
         <div class="flex justify-content-between flex-wrap mt-3">
             <div class="flex align-items-center justify-content-center text-xl font-bold">Наличие:<span style="color: green; margin-left: 1rem;"> {{ productInfo.quantity }}</span></div>
@@ -60,10 +60,23 @@
             </template>
         </div>
     </div>
+    <BuyOneClickModal v-if="showBuyOneClickModal" :productInfo="buyoneclickProduct"
+                                                  :is-visible="showBuyOneClickModal"
+                                                  @close-modal="closeBuyOneClickModal" />
 </template>
 
 <script setup>
 import QuantityVue from '~/components/productcard/Quantity.vue';
+import CartStore from '~/store/cart.js';
+import { useAuthStore } from '~/store/useAuthStore';
+import { flyToCartAnimation } from '~/utils/animations/flyToCart';
+import BuyOneClickModal from '../productcard/BuyOneClickModal.vue';
+
+const authData = useAuthStore();
+const isAuthenticated = ref(authData.isAuthenticated);
+
+const showBuyOneClickModal = ref(false);
+const buyoneclickProduct = ref(null);
 
 const props = defineProps({
     productInfo: {
@@ -111,6 +124,103 @@ const updateQuantity = (newQuantity) => {
   } else {
     console.log('показали сообщение')
   }
+};
+
+const addToCart = (event) => {
+    const xA = event.clientX - 100;
+    const yA = event.clientY;
+    const cartButton = document.getElementById('cart-button');
+    const buttonRect = cartButton.getBoundingClientRect();
+    const headerRect = document.querySelector('header').getBoundingClientRect();
+    const xB = buttonRect.left + window.scrollX - headerRect.left - 30;
+    const yB = buttonRect.top - headerRect.top;
+    if (isAuthenticated.value) {
+        addToCartAUTH(xA, yA, xB, yB);
+    } else {
+        addToCartGUEST(xA, yA, xB, yB);
+    }
+};
+
+const addToCartAUTH = async () => {
+    console.log('добавляем в auth корзину', selectedQuantity.value)
+
+    const config = useRuntimeConfig();
+    const BASE_API_URL = config.public.apiBase;
+    const endpoint = 'baskets/add/';
+
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    const body = JSON.stringify({
+        product_id: props.productInfo.id,
+        quantity: selectedQuantity.value
+    });
+
+    const response = await authRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+    const responseData = await response.json();
+
+    if (responseData.code === 0 || responseData.code === 1) {
+        const productInfo = props.productInfo;
+        const existingCartItem = CartStore.state.cartItems.find(item => item.productInfo.id === productInfo.id);
+        if (existingCartItem) {
+            const newQuantity = selectedQuantity.value + existingCartItem.quantity;
+            CartStore.commit('updateCartItem', { productInfo, newQuantity });
+            console.log('К-во товара в корзине обовлено');
+        } else {
+            CartStore.commit('addCartItem', { productInfo, quantity: selectedQuantity.value });
+            console.log('Товар добавлен в корзину');
+        }
+        const productImg = document.querySelector('.main-image');
+        const originalWidth = productImg.offsetWidth;
+        await flyToCartAnimation(productImg, originalWidth, xA, yA, xB, yB);
+    } else if (responseData.code === 2) {
+        console.log(responseData.message);
+    }
+}
+const addToCartGUEST = async (xA, yA, xB, yB) => {
+    console.log('добавляем в гостевую корзину', selectedQuantity.value)
+    const config = useRuntimeConfig();
+    const BASE_API_URL = config.public.apiBase;
+    const endpoint = 'baskets/add-guest/';
+
+    const headers = {
+        'Content-Type': 'application/json',
+    };
+    const body = JSON.stringify({
+        product_id: props.productInfo.id,
+        quantity: selectedQuantity.value
+    });
+
+    const response = await guestRequestHandler(BASE_API_URL, endpoint, 'POST', body, headers);
+    const responseData = await response.json();
+
+    if (responseData.code === 0 || responseData.code === 1) {
+        const productInfo = props.productInfo;
+        const existingCartItem = CartStore.state.cartItems.find(item => item.productInfo.id === productInfo.id);
+        if (existingCartItem) {
+            const newQuantity = selectedQuantity.value + existingCartItem.quantity;
+            CartStore.commit('updateCartItem', { productInfo, newQuantity });
+            console.log('К-во товара в корзине обовлено');
+        } else {
+            CartStore.commit('addCartItem', { productInfo, quantity: selectedQuantity.value });
+            console.log('Товар добавлен в корзину');
+        }
+        const productImg = document.querySelector('.main-image');
+        const originalWidth = productImg.offsetWidth;
+        await flyToCartAnimation(productImg, originalWidth, xA, yA, xB, yB);
+    } else if (responseData.code === 2) {
+        console.log(responseData.message);
+    }
+}
+
+const openBuyOneClickModal = (data) => {
+  buyoneclickProduct.value = data;
+  showBuyOneClickModal.value = true;
+  document.body.classList.add('body-locked');
+};
+const closeBuyOneClickModal = () => {
+  showBuyOneClickModal.value = false;
+  document.body.classList.remove('body-locked');
 };
 </script>
 

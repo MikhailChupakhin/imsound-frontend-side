@@ -118,6 +118,7 @@ const deleteItem = (item) => {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 1rem;
+  min-height: 100vh;
 }
 .output-section {
   margin-top: 1rem;

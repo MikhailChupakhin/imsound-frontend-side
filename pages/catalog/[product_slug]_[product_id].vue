@@ -19,11 +19,11 @@
               :productReviews="productData.reviews" :productChars="productData.characteristics" />
           </div>
           <div class="col-12">
-            <div>Рекомендованные товары</div>
+            <div class="text-xl font-bold">Рекомендованные товары</div>
             <ProductCarousel :products="productData.recommended_products" />
           </div>
           <div class="col-12">
-            <ProductCallMe />
+            <ProductCallMe :productInfo="productData.product" />
           </div>
         </div>
       </div>

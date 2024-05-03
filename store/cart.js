@@ -18,10 +18,10 @@ const CartStore = createStore({
       };
       state.cartItems.push(newItem);
     },
-    updateCartItem(state, { productInfo, quantity }) {
+    updateCartItem(state, { productInfo, newQuantity }) {
       const cartItemIndex = state.cartItems.findIndex(item => item.productInfo.id === productInfo.id);
       if (cartItemIndex !== -1) {
-        state.cartItems[cartItemIndex].quantity = quantity;
+        state.cartItems[cartItemIndex].quantity = newQuantity;
       }
     },
     removeCartItem(state, productId) {

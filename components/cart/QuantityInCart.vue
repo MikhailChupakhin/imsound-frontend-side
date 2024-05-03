@@ -102,7 +102,7 @@ export default {
         };
 
         const handleResponseData = (responseData) => {
-            if (responseData.message === 'performed') {s
+            if (responseData.message === 'performed') {
                 quantity.value = responseData.upd_qty;
                 emit('quantity-change', { productId: props.productId, quantity: quantity.value });
                 emit('update-item', { productId: props.productId, quantity: quantity.value });

@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <NuxtImg class="product-img" :src="productInfo.image.replace('http://', 'https://')" :alt="`${productInfo.name} Image`" loading="lazy" />
+          <NuxtImg class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>
       </template>
       <!-- .replace('http://', 'https://') -->
@@ -86,20 +86,18 @@
           <CommonInterfaceButton buttonText="предзаказ" @click="handleBuyoneclick(productInfo)"
             :customStyle="{ 'background-color': 'rgb(193, 111, 111)', 'padding': '0.5rem 1rem !important' }" />
         </div>
-        <div class="descr-wrapper">
-          <Divider />
-          <div class="descr-header">Описание</div>
-          <Divider />
-          <div v-if="productInfo.description">
-            <div class="card-description" v-html="productInfo.description"></div>
-          </div>
-          <div v-else>
-            Товару не добавлено описание.
-          </div>
-        </div>
       </div>
     </div>
-    <Divider />
+    <div v-if="viewMode === 'list'" class="descr-wrapper">
+      <div class="descr-header">Описание</div>
+      <Divider />
+      <div v-if="productInfo.description">
+        <div class="card-description" v-html="productInfo.description"></div>
+      </div>
+      <div v-else>
+        Товару не добавлено описание.
+      </div>
+    </div>
     <div v-if="viewMode === 'grid'">
       <div v-if="productInfo.quantity > 0" class="cart-btn-wrapper">
         <button :id="'addToCartButton_' + productInfo.id" class="add-to-cart-btn" ref="cartButton"
@@ -198,10 +196,14 @@ export default {
       this.visiblePrice = this.productInfo.total_price * newQuantity;
     },
     showCartButton() {
-      this.$refs.cartButton.style.opacity = '1';
+      if (this.$refs.cartButton) {
+        this.$refs.cartButton.style.opacity = '1';
+      }
     },
     hideCartButton() {
-      this.$refs.cartButton.style.opacity = '0';
+      if (this.$refs.cartButton) {
+        this.$refs.cartButton.style.opacity = '0';
+      }
     },
     handleAddToCartClick(productInfo, event) {
       const xA = event.clientX;
@@ -238,7 +240,15 @@ export default {
         const responseData = await response.json();
 
         if (responseData.code === 0 || responseData.code === 1) {
-          CartStore.commit('addCartItem', { productInfo, quantity });
+          const existingCartItem = CartStore.state.cartItems.find(item => item.productInfo.id === productInfo.id);
+          if (existingCartItem) {
+              const newQuantity =  quantity + existingCartItem.quantity;
+              CartStore.commit('updateCartItem', { productInfo, newQuantity });
+              console.log('К-во товара в корзине обовлено');
+          } else {
+              CartStore.commit('addCartItem', { productInfo, quantity: quantity });
+              console.log('Товар добавлен в корзину');
+          }
           const productImg = this.$el.querySelector('.product-img');
           await flyToCartAnimation(productImg, this, xA, yA, xB, yB);
         } else if (responseData.code === 2) {
@@ -266,9 +276,18 @@ export default {
         const responseData = await response.json();
 
         if (responseData.code === 0 || responseData.code === 1) {
-          CartStore.commit('addCartItem', { productInfo, quantity });
+          const existingCartItem = CartStore.state.cartItems.find(item => item.productInfo.id === productInfo.id);
+          if (existingCartItem) {
+              const newQuantity = quantity + existingCartItem.quantity;
+              CartStore.commit('updateCartItem', { productInfo, newQuantity });
+              console.log('К-во товара в корзине обовлено');
+          } else {
+              CartStore.commit('addCartItem', { productInfo, quantity: quantity });
+              console.log('Товар добавлен в корзину');
+          }
           const productImg = this.$el.querySelector('.product-img');
-          await flyToCartAnimation(productImg, this, xA, yA, xB, yB);
+          const originalWidth = this.$el.offsetWidth
+          await flyToCartAnimation(productImg, originalWidth, xA, yA, xB, yB);
         } else if (responseData.code === 2) {
           console.log(responseData.message);
         }
@@ -384,6 +403,7 @@ h2 a {
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease-in-out;
   z-index: 5;
+  margin-top: 0.3rem;
 }
 
 .preorder-btn {
@@ -523,7 +543,12 @@ h2 a {
     }
   }
 }
-
+.descr-wrapper {
+  width: 40%;
+}
+.card-description {
+  margin-bottom: 1rem;
+}
 @media (max-width: 767px) {
   .descr-wrapper {
     display: none;
@@ -552,11 +577,11 @@ h2 a {
   }
 }
 
-@media (min-width: 1100px) {
+/* @media (min-width: 1100px) {
   .card-description {
-    min-height: 22rem;
+    margin-bottom: 1rem;
   }
-}
+} */
 
 .undiscounted-price {
     color: red;

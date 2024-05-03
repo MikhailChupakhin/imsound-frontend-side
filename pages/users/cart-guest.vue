@@ -86,7 +86,6 @@ const CartItemsStored = computed(() => {
   return convertedCartItems;
 });
 
-
 const BASE_API_URL = config.public.apiBase;
 const endpoint = 'users/cart-guest/';
 
@@ -118,6 +117,7 @@ const deleteItem = (item) => {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 1rem;
+  min-height: 100vh;
 }
 
 .output-section {

@@ -1,11 +1,10 @@
 // C:\Users\user1\VSCProjects\imsound-frontend-side\utils\animations\flyToCart.js   
 
-export function flyToCartAnimation(element, context, xA, yA, xB, yB) {
+export function flyToCartAnimation(element, originalWidth, xA, yA, xB, yB) {
     const productImgClone = element.cloneNode(true);
 
-    const originalWidth = context.$el.offsetWidth;
-    productImgClone.style.width = `${originalWidth / 2}px`;
-    productImgClone.style.height = 'auto';
+    productImgClone.style.width = '150px';
+    productImgClone.style.height = '150px';
 
     productImgClone.style.left = `${xA}px`;
     productImgClone.style.top = `${yA}px`;

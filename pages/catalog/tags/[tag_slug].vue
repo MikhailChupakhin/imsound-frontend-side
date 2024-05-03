@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+import { useBaseStore } from '~/store/baseData';
 import { provide } from 'vue';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
@@ -30,9 +31,14 @@ import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
 import CatalogModalFilters from '~/components/catalog/CatalogModalFilters.vue';
 
+const baseStore = useBaseStore();
 const config = useRuntimeConfig()
 const route = useRoute()
 const router = useRouter();
+
+const baseData = baseStore.baseResponse;
+provide('categories', baseData.categories);
+provide('subcategories', baseData.subcategories);
 
 const BASE_API_URL = config.public.apiBase;
 const endpoint = `catalog/tags/${route.params.tag_slug}/`;
@@ -95,8 +101,10 @@ if (response.status === 200) {
     const currentPage = ref('1');
     provide('currentPage', currentPage);
 
-    provide('categories', data.results.categories);
-    provide('subcategories', data.results.subcategories);
+    const baseData = baseStore.baseResponse;
+    provide('categories', baseData.categories);
+    provide('subcategories', baseData.subcategories);
+
     provide('manufacturers', data.results.manufacturers);
     provide('price_interval', data.results.price_interval);
     provide('breadcrumbs', data.results.breadcrumbs);
@@ -112,20 +120,11 @@ if (response.status === 200) {
     const computedTitle = computed(() => data.results.seo_data.title);
     const computedDescription = computed(() => data.results.seo_data.title);
 
-    // useHead(() => ({
-    //     title: computedTitle.value,
-    //     meta: [
-    //     { name: 'description', content: computedDescription.value },
-    //     ],
-    // }))
-
     useSeoData(computedTitle, computedDescription);
 } else {
   console.log('Request failed with status:', response.status);
   router.push('/404')
 }
-
-
 </script>
 
 <style scoped>

@@ -10,11 +10,11 @@
             <div class="flex align-items-center justify-content-center header-2 font-bold">Цена</div>
             <div class="flex align-items-center justify-content-center text-2xl">
                 <div v-if="productInfo.discount_percentage > 0">
-                    <span class="mr-2" style="color: red; text-decoration: line-through;">{{ formatPrice(productInfo.price) }}</span>
-                    <span>{{ formatPrice(productInfo.total_price) }}</span>
+                    <span class="mr-2" style="color: red; text-decoration: line-through;">{{ formatPrice(visibleUndiscountedPrice) }}</span>
+                    <span>{{ formatPrice(visiblePrice) }}</span>
                 </div>
                 <div v-else>
-                    {{ formatPrice(productInfo.total_price) }}
+                    {{ formatPrice(visiblePrice) }}
                 </div>
             </div>
         </div>
@@ -125,6 +125,13 @@ const updateQuantity = (newQuantity) => {
     console.log('показали сообщение')
   }
 };
+const visiblePrice = computed(() => {
+    return props.productInfo.total_price * selectedQuantity.value;
+});
+
+const visibleUndiscountedPrice = computed(() => {
+    return props.productInfo.price * selectedQuantity.value;
+});
 
 const addToCart = (event) => {
     const xA = event.clientX - 100;

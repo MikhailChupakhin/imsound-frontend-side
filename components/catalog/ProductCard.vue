@@ -404,12 +404,18 @@ h2 a {
   transition: opacity 0.3s ease-in-out;
   z-index: 5;
   margin-top: 0.3rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
+.add-to-cart-btn:hover {
+  background-color: rgb(192, 115, 8);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
 .preorder-btn {
   background-color: rgb(193, 111, 111);
 }
-
+.preorder-btn:hover {
+  background-color: rgb(159, 88, 88);
+}
 @media screen and (min-width: 601px) {
   .add-to-cart-btn {
     opacity: 0;

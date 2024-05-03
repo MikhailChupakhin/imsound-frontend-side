@@ -30,9 +30,11 @@ export default {
   color: #000000;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 .interface-btn-1:hover {
-    background-color: rgb(192, 115, 8);
+  background-color: rgb(192, 115, 8);
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
 }
 @media screen and (max-width: 440px) {
     .interface-btn-1 {

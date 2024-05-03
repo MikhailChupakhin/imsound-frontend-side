@@ -8,7 +8,7 @@
             <form class="phone-form">
                 <div class="form-group">
                     <input type="text" id="name" v-model="nameUser" placeholder="Ваше имя" required>
-                    <input type="text" id="phone" v-model="phoneNumber" placeholder="Введите номер телефона" required>
+                    <input type="text" id="phone" v-model="phoneNumber" placeholder="Ваш номер телефона" required>
                     <div class="error-clue" v-if="showErrorClue">Пожалуйста, введите номер телефона в формате <strong>+79123456789</strong> или <strong>89123456789</strong></div>
                 </div> 
                 <CommonInterfaceButton buttonText="отправить" type="button" @click="handleFormSubmit(productInfo.id, $event)" :customStyle="{ width: '100%' }"/>
@@ -138,7 +138,7 @@ const validatePhoneNumber = () => {
     border: 0.25px solid #ccc;
     border-radius: 5px;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
     width: 100%;
     box-sizing: border-box;

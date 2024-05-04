@@ -29,9 +29,9 @@
                 </div>
             </div>
             <div class="flex justify-content-between">
-                <label class="form-check-label">Только в наличии</label>
+                <label class="form-check-label" for="inStockCheckbox">Только в наличии</label>
                 <div class="form-group">
-                    <input type="checkbox" v-model="inStock" class="form-check-input">
+                    <input id="inStockCheckbox" type="checkbox" v-model="inStock" class="form-check-input" aria-label="Только в наличии">
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     <ul class="manufacturers-list">
                         <li v-for="(manufacturer, index) in manufacturers" :key="index" class="list-group-item">
                             <input type="checkbox" v-model="selectedManufacturers" :value="manufacturer"
-                                class="form-check-input">
+                                class="form-check-input"  aria-label="Выбрать товары производителя {{ manufacturer.name }}">
                             <label>{{ manufacturer.name }}</label>
                         </li>
                     </ul>

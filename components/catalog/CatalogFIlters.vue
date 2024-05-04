@@ -11,14 +11,14 @@
                     <div class="form-group">
                         <label for="min_price_value">От:</label>
                         <input type="text" v-model.number="formattedMinPrice" @input="updateSliderFromMin($event)"
-                            class="form-control min-price-input" inputmode="numeric" style="width: 100%;">
+                            class="form-control min-price-input" inputmode="numeric" style="width: 100%;" aria-label="Минимальная цена">
                     </div>
                 </div>
                 <div class="input-field">
                     <div class="form-group">
                         <label for="max_price_value">До:</label>
                         <input type="text" v-model.number="formattedMaxPrice" @input="updateSliderFromMax($event)"
-                            class="form-control" inputmode="numeric" style="width: 100%;">
+                            class="form-control" inputmode="numeric" style="width: 100%;" aria-label="Максимальная цена">
                     </div>
                 </div>
             </div>

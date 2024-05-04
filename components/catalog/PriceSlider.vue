@@ -29,7 +29,11 @@ export default {
         },
         step: 1
       });
+      const lowerHandle = document.querySelector('.noUi-handle-lower');
+      const upperHandle = document.querySelector('.noUi-handle-upper');
 
+      lowerHandle.setAttribute('aria-label', 'Нижняя граница цены');
+      upperHandle.setAttribute('aria-label', 'Верхняя граница цены');
       slider.value.on('update', (values, handle) => {
         emit('sliderValuesChanged', values);
       });

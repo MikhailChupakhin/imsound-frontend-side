@@ -14,7 +14,7 @@
                     <NuxtLink :to="`/catalog`" class="menu-item">Каталог</NuxtLink>
                     <NuxtLink :to="`/blog`" class="menu-item">Блог</NuxtLink>
                 </div>
-                <a @click="toggleMenu" id="closeMenu" class="auth-menu-close">Закрыть меню</a>
+                <div @click="toggleMenu" id="closeMenu" class="auth-menu-close" role="button" tabindex="0" aria-label="Закрыть меню">закрыть меню</div>
                 <SidebarNav />
             </div>
         </div>
@@ -107,5 +107,10 @@ html, body {
   padding: 0.5rem 1rem;
   text-align: center;
   cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.auth-menu-close:hover {
+  background-color: #f0f0f0;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 </style>

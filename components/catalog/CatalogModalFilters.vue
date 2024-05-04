@@ -8,7 +8,7 @@
         </div>
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
-                <a @click="showMenu = !showMenu" class="auth-menu-close">закрыть меню</a>
+                <div @click="showMenu = !showMenu" class="auth-menu-close" role="button" tabindex="0" aria-label="Закрыть меню">закрыть меню</div>
                 <CatalogFilters sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
             </div>
         </div>

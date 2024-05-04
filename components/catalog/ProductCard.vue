@@ -1,7 +1,6 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductCard.vue -->
 
 <template>
-  <pre>{{ productInfo }}</pre>
   <div :class="{ 'product-card text-center': true, 'comparison': isInComparisonList }" @mouseenter="showCartButton"
     @mouseleave="hideCartButton">
     <div class="card-image">
@@ -9,7 +8,6 @@
         <Skeleton width="100%" :height="cardWidth"></Skeleton>
       </template>
       <template v-else>
-        
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
           <NuxtImg class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>

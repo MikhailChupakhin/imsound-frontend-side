@@ -4,6 +4,9 @@
 export default defineNuxtConfig({
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'ru'
+      },
       title: 'Интернет-магазин световой техники и музыкальной аппаратуры Imsound.ru',
       meta: [
         { name: 'description', content: 'Купить профессиональное сценическое и концертное оборудование Imsound.ru'},

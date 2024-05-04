@@ -336,10 +336,6 @@ export default {
 </script>
 
 <style scoped>
-/* .product-img {
-  width: 100%;
-} */
-
 h2 {
   margin-block-start: 0.3rem;
   margin-block-end: 0.3rem;

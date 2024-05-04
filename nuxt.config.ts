@@ -2,6 +2,15 @@
 // Nuxt 3.10
 
 export default defineNuxtConfig({
+  site: {
+    url: 'http://127.0.0.1:8000',
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      'Sofia+Sans': true,
+    }
+  },
   app: {
     head: {
       htmlAttrs: {
@@ -22,7 +31,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   pages: true,
-  modules: ['nuxt-primevue', '@pinia/nuxt', '@nuxtjs/google-fonts', "@nuxt/image"],
+  modules: [
+    'nuxt-primevue',
+    '@pinia/nuxt',
+    '@nuxtjs/google-fonts',
+    "@nuxt/image",
+  ],
   primevue: true,
   image: {
     inject: true
@@ -39,12 +53,15 @@ export default defineNuxtConfig({
       apiBase: '',
       apiMedia: '',
       brandName: process.env.NUXT_PUBLIC_BRANDNAME || '',
+      base_url: process.env.NUXT_PUBLIC_BASE_URL,
     }
   },
-  googleFonts: {
-    families: {
-      Roboto: true,
-      'Sofia+Sans': true,
+  nitro: {
+    prerender: {
+      routes: [
+        '/sitemap.xml',
+        'robots.txt',
+      ]
     }
   },
 })

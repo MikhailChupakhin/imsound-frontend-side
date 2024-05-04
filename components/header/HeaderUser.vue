@@ -12,9 +12,9 @@
       <div class="menu bg-white shadow-md z-10">
         <NuxtLink :to="'/users/profile/'" class="auth-menu-item">Ваш профиль</NuxtLink>
         <NuxtLink :to="'/users/my-orders/'" class="auth-menu-item">Ваши заказы</NuxtLink>
-        <a @click="logout" class="auth-menu-danger border-t border-gray-200">Выйти из профиля</a>
+        <div @click="logout" class="auth-menu-danger border-t border-gray-200" role="button" tabindex="0" aria-label="Выйти из профиля">Выйти из профиля</div>
         <div class="menu-divider"></div>
-        <a @click="showMenu = !showMenu" class="auth-menu-close">Закрыть меню</a>
+        <div @click="showMenu = !showMenu" class="auth-menu-close" role="button" tabindex="0" aria-label="Закрыть меню">закрыть меню</div>
       </div>
     </div>
   </div>
@@ -216,16 +216,15 @@ function checkQueryParams() {
   padding: 0.5rem 1rem;
   text-align: center;
   cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 .auth-menu-close:hover {
   background-color: #f0f0f0;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
-
 .auth-menu-item:hover {
   background-color: #f0f0f0;
 }
-
 .auth-menu-danger {
   padding: 0.5rem 1rem;
   display: block;
@@ -238,7 +237,6 @@ function checkQueryParams() {
   background-color: #ffcccc;
   color: red;
 }
-
 .login-modal {
   position: fixed;
   top: 0;
@@ -251,7 +249,6 @@ function checkQueryParams() {
   align-items: center;
   z-index: 1000;
 }
-
 .modal-content {
   background-color: white;
   padding: 1.2rem;
@@ -259,22 +256,18 @@ function checkQueryParams() {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 400px;
 }
-
 .modal-close {
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-
 .form-group {
   margin-bottom: 15px;
 }
-
 label {
   display: block;
   margin-bottom: 5px;
 }
-
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -283,17 +276,14 @@ input[type="password"] {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-
 button {
   border: none;
   border-radius: 10px;
 }
-
 .cart-button {
   text-decoration: none;
   border-radius: 10px;
 }
-
 button[type="submit"] {
   padding: 10px;
   font-size: 16px;
@@ -302,7 +292,6 @@ button[type="submit"] {
   border-radius: 7px;
   cursor: pointer;
 }
-
 @media screen and (max-width: 450px) {
   .cart-text {
     display: none;

@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <NuxtImg class="product-img" :src="loadedImageSrc" :alt="`${productInfo.name} Image`" loading="lazy" />
+          <NuxtImg class="product-img" :src="loadedImageSrc" :alt="`${productInfo.name} Image`" width="100%" height="auto" loading="lazy" />
         </router-link>
       </template>
       <div class="flex flex-column card-menu">
@@ -336,9 +336,9 @@ export default {
 </script>
 
 <style scoped>
-.product-img {
+/* .product-img {
   width: 100%;
-}
+} */
 
 h2 {
   margin-block-start: 0.3rem;

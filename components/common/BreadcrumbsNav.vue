@@ -95,7 +95,14 @@ export default {
     padding-top: 0.4rem;
     padding-bottom: 0rem;
 }
-.p-icon {color: #2196F3;}
+.p-menuitem-link .text-primary {
+    color: #2a2cb3 !important;
+    transition: color 0.1s;
+}
+.p-menuitem-link .text-primary:hover {
+    color: rgba(58, 61, 214, 0.8) !important;
+}
+.p-icon {color: #2a2cb3;}
 
 @media screen and (max-width: 767px) {
   .p-breadcrumb {

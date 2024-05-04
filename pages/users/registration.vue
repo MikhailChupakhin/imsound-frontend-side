@@ -186,10 +186,10 @@ async function registerUser() {
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 .error-field {
-  border-color: red !important;
+  border-color: #CB0606 !important;
 }
 .form-error {
-  color: red;
+  color: #CB0606;
   font-size: 0.8em;
   margin-top: 0.5em;
   margin-left: 0.8rem;

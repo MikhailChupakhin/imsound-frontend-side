@@ -590,7 +590,7 @@ h2 a {
 } */
 
 .undiscounted-price {
-    color: red;
+    color: #CB0606;
     text-decoration: line-through;
 }
 

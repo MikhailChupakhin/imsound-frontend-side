@@ -4,6 +4,7 @@
   <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products-block-container border-1 border-round-sm surface-border mt-2">
     <ProductCard v-for="(product, index) in productsList" :key="index"
                                                           :viewMode="viewMode"
+                                                          :BASE_API_MEDIA="BASE_API_MEDIA"
                                                           :productInfo="product"
                                                           :open-quickview-modal="openQuickviewModal"
                                                           :openBuyOneClickModal="openBuyOneClickModal"
@@ -29,6 +30,9 @@ import  comparisonList from '~/store/comparison.js';
 
 import { useAuthStore } from '~/store/useAuthStore';
 import BuyOneClickModal from '../productcard/BuyOneClickModal.vue';
+
+const config = useRuntimeConfig();
+const BASE_API_MEDIA = config.public.apiMedia;
 
 const authData = useAuthStore();
 const isAuthenticated = ref(authData.isAuthenticated);

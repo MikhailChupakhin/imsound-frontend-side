@@ -9,10 +9,9 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <NuxtImg class="product-img" :src="productInfo.image" :alt="`${productInfo.name} Image`" loading="lazy" />
+          <NuxtImg class="product-img" :src="loadedImageSrc" :alt="`${productInfo.name} Image`" loading="lazy" />
         </router-link>
       </template>
-      <!-- .replace('http://', 'https://') -->
       <div class="flex flex-column card-menu">
         <div class="card-icon" @click="fetchDetailData(productInfo.id)" title="Подробнее">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -138,6 +137,9 @@ export default {
       type: Object,
       required: true
     },
+    BASE_API_MEDIA: {
+      type: String,
+    },
     openQuickviewModal: {
       type: Function,
     },
@@ -184,8 +186,10 @@ export default {
     async loadImage() {
       try {
         const img = new Image();
-        img.src = this.productInfo.image;
+        const imageUrl = this.BASE_API_MEDIA + this.productInfo.image;
+        img.src = imageUrl;
         await img.decode();
+        this.loadedImageSrc = img.src;
         this.isLoading = false;
       } catch (error) {
         console.error('Error loading image:', error);
@@ -244,10 +248,8 @@ export default {
           if (existingCartItem) {
               const newQuantity =  quantity + existingCartItem.quantity;
               CartStore.commit('updateCartItem', { productInfo, newQuantity });
-              console.log('К-во товара в корзине обовлено');
           } else {
               CartStore.commit('addCartItem', { productInfo, quantity: quantity });
-              console.log('Товар добавлен в корзину');
           }
           const productImg = this.$el.querySelector('.product-img');
           await flyToCartAnimation(productImg, this, xA, yA, xB, yB);
@@ -280,10 +282,8 @@ export default {
           if (existingCartItem) {
               const newQuantity = quantity + existingCartItem.quantity;
               CartStore.commit('updateCartItem', { productInfo, newQuantity });
-              console.log('К-во товара в корзине обовлено');
           } else {
               CartStore.commit('addCartItem', { productInfo, quantity: quantity });
-              console.log('Товар добавлен в корзину');
           }
           const productImg = this.$el.querySelector('.product-img');
           const originalWidth = this.$el.offsetWidth

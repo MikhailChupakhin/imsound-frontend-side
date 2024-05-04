@@ -63,13 +63,13 @@
       </h2>
       <div class="total-price">
         <div v-if="productInfo.discount_percentage == 0">
-            <a>{{ formatPrice(visiblePrice) }}</a>
+            <div>{{ formatPrice(visiblePrice) }}</div>
         </div>
         <div v-else>
-            <a>
+            <div>
                 <div class="undiscounted-price">{{ formatPrice(visibleUndiscountedPrice) }}</div>
                 <div>{{ formatPrice(visiblePrice) }}</div>
-            </a>
+            </div>
         </div>
     </div>
       <div v-if="productInfo.quantity > 0" class="flex justify-content-center mt-3 mb-3">
@@ -582,13 +582,6 @@ h2 a {
     margin-top: 2rem;
   }
 }
-
-/* @media (min-width: 1100px) {
-  .card-description {
-    margin-bottom: 1rem;
-  }
-} */
-
 .undiscounted-price {
     color: #CB0606;
     text-decoration: line-through;

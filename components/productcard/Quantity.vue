@@ -1,7 +1,7 @@
 <!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productcard\Quantity.vue -->
 
 <template>
-    <div class="quantity-control">
+    <div class="quantity-control" aria-label="Количество">
         <div class="quantity-btn decr" @click="decrement($event)">-</div>
         <input class="quantity-input" type="number" v-model="quantity" min="1" :max="maxValue" @change="updateQuantity" />
         <div class="quantity-btn incr" @click="increment($event)">+</div>

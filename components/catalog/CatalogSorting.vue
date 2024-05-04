@@ -21,7 +21,7 @@
                 <strong>{{ pluralize(productsQuantity, 'товар') }}</strong>
             </div>
             <div class="sorting">
-                <select class="sort-select" v-model="sortingOption">
+                <select class="sort-select" v-model="sortingOption" aria-label="Сортировать по">
                     <option value="">По умолчанию</option>
                     <option value="name_asc">По названию (А-Я)</option>
                     <option value="name_desc">По названию (Я-А)</option>

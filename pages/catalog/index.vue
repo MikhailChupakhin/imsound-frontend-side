@@ -34,7 +34,7 @@ const baseStore = useBaseStore();
 
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
-console.log(BASE_API_URL);
+console.log('BASE_API_URL', BASE_API_URL);
 const endpoint = 'catalog/';
 
 const queryParams = useRoute().query

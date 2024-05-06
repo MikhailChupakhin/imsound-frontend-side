@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\articledetails\ArticleComments.vue -->
-
 <template>
     <h2>Комментарии к статье</h2>
     <Divider />

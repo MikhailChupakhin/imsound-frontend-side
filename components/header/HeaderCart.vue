@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\HeaderCart.vue -->
-
 <template>
     <NuxtLink id="cart-button" :to="isAuthenticated ? '/users/cart/' : '/users/cart-guest/'">
         <img src="/static/svg/cart-trolley.svg" class="svg-icon-2" alt="Корзина">

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogModalFilters.vue -->
-
 <template>
     <div class="unvisible-filters mt-2">
         <CommonInterfaceButton buttonText="фильтрация" @click="showMenu = !showMenu" :customStyle="{ width: '100%' }" />
@@ -9,15 +7,18 @@
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
                 <div @click="showMenu = !showMenu" class="auth-menu-close" role="button" tabindex="0" aria-label="Закрыть меню">закрыть меню</div>
-                <CatalogFilters sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
+                <LazyCatalogFilters v-if="showMenu === true" sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import CatalogFilters from './CatalogFIlters.vue';
+// import { onMounted, ref, defineAsyncComponent } from 'vue';
+// import CatalogFilters from './CatalogFIlters.vue';
+const LazyCatalogFilters = defineAsyncComponent(() =>
+  import('./CatalogFilters.vue')
+);
 import pluralize from '~/utils/func/pluralize.js';
 
 const showMenu = ref(false);

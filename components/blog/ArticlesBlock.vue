@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ArticlesBlock.vue -->
-
 <template>
     <div class="container" id="content-container">
         <ArticleCard class="item" v-for="article in articlesList" :articleInfo="article" :cardWidth="cardWidth" />

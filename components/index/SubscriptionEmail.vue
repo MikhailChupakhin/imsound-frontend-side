@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\SubscriptionEmail.vue -->
-
 <template>
     <div class="newsletter">
 		<div class="container">

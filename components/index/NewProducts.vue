@@ -1,6 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\NewProducts.vue -->
-
-
 <template>
     <div class="discounts-container">
         <div class="background-image">

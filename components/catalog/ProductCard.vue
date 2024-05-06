@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductCard.vue -->
-
 <template>
   <div :class="{ 'product-card text-center': true, 'comparison': isInComparisonList }" @mouseenter="showCartButton"
     @mouseleave="hideCartButton">

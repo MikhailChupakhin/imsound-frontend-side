@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\FeaturedArticles.vue -->
-
 <template>
     <h2>Популярные статьи блога</h2>
     <Carousel :value="articles" :numVisible="4" :numScroll="1" :responsiveOptions="responsiveOptions" circular

@@ -1,4 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\TextBlock.vue -->
 <template>
     <div class="headers-container">
         <h1>Интернет-магазин световой и музыкальной техники IMSOUND</h1>

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productcard\BuyOneClickModal.vue -->
-
 <template>
     <div v-if="isVisible" class="buyoneclick-modal">
         <div class="modal-content">

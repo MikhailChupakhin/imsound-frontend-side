@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productdetails\ProductImages.vue -->
-
 <template>
     <div class="actions-container" :style="{ height: containerHeight }" >
         <div class="flex justify-content-between flex-wrap">

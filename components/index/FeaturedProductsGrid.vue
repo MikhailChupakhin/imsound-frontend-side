@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\promotional\FeaturedProductsGrid.vue -->
-
 <template>
     <h2>Популярные товары</h2>
     <div class="grid">

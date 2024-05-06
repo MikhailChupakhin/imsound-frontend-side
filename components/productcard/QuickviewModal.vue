@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productcard\QuickviewModal.vue -->
-
 <template>
     <div v-if="isVisible" class="quickview-modal">
         <div class="modal-content">

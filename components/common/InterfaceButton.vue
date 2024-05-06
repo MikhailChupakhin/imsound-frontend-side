@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\InterfaceButton.vue -->
-
 <template>
     <button class="interface-btn-1":style="customStyle">{{ buttonText }}</button>
 </template>

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\PaginationBar.vue -->
-
 <template>
     <nav><Paginator class="m-1" :template="{
         '640px': 'PrevPageLink PageLinks NextPageLink',

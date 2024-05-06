@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\cart\CartProducts.vue     -->
-
 <template>
       <DataTable :value="computedCartItems" tableStyle="min-width: 50rem">
         <template #header>

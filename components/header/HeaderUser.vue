@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\HeaderUser.vue -->
-
 <template>
   <div class="flex items-center menu-container">
     <div class="svg-icon-2" v-if="isAuthenticated" @click="showMenu = !showMenu">

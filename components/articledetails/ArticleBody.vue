@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\articledetails\ArticleBody.vue -->
-
 <template>
     <div>
         <NuxtImg class="article-image w-full lg:w-7" :src="BASE_API_MEDIA + articleInfo.image" :alt="`${articleInfo.title} Image`" loading="lazy" />

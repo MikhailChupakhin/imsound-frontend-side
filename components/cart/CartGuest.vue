@@ -1,6 +1,4 @@
 
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\cart\CartGuest.vue -->
-    
 <template>
     <div>{{ cartItems }}</div>
     <div>{{ deliveryMethods }}</div>

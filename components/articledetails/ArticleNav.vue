@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\articledetails\ArticleNav.vue -->
-
 <template>
     <div class="flex flex-column left-border">
         <div class="col-12 md:col-12 lg:col-12">

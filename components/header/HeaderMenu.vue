@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\HeaderMenu.vue -->
-
 <template>
   <div class="unvisible-sm">
     <div class="menu">

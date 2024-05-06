@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\SiteLogo.vue -->
-
 <template>
   <div class="container">
     <NuxtLink :to="`/`" class="logo">IMSOUND</NuxtLink>

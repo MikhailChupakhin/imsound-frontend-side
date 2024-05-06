@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productdetails\ProductImages.vue -->
-
 <template>
     <div class="product-image-container">
         <img class="main-image" :src="BASE_API_MEDIA + images[mainImageIndex]" alt="Product Image" />

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\PriceSlider.vue -->
-
 <template>
   <div :id="sliderId" class="slider-container"></div>
 </template>

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogSorting.vue -->
-
 <template>
     <div>
         <div class="sorting-wrapper">

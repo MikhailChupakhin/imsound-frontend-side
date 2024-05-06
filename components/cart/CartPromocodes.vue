@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\cart\CartOutput.vue -->
-
 <template>
      <div class="flex lg:flex-row sm:flex-column">
         <input class="promo-code-input" v-model="promoCode" type="text" placeholder="Ввести промо-код"  style="flex: 1;" />

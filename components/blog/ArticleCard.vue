@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\blog\ArticleCard.vue -->
-
 <template>
   <div class="item">
     <div class="article-card">

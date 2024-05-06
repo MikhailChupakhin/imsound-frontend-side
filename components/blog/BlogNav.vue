@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\blog\BlogNav.vue -->
-
 <template>
   <Dropdown v-model="selectedCategory" :options="categories" optionLabel="name" placeholder="выбрать категорию"
     checkmark :highlightOnSelect="false" class="w-full" @change="handleCategoryChange" />

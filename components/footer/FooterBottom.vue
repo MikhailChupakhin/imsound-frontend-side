@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\footer\MainFooter.vue -->
-
 <template>
     <footer class="footer">
         <div class="flex">

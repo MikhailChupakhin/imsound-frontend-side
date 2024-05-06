@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\ButtonAnimated.vue -->
-
 <template>
     <button class="anim-button trans-200" type="submit" @click="handleClickInternal">
         <span>{{ buttonText }}</span>

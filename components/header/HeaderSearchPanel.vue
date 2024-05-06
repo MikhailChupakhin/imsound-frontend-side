@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\header\HeaderSearchPanel.vue  -->
-
 <template>
   <div class="search">
     <div class="search-icon" @click="toggleSearchMenu">

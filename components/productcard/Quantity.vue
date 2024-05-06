@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productcard\Quantity.vue -->
-
 <template>
     <div class="quantity-control" aria-label="Количество">
         <div class="quantity-btn decr" @click="decrement($event)">-</div>

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\cart\CartDelivery.vue -->
-
 <template>
       <div class="section-title text-center">Способ получения</div>
       <div v-if="processedDeliveryMethods.length > 0" >

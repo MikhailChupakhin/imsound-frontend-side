@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\product_card\Quantity.vue -->
-
 <template>
     <div class="quantity-control">
         <button class="quantity-btn" @click="changeQuantity('decrease')">-</button>

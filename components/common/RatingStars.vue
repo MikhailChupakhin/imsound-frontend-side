@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\RatingStars.vue -->
-
 <template>
     <Rating v-model="starsQuantity" readonly :cancel="false" :title="`Рейтинг: ${props.rating.toFixed(2)}`" />
 </template>

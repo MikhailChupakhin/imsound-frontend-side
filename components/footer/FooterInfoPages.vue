@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\footer\FooterInfoPages.vue -->
-
 <template>
     <div class="flex">
         <div class="col-6 text-center">
@@ -22,8 +20,6 @@
 </template>
   
 <script>
-
-
 export default {
     inject: ['company_info', 'clients_info'],
 };

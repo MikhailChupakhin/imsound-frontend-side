@@ -1,6 +1,6 @@
 <template>
   <div class="main_container">
-    <MainHeader />
+    <MainHeader />`/`
     <BreadcrumbsNav />
     <div class="content-wrapper grid">
       <SidebarBuiltin />
@@ -22,11 +22,11 @@ import { useBaseStore } from '~/store/baseData';
 import MainHeader from '~/components/header/MainHeader.vue'
 import BreadcrumbsNav from '~/components/common/BreadcrumbsNav.vue';
 import TagsCloud from '~/components/common/TagsCloud.vue';
-import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import ProductsBlock from '~/components/catalog/ProductsBlock.vue';
+import CatalogSorting from '~/components/catalog/CatalogSorting.vue';
 import PaginationBar from '~/components/common/PaginationBar.vue';
-import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import FooterBottom from '~/components/footer/FooterBottom.vue';
+import SidebarBuiltin from '~/components/catalog/SidebarBuiltin.vue';
 import CatalogModalFilters from '~/components/catalog/CatalogModalFilters.vue';
 import useSeoData from '~/composables/useSeoData';
 

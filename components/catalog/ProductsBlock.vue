@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\ProductsBlock.vue -->
-
 <template>
   <div :class="{ 'grid-mode': viewMode === 'grid', 'list-mode': viewMode === 'list' }" class="products-block-container border-1 border-round-sm surface-border mt-2">
     <ProductCard v-for="(product, index) in productsList" :key="index"

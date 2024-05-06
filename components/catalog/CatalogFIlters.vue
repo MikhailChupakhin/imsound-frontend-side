@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\CatalogFIlters.vue -->
-
 <template>
     <div class="filters-container">
         <div class="text-center">
@@ -56,11 +54,12 @@
 </template>
   
 <script>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import CatalogPriceSlider from '~/components/catalog/PriceSlider.vue';
 import { formatPriceShort } from '~/utils/priceFormatter.js';
 
 export default {
+    name: "CatalogFilters",
     props: {
         closeMenu: {
             type: Function,

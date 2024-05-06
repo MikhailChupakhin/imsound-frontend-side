@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\cart\CartOutput.vue -->
-
 <template>
   <div class="section-title text-center">Итог</div>
   <div class="costs">

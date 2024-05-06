@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\BannersTop.vue -->
-
 <template>
   <div class="banners-container mt-5">
     <div class="small-banner" :style="{ backgroundImage: 'url(' + BASE_API_MEDIA + banners[0].image + ')' }">

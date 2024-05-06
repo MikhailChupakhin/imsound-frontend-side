@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\index\SlidersCarousel.vue -->
-
 <template>
   <div class="slides-wrapper" ref="slidesWrapper">
     <template v-if="isLoading">
@@ -38,7 +36,6 @@ onMounted(() => {
   preloadImagesForFirstSlider();
 });
 
-// Функция загрузки изображений первого слайдера
 const preloadImagesForFirstSlider = async () => {
   const firstSliderImages = props.sliders[0].images;
   const imageValues = Object.values(firstSliderImages);

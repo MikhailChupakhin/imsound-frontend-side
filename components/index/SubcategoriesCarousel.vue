@@ -1,4 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productdetails\components/index/SubcategoriesCarousel.vue.vue -->
 <template>
   <h2>Популярные категории</h2>
   <div class="subcategories-carousel">

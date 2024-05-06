@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\common\TagsCloud.vue -->
-
 <template>
   <div class="grid align-items-center">
     <div class="tags-list col-10 md:col-11 lg:col-11 flex align-items-center">

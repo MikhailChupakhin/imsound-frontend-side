@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\productdetails\ProductCallMe.vue -->
-
 <template>
     <div class="call-me-container grid">
         <div class="col image-wrapper">

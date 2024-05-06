@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\components\catalog\SidebarNav.vue -->
-
 <template>
   <div class="sidebar-nav">
     <p class="text-lg font-semibold text-center">Навигация</p>

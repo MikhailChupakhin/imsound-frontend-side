@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <router-link :to="`/catalog/${productInfo.slug}_${productInfo.id}`">
-          <NuxtImg class="product-img" :src="loadedImageSrc" :alt="`${productInfo.name} Image`" width="100%" :height="cardWidth" loading="lazy" />
+          <NuxtImg :lazyLoad="productIndex >= 2" class="product-img" :src="loadedImageSrc" :alt="`${productInfo.name} Image`" width="100%" :height="cardWidth" />
         </router-link>
       </template>
       <div class="flex flex-column card-menu">
@@ -154,6 +154,10 @@ export default {
     },
     cardWidth: {
       type: String,
+    },
+    productIndex: {
+      type: Number,
+      required: true
     },
   },
   setup(props) {

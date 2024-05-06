@@ -9,7 +9,8 @@
                                                           :open-quickview-modal="openQuickviewModal"
                                                           :openBuyOneClickModal="openBuyOneClickModal"
                                                           :is-authenticated="isAuthenticated" 
-                                                          :cardWidth="cardWidth" />
+                                                          :cardWidth="cardWidth"
+                                                          :productIndex="index" />
     <QuickviewModal v-if="showQuickviewModal" :productInfo="quickviewProduct"
                                               :is-visible="showQuickviewModal"
                                               @close-modal="closeQuickviewModal" />

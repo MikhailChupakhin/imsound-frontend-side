@@ -3,7 +3,7 @@
 <template>
     <div class="quantity-control" aria-label="Количество">
         <div class="quantity-btn decr" @click="decrement($event)">-</div>
-        <input class="quantity-input" type="number" v-model="quantity" min="1" :max="maxValue" @change="updateQuantity" />
+        <input class="quantity-input" type="number" v-model="quantity" min="1" :max="maxValue" @change="updateQuantity" aria-label="Значение количества"/>
         <div class="quantity-btn incr" @click="increment($event)">+</div>
     </div>
 </template>

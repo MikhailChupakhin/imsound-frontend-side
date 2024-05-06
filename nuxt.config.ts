@@ -13,6 +13,32 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: true,
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://imsound.ru',
+          crossorigin: true,
+        },
+        // {
+        //   rel: 'preload',
+        //   as: 'font',
+        //   type: 'font/woff2',
+        //   href: 'https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtfABc4EsA.woff2',
+        //   crossorigin: true,
+        // },
+        // {
+        //   rel: 'preload',
+        //   as: 'font',
+        //   type: 'font/woff2',
+        //   href: 'https://fonts.gstatic.com/s/sofiasans/v6/8QIYb3HVajnLu72JhcqEcVpJgUHtlw.woff2',
+        //   crossorigin: true,
+        // },
+      ],
       htmlAttrs: {
         lang: 'ru'
       },

@@ -46,12 +46,32 @@ const endpoint = 'index/';
 
 const baseStore = useBaseStore();
 
-const { data: indexData } = await useAsyncData(
+// const { data: indexData } = await useAsyncData(
+//   'indexData',
+//   () => $fetch(`${BASE_API_URL}${endpoint}`, {
+//     method: 'GET',
+//   })
+// );
+const { data: indexData, error } = await useAsyncData(
   'indexData',
-  () => $fetch(`${BASE_API_URL}${endpoint}`, {
-    method: 'GET',
-  })
+  async () => {
+    try {
+      const response = await $fetch(`${BASE_API_URL}${endpoint}`, {
+        method: 'GET',
+      });
+      console.log('Response:', response); // Выводим результат запроса
+      return response.data;
+    } catch (err) {
+      console.error('Error fetching data:', err); // Выводим ошибку, если запрос завершается неудачно
+      throw err; // Прокидываем ошибку дальше для обработки
+    }
+  }
 );
+
+if (error) {
+  console.error('Error in useAsyncData:', error); // Обработка ошибок, возникших в процессе получения данных
+  // Дальнейшие действия по обработке ошибки, если это необходимо
+}
 
 const screenWidth = ref(0);
 

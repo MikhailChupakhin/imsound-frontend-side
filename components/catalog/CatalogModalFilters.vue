@@ -7,7 +7,7 @@
         <div v-show="showMenu" class="menu-container-expanded">
             <div class="menu bg-white shadow-md z-10">
                 <div @click="showMenu = !showMenu" class="auth-menu-close" role="button" tabindex="0" aria-label="Закрыть меню">закрыть меню</div>
-                <LazyCatalogFilters v-if="showMenu === true" sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
+                <CatalogFilters sliderId="'priceSliderAside'" :closeMenu="closeMenu" />
             </div>
         </div>
     </div>
@@ -15,10 +15,10 @@
 
 <script setup>
 // import { onMounted, ref, defineAsyncComponent } from 'vue';
-// import CatalogFilters from './CatalogFIlters.vue';
-const LazyCatalogFilters = defineAsyncComponent(() =>
-  import('./CatalogFilters.vue')
-);
+import CatalogFilters from './CatalogFIlters.vue';
+// const LazyCatalogFilters = defineAsyncComponent(() =>
+//   import('./CatalogFilters.vue')
+// );
 import pluralize from '~/utils/func/pluralize.js';
 
 const showMenu = ref(false);

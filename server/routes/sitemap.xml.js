@@ -22,7 +22,6 @@ export default defineEventHandler(async (event) => {
             <changefreq>weekly</changefreq>
         </url>
      `;
-
     
     for (const item of data) {
         const { frontend_path, priority, changefreq, updated_at } = item.sitemap_item;
@@ -39,9 +38,6 @@ export default defineEventHandler(async (event) => {
             </url>
         `;
     }
-
     result += '</urlset>';
-
     return result;
-    
 });

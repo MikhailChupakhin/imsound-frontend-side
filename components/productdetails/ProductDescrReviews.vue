@@ -1,12 +1,12 @@
 <template>
     <TabView role="tablist">
-        <TabPanel header="Описание" aria-labelledby="descriptionTab">
+        <TabPanel header="Описание" aria-labelledby="descriptionTab" tabindex="0" role="tab">
             <p class="m-0">
                 <div v-if="productDescr.length > 0" v-html="productDescr"></div>
                 <div v-else>Товару не добавлено описание</div>
             </p>
         </TabPanel>
-        <TabPanel header="Отзывы" aria-labelledby="reviewsTab">
+        <TabPanel header="Отзывы" aria-labelledby="reviewsTab" tabindex="0" role="tab">
             <p class="m-0">
                 <div v-if="productReviews.length > 0">
                 <div v-for="(review, index) in productReviews" :key="index" class="review">
@@ -31,7 +31,7 @@
             </div>
             </p>
         </TabPanel>
-        <TabPanel header="Характеристики" aria-labelledby="characteristicsTab">
+        <TabPanel header="Характеристики" aria-labelledby="characteristicsTab" tabindex="0" role="tab">
             <p class="m-0">
                 <template v-if="productChars && productChars.length > 0">
                     <table class="product-characteristics-table">

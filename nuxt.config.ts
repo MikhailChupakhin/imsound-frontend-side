@@ -68,12 +68,12 @@ export default defineNuxtConfig({
       base_url: process.env.NUXT_PUBLIC_BASE_URL,
     }
   },
-  nitro: {
-    prerender: {
-      routes: [
-        '/sitemap.xml',
-        'robots.txt',
-      ]
-    }
-  },
+  // nitro: {
+  //   prerender: {
+  //     routes: [
+  //       '/sitemap.xml',
+  //       'robots.txt',
+  //     ]
+  //   }
+  // },
 })

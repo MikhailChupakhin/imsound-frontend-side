@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\index.vue -->
-
 <template>
   <MainHeader />
   <IndexSlidersCarousel :sliders="slidersCarouselElements" />

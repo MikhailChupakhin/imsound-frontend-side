@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[category_slug]\[subcategory_slug].vue -->
-
 <template>
   <div v-if="requestDataSuccessful" class="main_container">
     <MainHeader />

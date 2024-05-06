@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[category_slug]\index.vue -->
-
 <template>
   <div v-if="requestDataSuccessful" class="main_container">
     <MainHeader />
@@ -112,9 +110,6 @@ if (response.status === 200) {
   console.log('Request failed with status:', response.status);
   router.push('/404')
 }
-
-
-
 </script>
 
 <style scoped>

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\[...404].vue    -->
-
 <template>
     <div>
         <div class="error-container">

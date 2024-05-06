@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\index.vue -->
-
 <template>
   <div class="main_container">
     <MainHeader />

@@ -1,5 +1,3 @@
-<!-- C:\Users\user1\VSCProjects\imsound-frontend-side\pages\catalog\[product_slug]_[product_id].vue -->
-
 <template>
   <div class="main_container" v-if="productData">
     <MainHeader />
@@ -49,7 +47,6 @@ import { formatPrice } from '~/utils/priceFormatter.js';
 import useSeoData from '~/composables/useSeoData';
 
 const baseStore = useBaseStore();
-
 const route = useRoute();
 const config = useRuntimeConfig()
 const BASE_API_URL = config.public.apiBase;
@@ -73,7 +70,6 @@ if (status.value == 'success') {
   console.error("Произошла ошибка при загрузке данных:", error);
   router.push('/404');
 }
-
 </script>
 
 <style scoped>
@@ -83,7 +79,6 @@ if (status.value == 'success') {
   display: flex;
   flex-direction: column;
 }
-
 .content-wrapper {
   display: flex;
   width: 95%;
@@ -92,7 +87,6 @@ if (status.value == 'success') {
   margin:auto;
   padding-top: 0.2rem;
 }
-
 .content-area {
   flex: 1;
   padding: 0px;
